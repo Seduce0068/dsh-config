@@ -19,3 +19,8 @@
 - `AGENTS/`: 個人・ツール別AGENTS.mdのコピー（sanitized）
 - `skills/`: 個人Skillsのコピー（canonical: `~/.config/opencode/skills`）
 - これらは復元用の控え。正本は各ホームのファイル。
+
+## 自動同期
+- `tools/export-instructions.sh` でAGENTS.md/Skillsを`instructions/`へ同期（既定は乾燥実行）。
+  - `--apply`: コピー / `--commit`: コミット / `--push`: pushまで。
+  - 実行前に秘密スキャン（0件でなければ中止）。
