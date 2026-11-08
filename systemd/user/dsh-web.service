@@ -1,0 +1,19 @@
+[Unit]
+Description=DeepSeek Harness Web UI
+Documentation=https://github.com/deepseek-ai/deepseek-harness
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/koppe
+Environment=DSH_HOME=/home/koppe/.dsh
+Environment=PATH=/home/koppe/.npm-global/bin:/home/koppe/.cargo/bin:/home/koppe/.local/bin:/usr/local/bin:/usr/bin:/bin
+EnvironmentFile=/home/koppe/.config/opencode/dsh.env
+ExecStartPre=/home/koppe/.local/bin/dsh-samesite-lax.sh
+ExecStart=/home/koppe/.npm-global/bin/dsh web --no-open --port 3080 --trusted-host 192.168.128.111 --trusted-host onoderakeita-systemproductname.tailb706b0.ts.net --public-url https://onoderakeita-systemproductname.tailb706b0.ts.net/
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target

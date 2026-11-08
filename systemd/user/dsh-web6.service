@@ -1,0 +1,14 @@
+[Unit]
+Description=DeepSeek Harness Web UI IPv6 loopback forwarder
+Documentation=https://github.com/deepseek-ai/deepseek-harness
+After=dsh-web.service
+Requires=dsh-web.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/socat TCP6-LISTEN:3080,bind=::1,ipv6only=1,fork,reuseaddr TCP4:127.0.0.1:3080
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target

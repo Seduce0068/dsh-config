@@ -1,0 +1,18 @@
+{
+  "name": "dsh-profile-web",
+  "private": true,
+  "dsh": {
+    "profile": {
+      "bundles": [
+        "@deepseek-ai/dsh-base",
+        "@deepseek-ai/dsh-web-app",
+        "dsh-web-ui-notify",
+        "dsh-ntfy-notify"
+      ]
+    }
+  },
+  "dependencies": {
+    "dsh-ntfy-notify": "link:/home/koppe/.dsh/plugins/dsh-ntfy-notify",
+    "dsh-web-ui-notify": "^0.1.7"
+  }
+}

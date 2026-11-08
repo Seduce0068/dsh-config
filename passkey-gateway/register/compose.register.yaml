@@ -1,0 +1,40 @@
+# 登録用インスタンス（S1 第3段階）
+# 新規の Pocket ID データだけを使い、既存の試験DB・DSH・Serve(443) には触れない。
+# 実パスキーの登録は本人がブラウザで行う。指紋/PINは私が受け取らない。
+name: dsh-passkey-register
+
+services:
+  pocket-id-register:
+    image: ghcr.io/pocket-id/pocket-id:v2.19.2@sha256:3ee23895d6a3adb5dd5de801a4fd31fc31b960e6dfbea9b5200e33cf477695eb
+    pull_policy: never
+    container_name: dsh-passkey-register-pocket-id
+    restart: unless-stopped
+    user: "1000:1000"
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    network_mode: host
+    entrypoint: ["/app/pocket-id"]
+    env_file: ["./pocket-id.env"]
+    environment:
+      APP_URL: https://onoderakeita-systemproductname.tailb706b0.ts.net:8443
+      HOST: 127.0.0.1
+      PORT: "14111"
+      ACTORS_HOST: 127.0.0.1
+      ACTORS_PORT: "1414"
+      TRUST_PROXY: "true"
+      UI_CONFIG_DISABLED: "true"
+      ALLOW_USER_SIGNUPS: disabled
+      WEBAUTHN_USER_VERIFICATION: required
+      WEBAUTHN_ALLOW_SYNCED_PASSKEYS: "true"
+      ALLOW_INSECURE_CALLBACK_URLS: "false"
+      EMAIL_ONE_TIME_ACCESS_AS_UNAUTHENTICATED_ENABLED: "false"
+      ANALYTICS_DISABLED: "true"
+      VERSION_CHECK_DISABLED: "true"
+      ICON_LIBRARY_URL: disabled
+      LOG_QUERY_ARGS: "false"
+    volumes:
+      - type: bind
+        source: ./data
+        target: /app/data
+        bind: {create_host_path: false}

@@ -1,0 +1,14 @@
+[Unit]
+Description=DeepSeek Harness Web UI LAN forwarder
+Documentation=https://github.com/deepseek-ai/deepseek-harness
+After=dsh-web.service
+Requires=dsh-web.service
+
+[Service]
+Type=simple
+ExecStart=/home/koppe/.local/bin/dsh-lan-forward.sh
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target

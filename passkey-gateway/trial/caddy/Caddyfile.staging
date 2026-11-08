@@ -1,0 +1,133 @@
+{
+	admin off
+	auto_https off
+	persist_config off
+}
+
+# 試用/本番ゲートの内部Caddy。すべてループバックのみ待受。
+# 各入口は「正しいHost以外を400で拒否」→「認証」→「転送」の順を route で固定する。
+
+# --- 8443: Pocket ID 用ゲート（/trial 経由で web を試用） ---
+:18888 {
+	bind 127.0.0.1
+	route {
+		@wrong_host not host onoderakeita-systemproductname.tailb706b0.ts.net
+		respond @wrong_host "invalid host" 400
+
+		handle /oauth2/* {
+			reverse_proxy 127.0.0.1:14180 {
+				header_up X-Real-IP {remote_host}
+				header_up X-Forwarded-Proto https
+				header_up X-Forwarded-Host {host}
+				header_up X-Forwarded-Uri {uri}
+			}
+		}
+		handle {
+			route {
+				request_header -X-Auth-Request-User
+				request_header -X-Auth-Request-Email
+				forward_auth 127.0.0.1:14180 {
+					uri /oauth2/auth
+					header_up X-Real-IP {remote_host}
+					copy_headers X-Auth-Request-Email X-Auth-Request-User
+					@unauthorized status 401
+					handle_response @unauthorized {
+						redir * /oauth2/sign_in?rd=https://onoderakeita-systemproductname.tailb706b0.ts.net:8443/trial/ 302
+					}
+				}
+				# 認証後にのみ /trial を剥がして DSH(web :3080) へ。
+				handle_path /trial* {
+					reverse_proxy {$DSH_WEB_UPSTREAM} {
+						header_up Host {host}
+						header_up X-Forwarded-Proto https
+					}
+				}
+				# それ以外は 404（横断ルートを作らない）
+				respond "not found" 404
+			}
+		}
+	}
+}
+
+# --- 8445: agentrouter ゲート ---
+:18889 {
+	bind 127.0.0.1
+	route {
+		@wrong_host not host onoderakeita-systemproductname.tailb706b0.ts.net
+		respond @wrong_host "invalid host" 400
+
+		handle /oauth2/* {
+			reverse_proxy 127.0.0.1:14181 {
+				header_up X-Real-IP {remote_host}
+				header_up X-Forwarded-Proto https
+				header_up X-Forwarded-Host {host}
+				header_up X-Forwarded-Uri {uri}
+			}
+		}
+		handle {
+			route {
+				request_header -X-Auth-Request-User
+				request_header -X-Auth-Request-Email
+				forward_auth 127.0.0.1:14181 {
+					uri /oauth2/auth
+					header_up X-Real-IP {remote_host}
+					copy_headers X-Auth-Request-Email X-Auth-Request-User
+					@unauthorized status 401
+					handle_response @unauthorized {
+						redir * /oauth2/sign_in?rd=https://onoderakeita-systemproductname.tailb706b0.ts.net:8445/ 302
+					}
+				}
+				reverse_proxy {$DSH_AGENT_UPSTREAM} {
+					# 公開オリジンのポートを固定（クライアント指定を反射しない）
+					header_up Host onoderakeita-systemproductname.tailb706b0.ts.net:8445
+					header_up X-Forwarded-Proto https
+				}
+			}
+		}
+	}
+}
+
+# --- 443: web ゲート ---
+:18890 {
+	bind 127.0.0.1
+	route {
+		@wrong_host not host onoderakeita-systemproductname.tailb706b0.ts.net
+		respond @wrong_host "invalid host" 400
+
+		handle /oauth2/* {
+			reverse_proxy 127.0.0.1:14182 {
+				header_up X-Real-IP {remote_host}
+				header_up X-Forwarded-Proto https
+				header_up X-Forwarded-Host {host}
+				header_up X-Forwarded-Uri {uri}
+			}
+		}
+		handle {
+			route {
+				# 旧URLの案内（Hostは上で検証済み）
+				handle_path /agent/* {
+					redir https://{host}:8445{uri} 308
+				}
+				handle /agent {
+					redir https://{host}:8445/ 308
+				}
+
+				request_header -X-Auth-Request-User
+				request_header -X-Auth-Request-Email
+				forward_auth 127.0.0.1:14182 {
+					uri /oauth2/auth
+					header_up X-Real-IP {remote_host}
+					copy_headers X-Auth-Request-Email X-Auth-Request-User
+					@unauthorized status 401
+					handle_response @unauthorized {
+						redir * /oauth2/sign_in?rd=https://onoderakeita-systemproductname.tailb706b0.ts.net/ 302
+					}
+				}
+				reverse_proxy {$DSH_WEB_UPSTREAM} {
+					header_up Host {host}
+					header_up X-Forwarded-Proto https
+				}
+			}
+		}
+	}
+}

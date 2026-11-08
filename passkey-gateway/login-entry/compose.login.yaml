@@ -1,0 +1,18 @@
+# S1 第1段階: 登録用ログイン入口（ローカルのみ）。
+# 既存の Serve / 3080 / 3081 / UFW は変更しない。
+name: dsh-passkey-login
+
+services:
+  caddy-login:
+    image: docker.io/library/caddy:2.11.9@sha256:0c2243efcf437ab7f7a978f1027fcf0d4f9be8a75df27b1b3fbc5dbe0ffa8cf0
+    pull_policy: never
+    container_name: dsh-passkey-login-caddy
+    restart: unless-stopped
+    user: "1000:1000"
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    network_mode: host
+    command: ["caddy", "run", "--config", "/etc/caddy/Caddyfile", "--adapter", "caddyfile"]
+    volumes:
+      - ./Caddyfile.login:/etc/caddy/Caddyfile:ro

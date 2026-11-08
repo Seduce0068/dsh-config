@@ -1,0 +1,8 @@
+[Unit]
+Description=DSH passkey gate health watchdog
+
+[Service]
+Type=oneshot
+ExecStart=/home/koppe/document/deepseek-harness/default-workspace/passkey-gateway/scripts/watchdog.sh
+TimeoutStartSec=120
+Nice=10

@@ -1,0 +1,509 @@
+# AgentRouter profile: all providers + agentrouter route.
+# agent-instructions stays disabled: the DSH_HOME split keeps AGENTS.md out
+# (AgentRouter content-blocks a Japanese system prompt), while every other
+# provider from the web profile is available in this one UI.
+- id: agent-instructions
+  disabled: true
+- id: llm-pi-ai
+  config:
+    providers:
+      opencode-go:
+        displayName: OpenCode Go
+        apiKeyEnv: OPENCODE_GO_API_KEY
+        api: openai-completions
+        baseURL: https://opencode.ai/zen/go/v1
+        headers:
+          x-opencode-session: dsh
+        models:
+          - id: deepseek-v4.1-flash
+            name: DeepSeek V4.1 Flash
+            contextWindow: 1048576
+            maxTokens: 131072
+            reasoningEfforts:
+              off: null
+              low: low
+              high: high
+              max: max
+          - id: claude-haiku-5-5
+            name: Claude Haiku 5.5
+            contextWindow: 1000000
+            maxTokens: 128000
+            input:
+              - text
+              - image
+          - id: minimax-m3
+            name: MiniMax-M3
+            contextWindow: 1000000
+            maxTokens: 131072
+            input:
+              - text
+              - image
+          - id: qwen3.7-plus
+            name: Qwen3.7 Plus
+            contextWindow: 1000000
+            maxTokens: 65536
+            input:
+              - text
+              - image
+          - id: qwen3.8-flash
+            name: Qwen3.8 Flash
+            contextWindow: 1000000
+            maxTokens: 131072
+            input:
+              - text
+              - image
+          - id: qwen3.8-max
+            name: Qwen3.8 Max
+            contextWindow: 1000000
+            maxTokens: 131072
+            input:
+              - text
+              - image
+          - id: gemini-4-argon
+            name: Gemini 4 Argon
+            contextWindow: 1048576
+            maxTokens: 65536
+            input:
+              - text
+              - image
+          - id: beam-free
+            name: Beam Free
+            contextWindow: 1048576
+            maxTokens: 131072
+            input:
+              - text
+          - id: deepseek-v4-pro
+            name: DeepSeek V4 Pro (New)
+            contextWindow: 1000000
+            maxTokens: 384000
+            input:
+              - text
+          - id: glm-5.2
+            name: GLM-5.2
+            contextWindow: 1000000
+            maxTokens: 131072
+            input:
+              - text
+          - id: glm-5.3
+            name: GLM-5.3
+            contextWindow: 1000000
+            maxTokens: 131072
+            input:
+              - text
+          - id: glm-5.3-flash
+            name: GLM-5.3-Flash
+            contextWindow: 1000000
+            maxTokens: 131072
+            input:
+              - text
+              - image
+          - id: hy3
+            name: Hy3
+            contextWindow: 256000
+            maxTokens: 128000
+            input:
+              - text
+          - id: hy4-preview
+            name: Hy4 preview
+            contextWindow: 1024000
+            maxTokens: 64000
+            input:
+              - text
+          - id: iceman-contributor-free
+            name: Iceman Contributor Free
+            contextWindow: 262144
+            maxTokens: 131072
+            input:
+              - text
+          - id: kimi-k2.7-code
+            name: Kimi K2.7 Code
+            contextWindow: 262144
+            maxTokens: 262144
+            input:
+              - text
+              - image
+          - id: kimi-k3
+            name: Kimi K3
+            contextWindow: 1048576
+            maxTokens: 131072
+            input:
+              - text
+              - image
+          - id: kimi-k3.1-pro
+            name: Kimi K3.1 Pro
+            contextWindow: 1048576
+            maxTokens: 131072
+            input:
+              - text
+              - image
+          - id: longcat-2.0
+            name: LongCat-2.0
+            contextWindow: 1000000
+            maxTokens: 131072
+            input:
+              - text
+          - id: mimo-v2.5
+            name: MiMo V2.5
+            contextWindow: 1000000
+            maxTokens: 128000
+            input:
+              - text
+              - image
+          - id: mimo-v2.5-pro
+            name: MiMo V2.5 Pro
+            contextWindow: 1048576
+            maxTokens: 128000
+            input:
+              - text
+          - id: mimo-v2.6-flash
+            name: MiMo-V2.6-Flash
+            contextWindow: 1048576
+            maxTokens: 131072
+            input:
+              - text
+              - image
+          - id: mimo-v2.6-pro
+            name: MiMo-V2.6-Pro
+            contextWindow: 1048576
+            maxTokens: 131072
+            input:
+              - text
+              - image
+          - id: minimax-m3.1-flash
+            name: MiniMax M3.1 Flash
+            contextWindow: 1000000
+            maxTokens: 512000
+            input:
+              - text
+              - image
+          - id: step-5-preview
+            name: Step 5 Preview
+            contextWindow: 1000000
+            maxTokens: 65536
+            input:
+              - text
+              - image
+          - id: gpt-5.6-luna
+            name: GPT-5.6 Luna
+            contextWindow: 1050000
+            maxTokens: 128000
+            input:
+              - text
+              - image
+          - id: gpt-6-luna
+            name: GPT-6 Luna
+            contextWindow: 1050000
+            maxTokens: 128000
+            input:
+              - text
+              - image
+          - id: grok-4.7
+            name: Grok 4.7
+            contextWindow: 500000
+            maxTokens: 500000
+            input:
+              - text
+              - image
+          - id: muse-spark-1.2-contributor
+            name: Muse Spark 1.2 Contributor
+            contextWindow: 1048576
+            maxTokens: 131072
+            input:
+              - text
+              - image
+          - id: muse-spark-1.3-contributor
+            name: Muse Spark 1.3 Contributor
+            contextWindow: 1048576
+            maxTokens: 131072
+            input:
+              - text
+              - image
+      deepai:
+        displayName: DeepAI Code
+        apiKeyEnv: DEEPAI_API_KEY
+        api: openai-completions
+        baseURL: https://api.deepai.org/deepai_code
+        headers:
+          X-DeepAI-Code-Theos: "2"
+          X-DeepAI-Code-Machine: b2f59641b1d56c7d7d824b73ab7ef4dd685a97b079f55b51fa56733e32a56fd0
+        models:
+          - id: deepseek-v4.1-flash
+            name: DeepSeek V4.1 Flash
+            contextWindow: 1048576
+            maxTokens: 131072
+          - id: glm-5.3
+            name: GLM 5.3
+            contextWindow: 1048576
+            maxTokens: 131072
+          - id: gpt-6-astra
+            name: GPT-6 Astra
+            contextWindow: 1048576
+            maxTokens: 128000
+          - id: claude-opus-5-5
+            name: Claude Opus 5.5
+            contextWindow: 1000000
+            maxTokens: 64000
+          - id: kimi-k3
+            name: Kimi K3
+            contextWindow: 1048576
+            maxTokens: 131072
+      ollama-cloud:
+        displayName: Ollama Cloud
+        apiKeyEnv: OLLAMA_CLOUD_API_KEY
+        api: openai-completions
+        baseURL: https://ollama.com/v1
+        models:
+          - id: beam
+            name: beam
+      nvidia:
+        displayName: NVIDIA NIM
+        apiKeyEnv: NVIDIA_API_KEY
+        api: openai-completions
+        baseURL: https://integrate.api.nvidia.com/v1
+        timeoutMs: 120000
+        models:
+          - id: deepseek-ai/deepseek-v4.1-flash
+            name: DeepSeek V4.1 Flash
+          - id: z-ai/glm-5.3-flash
+            name: GLM 5.3 Flash
+          - id: openai/gpt-oss-20b
+            name: GPT-OSS 20B
+          - id: nvidia/nemotron-3-ultra-550b-a55b
+            name: Nemotron 3 Ultra 550B
+          - id: google/diffusiongemma-26b-a4b-it
+            name: DiffusionGemma 26B A4B IT
+            contextWindow: 250000
+            maxTokens: 32768
+            input:
+              - text
+              - image
+          - id: google/gemma-3-12b-it
+            name: Gemma 3 12B IT
+            contextWindow: 131072
+            maxTokens: 16384
+            input:
+              - text
+              - image
+          - id: google/gemma-3-4b-it
+            name: Gemma 3 4B IT
+            contextWindow: 131072
+            maxTokens: 16384
+            input:
+              - text
+              - image
+          - id: meta/llama-3.2-11b-vision-instruct
+            name: Llama 3.2 11b Vision Instruct
+            contextWindow: 128000
+            maxTokens: 4096
+            input:
+              - text
+              - image
+          - id: meta/llama-3.2-90b-vision-instruct
+            name: Llama-3.2-90B-Vision-Instruct
+            contextWindow: 128000
+            maxTokens: 8192
+            input:
+              - text
+              - image
+          - id: meta/muse-glimmer-30b
+            name: Muse Glimmer 30B
+            contextWindow: 131072
+            maxTokens: 131072
+            input:
+              - text
+              - image
+          - id: minimaxai/minimax-m3.1-flash
+            name: MiniMax-M3.1-Flash
+            contextWindow: 262144
+            maxTokens: 262144
+            input:
+              - text
+              - image
+          - id: mistralai/mistral-7b-instruct-v0.3
+            name: Mistral-7B-Instruct-v0.3
+            contextWindow: 65536
+            maxTokens: 65536
+            input:
+              - text
+          - id: moonshotai/kimi-k2.6
+            name: Kimi K2.6
+            contextWindow: 262144
+            maxTokens: 262144
+            input:
+              - text
+              - image
+          - id: nvidia/cosmos-reason2-8b
+            name: Cosmos Reason2 8B
+            contextWindow: 131072
+            maxTokens: 16384
+            input:
+              - text
+              - image
+          - id: nvidia/llama-3.1-nemotron-70b-instruct
+            name: Llama 3.1 Nemotron 70B Instruct
+            contextWindow: 128000
+            maxTokens: 8192
+            input:
+              - text
+          - id: nvidia/llama-3.1-nemotron-ultra-253b-v1
+            name: Llama 3.1 Nemotron Ultra 253B
+            contextWindow: 128000
+            maxTokens: 16384
+            input:
+              - text
+          - id: nvidia/nemotron-3-nano-omni-30b-a3b-reasoning
+            name: Nemotron 3 Nano Omni
+            contextWindow: 256000
+            maxTokens: 65536
+            input:
+              - text
+              - image
+          - id: nvidia/nemotron-3.5-lightning-30b-a3b
+            name: Nemotron 3.5 Lightning 30B A3B
+            contextWindow: 262144
+            maxTokens: 262144
+            input:
+              - text
+          - id: nvidia/nemotron-3.5-super-vl-120b-a12b
+            name: Nemotron 3.5 Super VL 120B A12B
+            contextWindow: 1048576
+            maxTokens: 8192
+            input:
+              - text
+              - image
+          - id: poolside/laguna-xs-2.1
+            name: Laguna XS 2.1
+            contextWindow: 262144
+            maxTokens: 16384
+            input:
+              - text
+          - id: stepfun-ai/step-5-preview
+            name: Step 5 Preview
+            contextWindow: 1048576
+            maxTokens: 1048576
+            input:
+              - text
+              - image
+      zai:
+        displayName: Z.AI
+        apiKeyEnv: ZAI_API_KEY
+        api: openai-completions
+        baseURL: https://api.z.ai/api/paas/v4
+        models:
+          - id: glm-5.3
+            name: GLM 5.3
+          - id: glm-5.2
+            name: GLM 5.2
+          - id: glm-5.1
+            name: GLM 5.1
+          - id: glm-4.7
+            name: GLM 4.7
+          - id: glm-5.3-flash
+            name: GLM 5.3 Flash
+      orcarouter:
+        displayName: OrcaRouter
+        apiKeyEnv: ORCAROUTER_API_KEY
+        api: openai-completions
+        baseURL: https://api.orcarouter.ai/v1
+        models:
+          - id: orcarouter/free
+            name: orcarouter/free
+      agentrouter:
+        displayName: AgentRouter
+        apiKeyEnv: AGENTROUTER_API_KEY
+        api: openai-responses
+        baseURL: https://relay.agentrouter.internal/v1
+        defaultInput:
+          - text
+          - image
+        compat:
+          supportsDeveloperRole: false
+          supportsStrictMode: true
+        models:
+          - id: gpt-5.6-sol
+            name: GPT 5.6 Sol
+            contextWindow: 1050000
+            maxTokens: 128000
+            reasoningEfforts:
+              off: none
+              minimal: minimal
+              low: low
+              medium: medium
+              high: high
+              xhigh: xhigh
+              max: max
+          - id: gpt-6-astra
+            name: GPT 6 Astra
+            contextWindow: 1050000
+            maxTokens: 128000
+            reasoningEfforts:
+              off: none
+              minimal: minimal
+              low: low
+              medium: medium
+              high: high
+              xhigh: xhigh
+              max: max
+          - id: gpt-6.1-sol
+            name: GPT 6.1 Sol
+            contextWindow: 1050000
+            maxTokens: 128000
+            reasoningEfforts:
+              off: none
+              low: low
+              medium: medium
+              high: high
+              xhigh: xhigh
+              max: max
+- id: ui-settings-general
+  name: "@deepseek-ai/dsh-client-ui-settings-general"
+  config:
+    welcomeNoticeVersion: 2026-09-28.1
+- id: agent-default-model
+  name: "@deepseek-ai/dsh-agent-default-model"
+  config:
+    provider: opencode-go
+    model: deepseek-v4.1-flash
+    reasoningEffort: max
+- id: subagent-model-selection-settings
+  name: "@deepseek-ai/dsh-tool-subagent/model-selection-settings"
+  config:
+    enabled: true
+    allowedModels:
+      - provider: opencode-go
+        model: deepseek-v4.1-flash
+      - provider: deepai
+        model: deepseek-v4.1-flash
+      - provider: deepai
+        model: glm-5.3
+      - provider: deepai
+        model: gpt-6-astra
+      - provider: deepai
+        model: claude-opus-5-5
+      - provider: deepai
+        model: kimi-k3
+      - provider: nvidia
+        model: deepseek-ai/deepseek-v4.1-flash
+      - provider: nvidia
+        model: z-ai/glm-5.3-flash
+      - provider: nvidia
+        model: nvidia/nemotron-3-ultra-550b-a55b
+      - provider: agentrouter
+        model: gpt-5.6-sol
+      - provider: agentrouter
+        model: gpt-6-astra
+      - provider: agentrouter
+        model: gpt-6.1-sol
+
+- insert:
+    - id: mcp-github
+      name: '@deepseek-ai/dsh-mcp-client'
+      config:
+        serverName: github
+        transport: streamable-http
+        url: https://api.githubcopilot.com/mcp/
+        headers:
+          X-MCP-Toolsets: repos,pull_requests,issues
+          Authorization: !!js '`Bearer ${process.env.GITHUB_MCP_TOKEN}`'
+        toolCallTimeoutMs: 60000
+        failOnStartupError: false

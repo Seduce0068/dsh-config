@@ -1,0 +1,17 @@
+[Unit]
+Description=DSH passkey gate stack (Pocket ID + entry Caddy + auth gates)
+Documentation=file:///home/koppe/document/deepseek-harness/default-workspace/passkey-gateway/docs/s1-layout.md
+# ユーザーunitからはシステムのdocker.serviceへ直接Afterを張れないため、
+# 起動スクリプト内で docker の準備完了を待つ。
+After=network-online.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/home/koppe/document/deepseek-harness/default-workspace/passkey-gateway/scripts/start-gate-stack.sh
+TimeoutStartSec=300
+# 失敗しても既存DSHや他のサービスを巻き込まない
+SuccessExitStatus=0
+
+[Install]
+WantedBy=default.target

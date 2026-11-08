@@ -1,0 +1,10 @@
+[Unit]
+Description=DSH offsite backup to external disk (sdb2)
+Documentation=file:///home/koppe/document/deepseek-harness/default-workspace/passkey-gateway/docs/backup-restore.md
+
+[Service]
+Type=oneshot
+ExecStart=/home/koppe/document/deepseek-harness/default-workspace/passkey-gateway/scripts/backup-offsite.sh
+TimeoutStartSec=900
+Nice=10
+IOSchedulingClass=idle

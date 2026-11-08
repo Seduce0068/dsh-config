@@ -1,0 +1,14 @@
+[Unit]
+Description=Run system-all-update on system boot
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=koppe
+Environment=HOME=/home/koppe
+Environment=PATH=/home/koppe/.cargo/bin:/home/koppe/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+ExecStart=/home/koppe/.local/bin/system-all-update
+
+[Install]
+WantedBy=multi-user.target

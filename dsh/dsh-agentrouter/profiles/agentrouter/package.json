@@ -1,0 +1,21 @@
+{
+  "name": "dsh-profile-agentrouter",
+  "private": true,
+  "dependencies": {
+    "dsh-llm-agentrouter": "^2.6.1"
+  },
+  "dsh": {
+    "profile": {
+      "bundles": [
+        "@deepseek-ai/dsh-base",
+        "@deepseek-ai/dsh-web-app",
+        "dsh-llm-agentrouter",
+        "@deepseek-ai/dsh-experimental-agent-team-profile",
+        "@deepseek-ai/dsh-experimental-plugin-market-bundle",
+        "@deepseek-ai/dsh-experimental-auto-review",
+        "@deepseek-ai/dsh-experimental-forge-bundle",
+        "@deepseek-ai/dsh-experimental-voice-input-bundle"
+      ]
+    }
+  }
+}

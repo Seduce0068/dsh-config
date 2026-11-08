@@ -1,0 +1,26 @@
+# 試験用オーバーライド。ゲートはホストネットワークで loopback のみ待受。
+services:
+  pocket-id:
+    profiles: ["unused"]
+  upstream-echo:
+    profiles: ["unused"]
+  caddy:
+    network_mode: host
+    restart: unless-stopped
+    ports: []
+  oauth2-proxy:
+    network_mode: host
+    restart: unless-stopped
+    volumes:
+      - ./oauth2-proxy/allowed-users.staging.txt:/etc/oauth2-proxy/allowed-users.txt:ro
+  oauth2-proxy-agent:
+    network_mode: host
+    restart: unless-stopped
+    volumes:
+      - ./oauth2-proxy/allowed-users.staging.txt:/etc/oauth2-proxy/allowed-users.txt:ro
+  oauth2-proxy-web:
+    network_mode: host
+    restart: unless-stopped
+    volumes:
+      - ./oauth2-proxy/allowed-users.staging.txt:/etc/oauth2-proxy/allowed-users.txt:ro
+networks: {}

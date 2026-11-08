@@ -1,0 +1,12 @@
+[Unit]
+Description=Block tailnet access to unauthenticated opencode API (49374)
+After=network-pre.target tailscaled.service
+Wants=tailscaled.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/block-tailnet-opencode.sh
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

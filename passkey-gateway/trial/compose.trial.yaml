@@ -1,0 +1,192 @@
+# Local-test only. Does not connect to DSH, its credentials, DNS or Tailscale.
+# No host networking, no privileged containers and no Docker socket mounts.
+name: dsh-passkey-trial
+
+x-restricted: &restricted
+  user: "1000:1000"
+  read_only: true
+  cap_drop: [ALL]
+  security_opt: ["no-new-privileges:true"]
+  restart: "no"
+  pids_limit: 128
+  mem_limit: 256m
+  tmpfs: ["/tmp:rw,noexec,nosuid,size=32m,mode=1777"]
+
+services:
+  pocket-id:
+    <<: *restricted
+    image: ghcr.io/pocket-id/pocket-id:v2.19.2@sha256:3ee23895d6a3adb5dd5de801a4fd31fc31b960e6dfbea9b5200e33cf477695eb
+    pull_policy: never
+    entrypoint: ["/app/pocket-id"]
+    env_file: ["./pocket-id/pocket-id.env"]
+    # Enforced here: an old .env file cannot expose host listeners or enable signups.
+    environment:
+      APP_URL: http://localhost:14111
+      INTERNAL_APP_URL: http://pocket-id:1411
+      HOST: 0.0.0.0
+      PORT: "1411"
+      ACTORS_HOST: 127.0.0.1
+      ACTORS_PORT: "1414"
+      TRUST_PROXY: "false"
+      UI_CONFIG_DISABLED: "true"
+      ALLOW_USER_SIGNUPS: disabled
+      WEBAUTHN_USER_VERIFICATION: required
+      EMAIL_ONE_TIME_ACCESS_AS_UNAUTHENTICATED_ENABLED: "false"
+      ANALYTICS_DISABLED: "true"
+      VERSION_CHECK_DISABLED: "true"
+      ICON_LIBRARY_URL: disabled
+      ALLOW_INSECURE_CALLBACK_URLS: "false"
+      LOG_QUERY_ARGS: "false"
+    volumes:
+      - type: bind
+        source: ./data/pocket-id
+        target: /app/data
+        bind: {create_host_path: false}
+    healthcheck:
+      test: ["CMD", "/app/pocket-id", "healthcheck", "--endpoint", "http://127.0.0.1:1411"]
+      interval: 2s
+      timeout: 3s
+      retries: 20
+      start_period: 5s
+
+  oauth2-proxy:
+    <<: *restricted
+    image: quay.io/oauth2-proxy/oauth2-proxy:v7.15.6@sha256:c3415e8660af553f5e18f5d90db050614c02493c0ac6260ac59442f6d9b12048
+    pull_policy: never
+    env_file: ["./oauth2-proxy/oauth2-proxy.env"]
+    command:
+      - --provider=oidc
+      - --oidc-issuer-url=https://onoderakeita-systemproductname.tailb706b0.ts.net:8443
+      - --skip-oidc-discovery=false
+      - --oidc-jwks-url=https://onoderakeita-systemproductname.tailb706b0.ts.net:8443/.well-known/jwks.json
+      - --login-url=https://onoderakeita-systemproductname.tailb706b0.ts.net:8443/authorize
+      - --http-address=127.0.0.1:14180
+      - --upstream=static://202
+      - --reverse-proxy=false
+      - --authenticated-emails-file=/etc/oauth2-proxy/allowed-users.txt
+      - --set-xauthrequest=true
+      - --skip-provider-button=true
+      # 試用: Pocket ID のセッションが残っていてもパスキーを要求する。
+      # oauth2-proxy の Cookie が有効な間は OIDC フロー自体が走らないため、
+      # 再認証の確認には /oauth2/sign_out も必要。
+      - --code-challenge-method=S256
+      # 試用: 並行した認可フローで PKCE verifier が上書きされないよう、
+      # CSRF Cookie をリクエスト（state）単位に分離する。
+      - --cookie-csrf-per-request=true
+      - --cookie-csrf-per-request-limit=5
+      - --insecure-oidc-skip-nonce=false
+      - --cookie-name=dsh-passkey-staging
+      - --cookie-secure=true
+      - --cookie-httponly=true
+      - --cookie-samesite=lax
+      - --cookie-expire=720h
+      - --cookie-refresh=1h
+      - --scope=openid email profile offline_access
+      - --redirect-url=https://onoderakeita-systemproductname.tailb706b0.ts.net:8443/oauth2/callback
+      - --whitelist-domain=onoderakeita-systemproductname.tailb706b0.ts.net:8443
+      # 8445 の agentrouter ゲートから戻る rd を許可する。
+      # OIDC callback 自体は 8443 のまま（cookie は host スコープで共有）。
+      - --request-logging=false
+      - --auth-logging=false
+    volumes:
+      - ./oauth2-proxy/allowed-users.staging.txt:/etc/oauth2-proxy/allowed-users.txt:ro
+
+  # 8445 (agentrouter) 専用のゲート。
+  # 8443 の dsh-passkey-staging とは別の Cookie 名にして、
+  # 8443 のセッションを 8445 に流用させない。
+  oauth2-proxy-agent:
+    <<: *restricted
+    image: quay.io/oauth2-proxy/oauth2-proxy:v7.15.6@sha256:c3415e8660af553f5e18f5d90db050614c02493c0ac6260ac59442f6d9b12048
+    pull_policy: never
+    env_file: ["./oauth2-proxy/oauth2-proxy.env"]
+    command:
+      - --provider=oidc
+      - --oidc-issuer-url=https://onoderakeita-systemproductname.tailb706b0.ts.net:8443
+      - --skip-oidc-discovery=false
+      - --oidc-jwks-url=https://onoderakeita-systemproductname.tailb706b0.ts.net:8443/.well-known/jwks.json
+      - --login-url=https://onoderakeita-systemproductname.tailb706b0.ts.net:8443/authorize
+      - --http-address=127.0.0.1:14181
+      - --upstream=static://202
+      - --reverse-proxy=false
+      - --authenticated-emails-file=/etc/oauth2-proxy/allowed-users.txt
+      - --set-xauthrequest=true
+      - --skip-provider-button=true
+      - --code-challenge-method=S256
+      - --cookie-csrf-per-request=true
+      - --cookie-csrf-per-request-limit=5
+      - --insecure-oidc-skip-nonce=false
+      - --cookie-name=dsh-passkey-agent
+      - --cookie-secure=true
+      - --cookie-httponly=true
+      - --cookie-samesite=lax
+      - --cookie-expire=720h
+      - --cookie-refresh=1h
+      - --scope=openid email profile offline_access
+      - --redirect-url=https://onoderakeita-systemproductname.tailb706b0.ts.net:8445/oauth2/callback
+      - --whitelist-domain=onoderakeita-systemproductname.tailb706b0.ts.net:8445
+      - --request-logging=false
+      - --auth-logging=false
+    volumes:
+      - ./oauth2-proxy/allowed-users.staging.txt:/etc/oauth2-proxy/allowed-users.txt:ro
+
+  oauth2-proxy-web:
+    <<: *restricted
+    image: quay.io/oauth2-proxy/oauth2-proxy:v7.15.6@sha256:c3415e8660af553f5e18f5d90db050614c02493c0ac6260ac59442f6d9b12048
+    pull_policy: never
+    env_file: ["./oauth2-proxy/oauth2-proxy.env"]
+    command:
+      - --provider=oidc
+      - --oidc-issuer-url=https://onoderakeita-systemproductname.tailb706b0.ts.net:8443
+      - --skip-oidc-discovery=false
+      - --oidc-jwks-url=https://onoderakeita-systemproductname.tailb706b0.ts.net:8443/.well-known/jwks.json
+      - --login-url=https://onoderakeita-systemproductname.tailb706b0.ts.net:8443/authorize
+      - --http-address=127.0.0.1:14182
+      - --upstream=static://202
+      - --reverse-proxy=false
+      - --authenticated-emails-file=/etc/oauth2-proxy/allowed-users.txt
+      - --set-xauthrequest=true
+      - --skip-provider-button=true
+      - --code-challenge-method=S256
+      - --cookie-csrf-per-request=true
+      - --cookie-csrf-per-request-limit=5
+      - --insecure-oidc-skip-nonce=false
+      - --cookie-name=dsh-passkey-web
+      - --cookie-secure=true
+      - --cookie-httponly=true
+      - --cookie-samesite=lax
+      - --cookie-expire=720h
+      - --cookie-refresh=1h
+      - --scope=openid email profile offline_access
+      - --redirect-url=https://onoderakeita-systemproductname.tailb706b0.ts.net/oauth2/callback
+      - --whitelist-domain=onoderakeita-systemproductname.tailb706b0.ts.net
+      - --request-logging=false
+      - --auth-logging=false
+    volumes:
+      - ./oauth2-proxy/allowed-users.staging.txt:/etc/oauth2-proxy/allowed-users.txt:ro
+
+  caddy:
+    <<: *restricted
+    image: docker.io/library/caddy:2.11.9@sha256:0c2243efcf437ab7f7a978f1027fcf0d4f9be8a75df27b1b3fbc5dbe0ffa8cf0
+    pull_policy: never
+    command: ["caddy", "run", "--config", "/etc/caddy/Caddyfile", "--adapter", "caddyfile"]
+    volumes:
+      - ./caddy/Caddyfile.staging:/etc/caddy/Caddyfile:ro
+      - ./caddy/dsh-routes.caddy:/etc/caddy/dsh-routes.caddy:ro
+    depends_on:
+      oauth2-proxy: {condition: service_started}
+    environment:
+      DSH_WEB_UPSTREAM: http://127.0.0.1:3080
+      DSH_AGENT_UPSTREAM: http://127.0.0.1:3081
+
+  upstream-echo:
+    <<: *restricted
+    image: docker.io/library/caddy:2.11.9@sha256:0c2243efcf437ab7f7a978f1027fcf0d4f9be8a75df27b1b3fbc5dbe0ffa8cf0
+    pull_policy: never
+    command: ["caddy", "run", "--config", "/etc/caddy/upstream.Caddyfile", "--adapter", "caddyfile"]
+    volumes: ["./caddy/upstream.Caddyfile:/etc/caddy/upstream.Caddyfile:ro"]
+    # No published ports: only the private test network can reach the mock upstream.
+
+networks:
+  isolated:
+    internal: true
+    labels: {purpose: dsh-passkey-local-test}

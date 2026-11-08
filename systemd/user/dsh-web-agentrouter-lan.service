@@ -1,0 +1,14 @@
+[Unit]
+Description=DeepSeek Harness AgentRouter Web UI LAN forwarder
+Documentation=https://github.com/deepseek-ai/deepseek-harness
+After=dsh-web-agentrouter.service
+Requires=dsh-web-agentrouter.service
+
+[Service]
+Type=simple
+ExecStart=/home/koppe/.local/bin/dsh-lan-forward-3081.sh
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target
