@@ -9,6 +9,9 @@ DeepSeek Harness（DSH）の設定と、このPCの環境情報をまとめた**
 - 環境変数は「名前のみ」を `.env.example` に記載しています。
 - ホスト名・LAN構成は含みますが、公開IPやtailnet IPはマスクしています。
 
+## 検証
+- `tools/check-config.sh`: 設定例（JSONC対応）・YAML（テンプレート除外）・リンクの静的検証。
+
 ## 収録内容
 - `docs/approval-matrix.md`: 承認区分（確認不要／1回確認／明示承認）と完了定義
 - `AGENTS.md`: 指示の正本テンプレート（ツール別参照は `instructions/`）
