@@ -14,3 +14,8 @@
 - **正はリポジトリrootの`AGENTS.md`**。他は参照か最小限の互換ファイル。
 - 秘密情報は指示ファイルに書かない（環境変数/secret store）。
 - 指示は短く、非自明な規約と検証コマンドに絞る。
+
+## バックアップ（2026-11-09 追加）
+- `AGENTS/`: 個人・ツール別AGENTS.mdのコピー（sanitized）
+- `skills/`: 個人Skillsのコピー（canonical: `~/.config/opencode/skills`）
+- これらは復元用の控え。正本は各ホームのファイル。
