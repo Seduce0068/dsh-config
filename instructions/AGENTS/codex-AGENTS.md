@@ -149,11 +149,9 @@ generated: <br>
 - [RFC 3339][rfc3339]
 - [Google](https://www.google.com)
 - [Google Search][gsa]
-- [Google Time](https://time.google.com)
 - [Violentmonkey](https://violentmonkey.github.io)
 - [Rust](https://www.rust-lang.org)
 - [Kubuntu](https://kubuntu.org)
-- [firefox](https://www.firefox.com/ja)
 
 [rules]: https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md
 [md013]: https://github.com/DavidAnson/markdownlint/blob/main/doc/md013.md
