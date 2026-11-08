@@ -1,0 +1,13 @@
+{
+  // ~/.config/zed/settings.json への追記例（値は環境に合わせる）
+  "agent_servers": {
+    "DSH": { "type": "custom", "command": "dsh", "args": ["--profile", "acp"] },
+    "OpenCode": { "command": "opencode", "args": ["acp"] }
+  },
+  "context_servers": {
+    "jarvis": { "url": "http://127.0.0.1:8082/mcp" }
+  },
+  "agent": {
+    "tool_permissions": { "default": "confirm" }
+  }
+}

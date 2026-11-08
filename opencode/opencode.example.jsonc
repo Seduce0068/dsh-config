@@ -1,0 +1,8 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  // 既定はask。信頼できるものだけallowにする
+  "permission": { "*": "ask", "bash": "allow" },
+  "mcp": {
+    "jarvis": { "type": "remote", "url": "http://127.0.0.1:8082/mcp", "enabled": true }
+  }
+}
