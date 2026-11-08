@@ -10,6 +10,8 @@ DeepSeek Harness（DSH）の設定と、このPCの環境情報をまとめた**
 - ホスト名・LAN構成は含みますが、公開IPやtailnet IPはマスクしています。
 
 ## 収録内容
+- `docs/approval-matrix.md`: 承認区分（確認不要／1回確認／明示承認）と完了定義
+- `AGENTS.md`: 指示の正本テンプレート（ツール別参照は `instructions/`）
 - `environment/`: OS/カーネル/ハードウェア/バージョン/待受ポート/ネットワーク概要
 - `dsh/`: DSHのプロファイル構成（web / agentrouter / headless）、バージョン
 - `systemd/`: ユーザーunit・システムunit（DSH/ゲート/監視/バックアップ）
