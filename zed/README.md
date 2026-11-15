@@ -16,6 +16,7 @@ zed/
 ├── local-bin/
 │   ├── dsh-acp         # ~/.local/bin/dsh-acp（ACP ラッパー、700）
 │   └── dsh-tui         # ~/.local/bin/dsh-tui（TUI ラッパー、700）
+├── restore-layout.py   # 3ペインレイアウト復元スクリプト
 └── settings.example.jsonc  # 最小設定例（公開参照用）
 ```
 
@@ -35,6 +36,24 @@ ln -sfn dsh-tui ~/.local/bin/dst
 zed ~/document/deepseek-harness/default-workspace
 ```
 
+### パネルレイアウトの復元（VSCode 風 3ペイン）
+
+Zed はパネル配置（左/右/下 と active panel）を SQLite DB
+（`~/.local/share/zed/db/0-stable/db.sqlite` の `workspaces` テーブル）に保存する。
+新規プロジェクトを開いた直後や、Zed 更新後にレイアウトが初期化された場合は
+`restore-layout.py` で 3ペイン（左=Project Panel / 右=AgentPanel / 下=TerminalPanel）に戻せる。
+
+```bash
+# Zed を停止してから実行（稼働中は DB が上書きされる）
+pkill -x zed-editor; sleep 2
+python3 zed/restore-layout.py                                   # default-workspace
+python3 zed/restore-layout.py /path/to/other-project            # 任意のプロジェクト
+zed ~/document/deepseek-harness/default-workspace              # 再起動
+```
+
+バックアップは `db.sqlite.bak-<timestamp>` に自動作成。
+ロールバック: `cp ~/.local/share/zed/db/0-stable/db.sqlite.bak-* db.sqlite`
+
 ## 前提（別途必要）
 
 - `~/.config/opencode/dsh.env`（600）: DeepSeek 等の API キー。ラッパーが読む（本リポジトリには含めない）。
@@ -51,3 +70,13 @@ zed ~/document/deepseek-harness/default-workspace
 
 - 設計意図・検証結果: `passkey-gateway/docs/zed-setup-2026-11-10.md`（DeepSeek Harness ワークスペース内）
 - dsh-TUI: `passkey-gateway/docs/dsh-tui-setup-2026-11-10.md`
+
+## 参考: レイアウト永続化の仕組み（Zed 1.28.1 ソース調査）
+
+- 開閉状態: `workspaces` テーブルの `{left,right,bottom}_dock_visible` / `{...}_active_panel`
+- パネル名は各パネルの `Panel::persistent_name()`:
+  `Project Panel` / `GitPanel` / `Outline Panel` / `TerminalPanel` / `AgentPanel`
+- パネル幅: `scoped_kv_store` の `dock_panel_size` 名前空間に `{workspace_id}:{panel_key}` で保存
+  （`project_panel` の panel_key は `ProjectPanel`、`agent_panel` は `agent_panel`、`terminal` は `TerminalPanel`）
+- 保存タイミング: `serialize_workspace`（200ms throttle）— パネル開閉・リサイズ・ウィンドウ操作時
+- 参照: `crates/workspace/src/{dock.rs,persistence/model.rs}`、`crates/workspace/src/workspace.rs`
