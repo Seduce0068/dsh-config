@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+# Zed External Agent (ACP) launcher for DSH.
+#
+# 目的:
+#   - DSH の Web サービス (dsh-web / dsh-web-agentrouter) と同じ env ファイルを読み、
+#     provider の API キー (DEEPSEEK_API_KEY 等) を ACP プロセスに渡す。
+#   - キー類はこのスクリプトにも Zed 設定にも書かない（env ファイルは 600）。
+#   - DSH_HOME は Web サービスと同じホームを使い、セッション/認証を共有する。
+#
+# 使い方 (Zed の agent_servers から):
+#   command: /home/koppe/.local/bin/dsh-acp
+#   args: []
+#
+# 手動確認:
+#   /home/koppe/.local/bin/dsh-acp --help
+set -u
+
+ENV_FILE="${DSH_ENV_FILE:-/home/koppe/.config/opencode/dsh.env}"
+if [ -r "$ENV_FILE" ]; then
+  set -a
+  # shellcheck disable=SC1090
+  . "$ENV_FILE" || true
+  set +a
+fi
+
+export DSH_HOME="${DSH_HOME:-/home/koppe/.dsh-agentrouter}"
+
+exec /home/koppe/.npm-global/bin/dsh --profile acp "$@"

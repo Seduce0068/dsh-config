@@ -1,0 +1,21 @@
+// Zed キーマップ — base_keymap = VSCode の上に、足りない操作だけ追加する。
+// 既存の VSCode 互換キー（Ctrl+Shift+E, Ctrl+Shift+G, Ctrl+`, Ctrl+P 等）は
+// Zed 本体にすでに入っているので再定義しない。
+[
+  {
+    // VSCode 同様、ターミナルで Ctrl+V 貼り付け（Zed 既定は Ctrl+Shift+V）
+    "context": "Terminal",
+    "bindings": {
+      "ctrl-v": "terminal::Paste"
+    }
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      // タスク実行（task::Spawn のモーダル）。ctrl-alt-t は Zed 既定で未使用。
+      "ctrl-alt-t": "task::Spawn",
+      // 新しいターミナルタブ
+      "ctrl-shift-`": "workspace::NewTerminal"
+    }
+  }
+]

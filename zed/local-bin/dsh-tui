@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+# dsh-TUI launcher for this machine.
+#
+# 目的:
+#   - DSH Web サービスと同じ env ファイルを読み、DeepSeek の API キーを TUI に渡す。
+#   - DSH_HOME を Web サービスと同じホームに固定し、セッション/認証を共有する。
+#   - 秘密情報はこのスクリプトには含めない（env ファイルは 600）。
+#
+# 実体: ~/.npm-global/bin/dsh-tui（npm グローバル導入版）
+set -u
+
+ENV_FILE="${DSH_ENV_FILE:-/home/koppe/.config/opencode/dsh.env}"
+if [ -r "$ENV_FILE" ]; then
+  set -a
+  # shellcheck disable=SC1090
+  . "$ENV_FILE" || true
+  set +a
+fi
+
+export DSH_HOME="${DSH_HOME:-/home/koppe/.dsh-agentrouter}"
+
+exec /home/koppe/.npm-global/bin/dsh-tui "$@"
