@@ -4,26 +4,37 @@
 set -euo pipefail
 repo="$(cd "$(dirname "$0")/.." && pwd)"
 home_dir="${HOME:-/home/koppe}"
-apply=0; commit=0; push=0
+apply=0
+commit=0
+push=0
 for a in "$@"; do
   case "$a" in
-    --apply) apply=1;;
-    --commit) apply=1; commit=1;;
-    --push) apply=1; commit=1; push=1;;
+    --apply) apply=1 ;;
+    --commit)
+      apply=1
+      commit=1
+      ;;
+    --push)
+      apply=1
+      commit=1
+      push=1
+      ;;
   esac
 done
 
 copy() { # src dst
-  if diff -q "$1" "$2" >/dev/null 2>&1; then echo "  [同一] ${2#$repo/}"; else
-    echo "  [更新] ${2#$repo/}"
+  if diff -q "$1" "$2" >/dev/null 2>&1; then
+    echo "  [同一] ${2#"$repo"/}"
+  else
+    echo "  [更新] ${2#"$repo"/}"
     if [ "$apply" -eq 1 ]; then cp -a "$1" "$2"; fi
   fi
 }
 
 echo "== AGENTS.md =="
 copy "$home_dir/.config/opencode/AGENTS.md" "$repo/instructions/AGENTS/config-opencode-AGENTS.md"
-copy "$home_dir/.codex/AGENTS.md"          "$repo/instructions/AGENTS/codex-AGENTS.md"
-copy "$home_dir/.agents/AGENTS.md"         "$repo/instructions/AGENTS/agents-AGENTS.md"
+copy "$home_dir/.codex/AGENTS.md" "$repo/instructions/AGENTS/codex-AGENTS.md"
+copy "$home_dir/.agents/AGENTS.md" "$repo/instructions/AGENTS/agents-AGENTS.md"
 copy "$home_dir/document/deepseek-harness/default-workspace/AGENTS.md" "$repo/instructions/AGENTS/workspace-AGENTS.md"
 
 echo "== Skills (canonical: ~/.config/opencode/skills) =="
@@ -35,7 +46,10 @@ if [ -d "$src" ]; then
       echo "  [同一] skills/$n"
     else
       echo "  [更新] skills/$n"
-      if [ "$apply" -eq 1 ]; then rm -rf "$repo/instructions/skills/$n"; cp -a "$d" "$repo/instructions/skills/$n"; fi
+      if [ "$apply" -eq 1 ]; then
+        rm -rf "$repo/instructions/skills/$n"
+        cp -a "$d" "$repo/instructions/skills/$n"
+      fi
     fi
   done
 fi
@@ -54,12 +68,12 @@ print('  secret hits:', len(hits))
 if hits: sys.exit(2)
 PY
   if [ "$commit" -eq 1 ]; then
-    ( cd "$repo" && git add instructions && \
-      git -c user.name="${GIT_AUTHOR_NAME:-koppe}" -c user.email="${GIT_AUTHOR_EMAIL:-keitaonodera0903@gmail.com}" \
-          commit -q -m "chore(instructions): 自動同期" || echo "  変更なし" )
+    (cd "$repo" && git add instructions \
+      && git -c user.name="${GIT_AUTHOR_NAME:-koppe}" -c user.email="${GIT_AUTHOR_EMAIL:-keitaonodera0903@gmail.com}" \
+        commit -q -m "chore(instructions): 自動同期" || echo "  変更なし")
   fi
   if [ "$push" -eq 1 ]; then
-    ( cd "$repo" && git push origin master )
+    (cd "$repo" && git push origin master)
   fi
 else
   echo "乾燥実行のみ（--apply でコピー、--commit/--push も可）"
