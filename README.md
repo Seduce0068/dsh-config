@@ -14,9 +14,10 @@ DeepSeek Harness（DSH）の設定と、このPCの環境情報をまとめた**
 
 ## 収録内容
 - `docs/approval-matrix.md`: 承認区分（確認不要／1回確認／明示承認）と完了定義
+- `docs/notifications.md`: スマホ通知の構成、goal 中の抑制ルールと修正履歴
 - `AGENTS.md`: 指示の正本テンプレート（ツール別参照は `instructions/`）
 - `environment/`: OS/カーネル/ハードウェア/バージョン/待受ポート/ネットワーク概要
-- `dsh/`: DSHのプロファイル構成（web / agentrouter / headless）、バージョン
+- `dsh/`: DSHのプロファイル構成（web / agentrouter / headless）、バージョン、自作プラグインのソース（`dsh/plugins/`）
 - `systemd/`: ユーザーunit・システムunit（DSH/ゲート/監視/バックアップ）
 - `passkey-gateway/`: パスキーゲートのcompose/Caddy設定、運用スクリプト、主要ドキュメント
 - `.env.example`: 必要な環境変数の**名前のみ**

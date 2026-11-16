@@ -1,0 +1,24 @@
+# dsh-ntfy-notify bundle patch: mount the ntfy push notifier.
+#
+# Applied when this bundle appears in a profile's dsh.profile.bundles list.
+# The host half (package root) turns DSH events into ntfy HTTP publishes; the
+# browser half (dsh.client) reports the away/main-view state the host uses to
+# decide whether a push is warranted.
+
+- insert:
+    - id: ntfy-notify
+      name: 'dsh-ntfy-notify'
+      config:
+        # Publish target. Fill in the topic you subscribe to on your phone.
+        server: 'https://ntfy.sh'
+        topic: ''
+        # Optional ntfy access token (sent as a Bearer header).
+        token: ''
+        # Set to true to ask the phone to play a sound for every push.
+        sound: true
+        # Only the "away" events are gated by the browser view:
+        #   approval/question -> pushed whenever nobody is looking at that session
+        #   turn completion   -> pushed only when no DSH page is in the foreground
+        notifyApproval: true
+        notifyQuestion: true
+        notifyTurnComplete: true
