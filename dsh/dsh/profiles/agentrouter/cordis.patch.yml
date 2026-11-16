@@ -13,3 +13,7 @@
   config:
     provider: agentrouter
     model: gpt-5.6-sol
+
+# DeepSeek の web search は使用しない（調査は MCP の jarvis web_search を使う）
+- id: web-search-deepseek
+  disabled: true

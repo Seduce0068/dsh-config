@@ -222,35 +222,9 @@
             input:
               - text
               - image
-      deepai:
-        displayName: DeepAI Code
-        apiKeyEnv: DEEPAI_API_KEY
-        api: openai-completions
-        baseURL: https://api.deepai.org/deepai_code
-        headers:
-          X-DeepAI-Code-Theos: "2"
-          X-DeepAI-Code-Machine: b2f59641b1d56c7d7d824b73ab7ef4dd685a97b079f55b51fa56733e32a56fd0
-        models:
-          - id: deepseek-v4.1-flash
-            name: DeepSeek V4.1 Flash
-            contextWindow: 1048576
-            maxTokens: 131072
-          - id: glm-5.3
-            name: GLM 5.3
-            contextWindow: 1048576
-            maxTokens: 131072
-          - id: gpt-6-astra
-            name: GPT-6 Astra
-            contextWindow: 1048576
-            maxTokens: 128000
-          - id: claude-opus-5-5
-            name: Claude Opus 5.5
-            contextWindow: 1000000
-            maxTokens: 64000
-          - id: kimi-k3
-            name: Kimi K3
-            contextWindow: 1048576
-            maxTokens: 131072
+      # DeepAI Code プロバイダは削除 (2026-11-14): /deepai_code は公式クライアント専用の
+      # 非公開バックエンドで、DeepAI 利用規約 Restrictions（無断アプリ利用・アクセス迂回）
+      # に抵触するため。過去設定は同ディレクトリの bak ファイルを参照。
       ollama-cloud:
         displayName: Ollama Cloud
         apiKeyEnv: OLLAMA_CLOUD_API_KEY
@@ -418,6 +392,36 @@
             name: DeepSeek V4.1 Flash
           - id: orcarouter/auto
             name: OrcaRouter Auto
+      google:
+        displayName: Google Gemini
+        apiKeyEnv: GOOGLE_API_KEY
+        models:
+          - id: gemini-4-hydrogen
+            name: Gemini 4 Hydrogen
+            contextWindow: 1048576
+            maxTokens: 65536
+            input:
+              - text
+              - image
+            reasoningEfforts:
+              'off': null
+              low: low
+              medium: medium
+              high: high
+          - id: gemini-4-argon
+            name: Gemini 4 Argon
+            contextWindow: 1048576
+            maxTokens: 32768
+            input:
+              - text
+              - image
+          - id: gemini-3.8-flash
+            name: Gemini 3.8 Flash
+            contextWindow: 1048576
+            maxTokens: 65536
+            input:
+              - text
+              - image
 - id: ui-settings-general
   name: "@deepseek-ai/dsh-client-ui-settings-general"
   config:
@@ -462,5 +466,67 @@
         headers:
           X-MCP-Toolsets: repos,pull_requests,issues
           Authorization: !!js '`Bearer ${process.env.GITHUB_MCP_TOKEN}`'
+        toolCallTimeoutMs: 60000
+        failOnStartupError: false
+
+- insert:
+    - id: mcp-rustxng
+      name: '@deepseek-ai/dsh-mcp-client'
+      config:
+        serverName: rustxng
+        transport: stdio
+        command: /home/koppe/.local/bin/rustxng
+        args:
+          - mcp
+        toolCallTimeoutMs: 60000
+        failOnStartupError: false
+
+# DeepSeek の web search は使用しない（調査は MCP の jarvis web_search を使う）
+- id: web-search-deepseek
+  disabled: true
+
+# MCP: exa (web search/fetch) — streamable-http, keyless (free rate limit).
+# 認証: OAuth は DSH 未対応のため keyless で接続。キーを使う場合は
+# dsh.env に EXA_API_KEY を追加し、headers に
+# x-api-key: !!js process.env.EXA_API_KEY
+# を追加する（README: API key mode / https://mcp.exa.ai/mcp）。
+- insert:
+    - id: mcp-exa
+      name: '@deepseek-ai/dsh-mcp-client'
+      config:
+        serverName: exa
+        transport: streamable-http
+        url: https://mcp.exa.ai/mcp
+        toolCallTimeoutMs: 60000
+        failOnStartupError: false
+
+# MCP: tavily (search/extract) — streamable-http, keyless header 必須.
+# 認証: X-Tavily-Access-Mode: keyless ヘッダーがないと 401。
+# crawl/map/research はキー必須: dsh.env に TAVILY_API_KEY を追加し headers に
+# Authorization: !!js '`Bearer ${process.env.TAVILY_API_KEY}`'
+# を追加（キーが優先される）。
+- insert:
+    - id: mcp-tavily
+      name: '@deepseek-ai/dsh-mcp-client'
+      config:
+        serverName: tavily
+        transport: streamable-http
+        url: https://mcp.tavily.com/mcp/
+        headers:
+          X-Tavily-Access-Mode: keyless
+        toolCallTimeoutMs: 60000
+        failOnStartupError: false
+
+# MCP: context7 (library docs) — streamable-http, keyless (rate limited).
+# キーを使う場合は dsh.env に CONTEXT7_API_KEY を追加し、
+# url を !!js '`https://mcp.context7.com/mcp?api_key=${process.env.CONTEXT7_API_KEY}`'
+# に差し替える。
+- insert:
+    - id: mcp-context7
+      name: '@deepseek-ai/dsh-mcp-client'
+      config:
+        serverName: context7
+        transport: streamable-http
+        url: https://mcp.context7.com/mcp
         toolCallTimeoutMs: 60000
         failOnStartupError: false

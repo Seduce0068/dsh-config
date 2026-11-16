@@ -2,7 +2,10 @@
   "name": "dsh-profile-agentrouter",
   "private": true,
   "dependencies": {
-    "dsh-llm-agentrouter": "^2.6.1"
+    "dsh-llm-agentrouter": "^2.6.1",
+    "dsh-mobile-maxxing": "file:/home/koppe/.dsh/plugins/artifacts/dsh-mobile-maxxing-1.0.6.tgz",
+    "dsh-ntfy-notify": "link:/home/koppe/.dsh/plugins/dsh-ntfy-notify",
+    "dsh-resilient-retry": "link:/home/koppe/document/deepseek-harness/default-workspace/dsh-resilient-retry"
   },
   "dsh": {
     "profile": {
@@ -10,11 +13,13 @@
         "@deepseek-ai/dsh-base",
         "@deepseek-ai/dsh-web-app",
         "dsh-llm-agentrouter",
-        "@deepseek-ai/dsh-experimental-agent-team-profile",
         "@deepseek-ai/dsh-experimental-plugin-market-bundle",
         "@deepseek-ai/dsh-experimental-auto-review",
         "@deepseek-ai/dsh-experimental-forge-bundle",
-        "@deepseek-ai/dsh-experimental-voice-input-bundle"
+        "@deepseek-ai/dsh-experimental-voice-input-bundle",
+        "dsh-mobile-maxxing",
+        "dsh-ntfy-notify",
+        "dsh-resilient-retry"
       ]
     }
   }
