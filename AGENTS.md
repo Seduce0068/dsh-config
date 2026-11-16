@@ -14,6 +14,7 @@
 
 ## 開発規約
 - コミットは1論理変更ずつ。テスト/lint（fmt/check/test/clippy等）を通す。
+- **設定系の自動コミット**: `~/.dsh*` 配下の DSH 設定（`cordis.patch.yml` / `cordis.yml` / `package.json` 等）を変更したエージェントは、完了前に当リポジトリの対応ファイルへ同期し、`git add` → 差分確認 → `bash tools/check-config.sh` と秘密スキャン → コミット → push まで実施する（都度確認不要）。同期先: `dsh/dsh-agentrouter/*` ↔ `~/.dsh-agentrouter/*`、`dsh/dsh/*` ↔ `~/.dsh/*`。秘密情報・トークンは絶対に含めない。
 - 生成物・秘密・ローカル設定は`.gitignore`で除外。
 - ドキュメントは実装と同じコミットで更新する。
 
