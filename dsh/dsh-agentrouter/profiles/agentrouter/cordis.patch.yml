@@ -4,6 +4,14 @@
 # provider from the web profile is available in this one UI.
 - id: agent-instructions
   disabled: true
+# モデル選択メニューの「エージェント連携を有効にする」を新規セッションで既定ONにする。
+# config は丸ごと置換されるため base の maxTasks: 256 も併記する。
+# 既存セッションの保存済み選択は上書きしない（ドキュメント仕様）。
+- id: agent-team
+  name: '@deepseek-ai/dsh-agent-team'
+  config:
+    maxTasks: 256
+    defaultEnabled: true
 - id: llm-pi-ai
   config:
     providers:
