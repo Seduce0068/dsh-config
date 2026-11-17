@@ -29,91 +29,7 @@
     enabled: true
     allowedModels:
       - provider: opencode-go
-        model: deepseek-v4.1-flash
-      - provider: nvidia
-        model: deepseek-ai/deepseek-v4.1-flash
-      - provider: nvidia
-        model: z-ai/glm-5.3-flash
-      - provider: nvidia
-        model: nvidia/nemotron-3-ultra-550b-a55b
-      - provider: agentrouter
-        model: gpt-5.6-sol
-      - provider: agentrouter
-        model: gpt-6-astra
-      - provider: agentrouter
-        model: gpt-6.1-sol
-      - provider: opencode-go
-        model: beam-free
-      - provider: opencode-go
-        model: iceman-contributor-free
-      - provider: nvidia
-        model: openai/gpt-oss-20b
-      - provider: nvidia
-        model: google/diffusiongemma-26b-a4b-it
-      - provider: nvidia
-        model: google/gemma-3-12b-it
-      - provider: nvidia
-        model: google/gemma-3-4b-it
-      - provider: nvidia
-        model: meta/llama-3.2-11b-vision-instruct
-      - provider: nvidia
-        model: meta/llama-3.2-90b-vision-instruct
-      - provider: nvidia
-        model: meta/muse-glimmer-30b
-      - provider: nvidia
-        model: minimaxai/minimax-m3.1-flash
-      - provider: nvidia
-        model: mistralai/mistral-7b-instruct-v0.3
-      - provider: nvidia
-        model: moonshotai/kimi-k2.6
-      - provider: nvidia
-        model: nvidia/cosmos-reason2-8b
-      - provider: nvidia
-        model: nvidia/llama-3.1-nemotron-70b-instruct
-      - provider: nvidia
-        model: nvidia/llama-3.1-nemotron-ultra-253b-v1
-      - provider: nvidia
-        model: nvidia/nemotron-3-nano-omni-30b-a3b-reasoning
-      - provider: nvidia
-        model: nvidia/nemotron-3.5-lightning-30b-a3b
-      - provider: nvidia
-        model: nvidia/nemotron-3.5-super-vl-120b-a12b
-      - provider: nvidia
-        model: poolside/laguna-xs-2.1
-      - provider: nvidia
-        model: stepfun-ai/step-5-preview
-      - provider: google
-        model: gemini-2.5-flash
-      - provider: google
-        model: gemini-2.5-flash-lite
-      - provider: google
-        model: gemini-3-flash-preview
-      - provider: google
-        model: gemini-3.1-flash-lite
-      - provider: google
-        model: gemini-3.5-flash
-      - provider: google
-        model: gemini-3.5-flash-lite
-      - provider: google
-        model: gemini-3.6-flash
-      - provider: google
-        model: gemini-3.7-flash
-      - provider: google
-        model: gemini-3.8-flash
-      - provider: google
-        model: gemini-flash-latest
-      - provider: google
-        model: gemini-flash-lite-latest
-      - provider: logfare
-        model: kimi-k2.7-code
-      - provider: logfare
-        model: kimi-k2.6
-      - provider: logfare
-        model: glm-5.3-flash
-      - provider: logfare
-        model: glm-5.3
-      - provider: logfare
-        model: deepseek-v4.1-flash-1017
+        model: hy4-flash-free
 
 - insert:
     - id: mcp-github
@@ -165,8 +81,8 @@
     topic: 'LZYVQrZ5hf754ZUQkLYGLPFEX'
     sound: true
     notifyApproval: true
-    notifyQuestion: true
-    notifyTurnComplete: true
+    notifyQuestion: false
+    notifyTurnComplete: false
     approvalPriority: 'max'
     questionPriority: 'max'
     turnPriority: 'high'
