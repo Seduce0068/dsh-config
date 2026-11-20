@@ -369,7 +369,7 @@ window.__ModuleLoader__.load({
           id: 'goal-bulk-resume',
           order: 90,
           locale: NS,
-          inject: ({ onDismiss }) => ({ ...callbacks(), onDismiss }),
+          inject: props => ({ ...callbacks(), onDismiss: props && props.onDismiss }),
         }, SidebarAction));
       },
     };
