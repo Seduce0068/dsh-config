@@ -1,0 +1,7 @@
+{
+  "meta": {
+    "title": "Reanudar todas las metas",
+    "description": "Añade un botón «Reanudar todas las metas» a la barra de metas. Tras reiniciar DSH, reanuda las metas sin completar en todas las sesiones persistentes y omite las completadas.",
+    "detail": "docs/DETAIL.md"
+  }
+}

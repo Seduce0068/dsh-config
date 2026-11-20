@@ -1,0 +1,7 @@
+{
+  "meta": {
+    "title": "Ziele gesamt fortsetzen",
+    "description": "Fügt der Zieleiste eine Schaltfläche „Alle Ziele fortsetzen“ hinzu. Nach einem DSH-Neustart werden unabgeschlossene Ziele in allen gespeicherten Sitzungen fortgesetzt, abgeschlossene übersprungen.",
+    "detail": "docs/DETAIL.md"
+  }
+}

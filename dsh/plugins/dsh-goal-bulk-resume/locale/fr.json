@@ -1,0 +1,7 @@
+{
+  "meta": {
+    "title": "Reprendre tous les objectifs",
+    "description": "Ajoute un bouton « Reprendre tous les objectifs » à la barre d'objectifs. Après un redémarrage de DSH, reprend les objectifs non terminés dans toutes les sessions persistantes et ignore les objectifs terminés.",
+    "detail": "docs/DETAIL.md"
+  }
+}

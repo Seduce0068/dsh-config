@@ -1,0 +1,3 @@
+- insert:
+    - id: goal-bulk-resume
+      name: '@local/dsh-goal-bulk-resume'

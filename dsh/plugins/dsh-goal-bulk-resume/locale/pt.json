@@ -1,0 +1,7 @@
+{
+  "meta": {
+    "title": "Retomar todas as metas",
+    "description": "Adiciona um botão «Retomar todas as metas» à barra de metas. Após reiniciar o DSH, retoma metas não concluídas em todas as sessões persistentes e ignora as concluídas.",
+    "detail": "docs/DETAIL.md"
+  }
+}

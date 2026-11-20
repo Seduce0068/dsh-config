@@ -1,0 +1,7 @@
+{
+  "meta": {
+    "title": "Goal bulk resume",
+    "description": "Adds a Resume all goals button to the goal strip. After a DSH restart it resumes unfinished goals in all persisted sessions and skips completed ones.",
+    "detail": "docs/DETAIL.md"
+  }
+}
