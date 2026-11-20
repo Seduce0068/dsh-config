@@ -1,8 +1,7 @@
 # Zed 設定（ koppe / Kubuntu 2026.04 ）
 
 `~/.config/zed/` の実稼働設定と、DSH ACP / dsh-TUI 用ラッパーのバックアップ。
-Zed 1.27 → 1.28 で運用中。
-
+Zed 1.28（公式）と zed-i18n 1.29.2（日本語UIビルド）を併用中。
 ## 構成
 
 ```
@@ -15,7 +14,8 @@ zed/
 │   └── tasks.json      # ~/.config/zed/tasks.json
 ├── local-bin/
 │   ├── dsh-acp         # ~/.local/bin/dsh-acp（ACP ラッパー、700）
-│   └── dsh-tui         # ~/.local/bin/dsh-tui（TUI ラッパー、700）
+│   ├── dsh-tui         # ~/.local/bin/dsh-tui（TUI ラッパー、700）
+│   └── zed-i18n        # ~/.local/bin/zed-i18n（日本語 UI ビルドの起動ラッパー、700）
 ├── restore-layout.py   # 3ペインレイアウト復元スクリプト
 └── settings.example.jsonc  # 最小設定例（公開参照用）
 ```
@@ -35,6 +35,36 @@ ln -sfn dsh-tui ~/.local/bin/dst
 # 3. Zed を起動 → 拡張は auto_install_extensions で自動導入
 zed ~/document/deepseek-harness/default-workspace
 ```
+
+### 日本語 UI（zed-i18n ビルド）
+
+公式 Zed は UI ローカライズをサポートしていないため、コミュニティビルド
+`zed-i18n`（Zed 1.29.2 ベース、日本語訳を含む全 13 言語）を併用する。
+
+```bash
+# ラッパー配置（初回のみ）
+cp zed/local-bin/zed-i18n ~/.local/bin/zed-i18n
+chmod 700 ~/.local/bin/zed-i18n
+# 起動
+zed-i18n ~/document/deepseek-harness/default-workspace
+```
+
+表示言語は `~/.config/zed/settings.json` の `ui_locale` で固定する。
+
+```jsonc
+"ui_locale": "ja-JP"
+```
+
+`ui_locale` の値は `cs-CZ` / `de-DE` / `es-ES` / `fr-FR` / `it-IT` / `ja-JP` /
+`ko-KR` / `pl-PL` / `pt-BR` / `ru-RU` / `tr-TR` / `zh-CN` / `zh-TW` のいずれか
+（`en-US` を指定すると英語に戻る）。公式 Zed はこのキーを無視する。
+
+注意:
+- zed-i18n は `~/.config/zed/` と `~/.local/share/zed/` を公式 Zed と共有する。
+  DB スキーマが 1.29 系に更新されるため、公式 1.28 に戻すと不整合が起きる可能性がある。
+- zed-i18n は内蔵自動更新を無効化している（`ZED_UPDATE_EXPLANATION`）。更新時は
+  リリースページから .deb / tar.gz を取得して `~/.local/zed-i18n/` を置き換える。
+- zed-i18n はコミュニティビルドであり、Zed Industries の公式サポート対象外。
 
 ### パネルレイアウトの復元（VSCode 風 3ペイン）
 
