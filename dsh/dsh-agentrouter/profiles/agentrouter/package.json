@@ -3,7 +3,7 @@
   "private": true,
   "dependencies": {
     "dsh-llm-agentrouter": "^2.6.1",
-    "dsh-mobile-maxxing": "file:/home/koppe/.dsh/plugins/artifacts/dsh-mobile-maxxing-1.0.9.tgz",
+    "dsh-mobile-maxxing": "file:/home/koppe/.dsh/plugins/artifacts/dsh-mobile-maxxing-1.0.9-local.1.tgz",
     "dsh-ntfy-notify": "link:/home/koppe/.dsh/plugins/dsh-ntfy-notify",
     "dsh-resilient-retry": "link:/home/koppe/document/deepseek-harness/default-workspace/dsh-resilient-retry"
   },
