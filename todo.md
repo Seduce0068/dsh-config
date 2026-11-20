@@ -14,13 +14,14 @@ status: current
 
 ## 進行中
 
-（なし）
+- [ ] セッションローカルキャッシュのブラウザ実機確認（キャッシュヒット・再接続時の描画）
+- [ ] 上流 `deepseek-ai/deepseek-harness` への反映（Issue/PR）
 
 ## 未着手
 
 ### 優先度: 高
 
-（なし）
+- [ ] `npm install -g` 後の再適用を自動化する（現在は手動で `deploy.sh` を実行）
 
 ### 優先度: 中
 
