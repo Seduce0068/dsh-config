@@ -14,18 +14,18 @@ status: current
 
 ## 進行中
 
-- [ ] セッションローカルキャッシュのブラウザ実機確認（キャッシュヒット・再接続時の描画）
-- [ ] 上流 `deepseek-ai/deepseek-harness` への反映（Issue/PR）
+- [ ] 上流 `deepseek-ai/deepseek-harness` で `SessionListRequest.cursor` を実装し、差分 list を実現する（要ユーザー承認でフォーク／PR）
+- [ ] 実装後に `session.list` / `session.follow` の呼出回数と転送量を before/after 計測する
 
 ## 未着手
 
 ### 優先度: 高
 
-- [ ] `npm install -g` 後の再適用を自動化する（現在は手動で `deploy.sh` を実行）
+- [ ] 会話履歴の差分化（follow への cursor 追加。list 差分の実測後）
 
 ### 優先度: 中
 
-（なし）
+- [ ] 先描画ハックの副作用を上流実装へ持ち込まないことをレビューで確認する
 
 ### 優先度: 低
 
@@ -34,7 +34,12 @@ status: current
 ## 完了
 
 - [x] `todo.md` をプロジェクト内へ配置（2026-11-17）
+- [x] 11/20 のキャッシュパッチが無効な原因を特定（11/21 01:05 に `lib/client.js` 単体が元へ戻る）
+- [x] 体感改善が出なかった構造的理由を検証し、ADR を訂正（2026-11-22）
 
 ## メモ
 
 - グローバルTODO: `~/.config/opencode/todo.md`（複数プロジェクト横断のタスク用）。
+- 11/20 のパッチは再適用しない（効果 < 副作用リスク）。記録は `work/dsh-session-cache/` に残す。
+- 検証記録: `passkey-gateway/docs/session-cache-verification-2026-11-22.md`
+- 現行方針: `passkey-gateway/docs/session-local-cache-adr-2026-11-22.md`
