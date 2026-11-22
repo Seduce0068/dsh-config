@@ -70,6 +70,12 @@
   config:
     maxActiveSubagents: 80
     maxDepth: 80
+# ゴールのデフォルト継続ラウンド上限。create で max_goal_rounds を省略した場合に適用される。
+# エージェントが独自の小さい値を明示しないよう ~/.agents/AGENTS.md でも指示している。
+- id: goal
+  name: '@deepseek-ai/dsh-goal'
+  config:
+    defaultMaxGoalRounds: 5000
 
 # スマホ通知 (dsh-ntfy-notify): 承認待ちだけを ntfy に流す。
 # ターン完了・質問は dsh-mobile-maxxing の Web Push（アプリ内バナー/タップで開く）が担当。
