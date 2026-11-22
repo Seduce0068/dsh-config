@@ -14,7 +14,9 @@ status: current
 
 ## 進行中
 
-- [ ] 上流 `deepseek-ai/deepseek-harness` で `SessionListRequest.cursor` を実装し、差分 list を実現する（要ユーザー承認でフォーク／PR）
+- [ ] 上流 `deepseek-ai/deepseek-harness` で
+  `SessionListRequest.cursor` を実装し差分 list を実現する
+  （要ユーザー承認でフォーク／PR）
 - [ ] 実装後に `session.list` / `session.follow` の呼出回数と転送量を before/after 計測する
 
 ## 未着手
