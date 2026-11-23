@@ -10,7 +10,7 @@ root="/home/koppe/document/deepseek-harness/default-workspace/passkey-gateway"
 log="$root/docs/backup-offsite.log"
 mnt="/mnt/timeshift"
 uuid="4011f2a9-a538-4b6e-ac04-7a0fa58a6559"   # sdb1 ext4 TS-BACKUP
-keep=5
+keep=14
 
 log_line() { printf '%s %s\n' "$(date -Is)" "$*" >>"$log"; }
 cleanup() { sudo -n /usr/local/sbin/dsh-root-helper umount-disk >/dev/null 2>&1 || true; rmdir "$mnt" 2>/dev/null || true; }
@@ -58,6 +58,13 @@ tar -C / -czf "$stage/repos.tar.gz" \
 	--exclude='*/node_modules' --exclude='*/target' --exclude='*/dist' \
 	--exclude='*/.cache' --exclude='*/.next' --exclude='*/__pycache__' \
 	--exclude='*/venv' --exclude='*/.venv' --exclude='*/.serena/cache' \
+	--exclude='home/koppe/.config/opencode/opencode.jsonc*' \
+	--exclude='home/koppe/.config/opencode/dsh.env' \
+	--exclude='home/koppe/.config/opencode/deepai.key' \
+	--exclude='*/browser-session' --exclude='*/browser-session/*' \
+	--exclude='*.env*' \
+	--exclude='*.key' --exclude='*.pem' --exclude='*.p12' \
+	--exclude='id_rsa*' --exclude='*credentials*' \
 	"home/koppe/.config/opencode" \
 	"home/koppe/ドキュメント/作業用/-" \
 	"home/koppe/ドキュメント/作業用/Policy_discussion_casualconversation" \
@@ -66,6 +73,7 @@ tar -C / -czf "$stage/repos.tar.gz" \
 	"home/koppe/ドキュメント/作業用/userscript/userscript" \
 	"home/koppe/ドキュメント/作業用/UserScripts" \
 	"home/koppe/knowledge" \
+	"home/koppe/.agents/skills" \
 	"home/koppe/.openclaw/workspace" \
 	"home/koppe/.codex/memories" \
 	2>/dev/null || true
@@ -74,6 +82,12 @@ sudo -n /usr/local/sbin/dsh-root-helper collect-sudoers "$stage" || true
 # 2. 設定とDSHデータのアーカイブ
 tar -C / -czf "$stage/config.tar.gz" \
 	--warning=no-file-changed \
+	--exclude='home/koppe/.dsh/.credentials.yaml' \
+	--exclude='home/koppe/.dsh/certs' \
+	--exclude='*/.dsh/certs/*' \
+	--exclude='*.env*' --exclude='*.key' --exclude='*.pem' --exclude='*.p12' \
+	--exclude='*credentials*' \
+	--exclude='*pocket-id.db-*' --exclude='*pocket-id.db.bak-*' \
 	$(cd / && ls -d \
 		"home/koppe/.config/systemd/user/dsh-passkey-stack.service" \
 		"home/koppe/.config/systemd/user/dsh-web.service" \
@@ -86,6 +100,12 @@ tar -C / -czf "$stage/config.tar.gz" \
 		"home/koppe/.config/systemd/user/dsh-health-report.timer" \
 		"home/koppe/.config/systemd/user/dsh-github-inventory.service" \
 		"home/koppe/.config/systemd/user/dsh-github-inventory.timer" \
+		"home/koppe/.config/systemd/user/dsh-backup-verify.service" \
+		"home/koppe/.config/systemd/user/dsh-backup-verify.timer" \
+		"home/koppe/.config/systemd/user/dsh-security-scan.service" \
+		"home/koppe/.config/systemd/user/dsh-security-scan.timer" \
+		"home/koppe/.config/systemd/user/dsh-advisory-check.service" \
+		"home/koppe/.config/systemd/user/dsh-advisory-check.timer" \
 		"etc/systemd/system/block-tailnet-opencode.service" \
 		"usr/local/sbin/block-tailnet-opencode.sh" \
 		"etc/systemd/system/dsh-passkey-stack.service" \
@@ -96,11 +116,13 @@ tar -C / -czf "$stage/config.tar.gz" \
 		"home/koppe/document/deepseek-harness/default-workspace/passkey-gateway/register" \
 		"home/koppe/document/deepseek-harness/default-workspace/passkey-gateway/login-entry" \
 		"home/koppe/document/deepseek-harness/default-workspace/passkey-gateway/scripts" \
+		"home/koppe/document/deepseek-harness/default-workspace/AGENTS.md" \
 		"home/koppe/document/deepseek-harness/default-workspace/passkey-gateway/docs" \
 		"home/koppe/.dsh" \
 		"home/koppe/.dsh-agentrouter/sessions" \
 		"home/koppe/.dsh-agentrouter/storages" \
-		"home/koppe/.dsh-agentrouter/profiles" 2>/dev/null) \
+		"home/koppe/.dsh-agentrouter/profiles" \
+		"home/koppe/.dsh-agentrouter/dsh-mobile-maxxing" 2>/dev/null) \
 	--exclude='*/node_modules' \
 	-C "$stage" sudoers.d \
 	2>/dev/null || true
@@ -120,7 +142,8 @@ cat >"$stage/README-RESTORE.txt" <<'EOF'
 DSH 自動バックアップ（秘密・会話履歴を含む）
 - config.tar.gz : ゲート設定（env含む）、systemd unit、DSHホーム（~/.dsh, agentrouterのsessions/storages/profiles）
 - pocket-id.db  : Pocket ID の整合スナップショット（ENCRYPTION_KEY 必須）
-- repos.tar.gz  : 個人リポジトリ（作業ツリー+.git。ビルド生成物は除外）\n- state.txt     : Serve / UFW / 待受 / コンテナの記録
+- repos.tar.gz  : 個人リポジトリ＋指示/秘密設定（dsh.env, .env等を含む。要物理保護）
+- state.txt     : Serve / UFW / 待受 / コンテナの記録
 復元: 展開 → DB配置（同キー） → systemctl --user daemon-reload → restart dsh-passkey-stack
 注意: 共有・アップロード禁止。ディスクを物理的に保護すること。
 EOF
