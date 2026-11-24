@@ -1,0 +1,37 @@
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini
+.Trash-*
+
+# Editor/IDE local state
+.idea/
+*.swp
+*.swo
+*~
+*.orig
+*.rej
+
+# Secrets
+.env
+.env.*
+*.pem
+*.key
+id_rsa
+id_ed25519
+
+# Logs / temp
+*.log
+.cache/
+
+# Build artifacts (tracked files are unaffected)
+node_modules/
+target/
+__pycache__/
+*.pyc
+.venv/
+venv/
+dist/
+.next/
+.turbo/
+coverage/
