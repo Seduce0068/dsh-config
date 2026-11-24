@@ -23,6 +23,8 @@ status: current
 
 ### 優先度: 高
 
+- [ ] ローディング UX の設定改善を適用（Plugins で session titles 有効化、
+      `modelsMaxAgeMs` / connection recovery の確認。詳細は調査レポート参照）
 - [ ] 会話履歴の差分化（follow への cursor 追加。list 差分の実測後）
 
 ### 優先度: 中
