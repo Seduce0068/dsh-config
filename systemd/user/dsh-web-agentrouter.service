@@ -11,7 +11,7 @@ Environment=DSH_HOME=<home>/.dsh-agentrouter
 EnvironmentFile=<home>/.config/opencode/dsh.env
 Environment=PATH=<home>/.npm-global/bin:<home>/.cargo/bin:<home>/.local/bin:/usr/local/bin:/usr/bin:/bin
 ExecStartPre=<home>/.local/bin/dsh-samesite-lax.sh
-ExecStart=<home>/.npm-global/bin/dsh --profile agentrouter --no-open --port 3081 --trusted-host <private-ip> --trusted-host onoderakeita-systemproductname.<tailnet> --public-url https://onoderakeita-systemproductname.<tailnet>:8445/
+ExecStart=<home>/.npm-global/bin/dsh --profile agentrouter --no-open --port 3081 --trusted-host <private-ip> --trusted-host <host>.<tailnet> --public-url https://<host>.<tailnet>:8445/
 Restart=on-failure
 RestartSec=5
 

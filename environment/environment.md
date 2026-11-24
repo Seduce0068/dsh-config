@@ -6,9 +6,9 @@ arch: x86_64
 ## Hardware
 
 total        used        free      shared  buff/cache   available
-Mem:            62Gi        40Gi       1.9Gi       740Mi        21Gi        22Gi
-Swap:           63Gi       4.0Ki        63Gi
-NVIDIA GeForce GTX 1660 SUPER, 595.99.02, 6144 MiB
+Mem:         <memory>     <used>     <free>     <shared>    <cache>     <available>
+Swap:        <swap>       <used>     <free>
+GPU: <gpu>（driver <driver>, VRAM <vram>）
 
 ## Versions
 dsh: 0.2.2-rc.1
@@ -20,22 +20,22 @@ python3: Python 3.14.4
 tailscale: 1.104.5
 git: git version 2.53.0
 
-## Storage
-NAME          SIZE FSTYPE MOUNTPOINT
-sda         931.5G
-└─sda1      931.5G ntfs
-sdb         447.1G
-└─sdb1      447.1G ext4   /mnt/timeshift
-nvme0n1     931.5G
-├─nvme0n1p1   450M ntfs
-├─nvme0n1p2   100M vfat   /boot/efi
-├─nvme0n1p3    16M
-├─nvme0n1p4 333.3G ntfs
-├─nvme0n1p5   826M ntfs
-└─nvme0n1p7 596.9G ext4   /
-Filesystem      Size  Used Avail Use% Mounted on
-/dev/nvme0n1p7  587G  445G  113G  80% /
-/dev/sdb1       440G  127G  309G  30% /mnt/timeshift
+## Storage（sanitized）
+NAME          SIZE    FSTYPE  MOUNTPOINT
+<disk>        <size>
+└─<diskpart>  <size>  <fstype>
+<disk>        <size>
+└─<diskpart>  <size>  ext4    <mount>
+<disk>        <size>
+├─<diskpart>  <size>  ntfs
+├─<diskpart>  <size>  vfat    <mount>
+├─<diskpart>  <size>
+├─<diskpart>  <size>  ntfs
+├─<diskpart>  <size>  ntfs
+└─<diskpart>  <size>  ext4    <mount>
+Filesystem      Size    Used  Avail Use% Mounted on
+<diskpart>      <size>  <used> <avail> <pct>% <mount>
+<diskpart>      <size>  <used> <avail> <pct>% <mount>
 
 ## Network (sanitized)
 default via <private-ip> dev enp4s0 proto dhcp src <private-ip> metric 100

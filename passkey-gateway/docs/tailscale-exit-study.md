@@ -11,8 +11,8 @@
 | 役割 | 詳細 | 代替の難易度 |
 |---|---|---|
 | リモート到達 | スマホ等をtailnet経由で接続 | 高（CGNATのため要トンネル/VPS） |
-| TLS終端・証明書 | Serveが`*.ts.net`証明書でHTTPS終端。内側Caddyは**HTTPのみ** | 中〜高（ドメイン＋ACME/Caddy TLS化） |
-| DNS/名前 | MagicDNS + `*.ts.net` ホスト名 | 中（LAN DNS/内部CA/独自ドメイン） |
+| TLS終端・証明書 | Serveが`*.<tailnet>`証明書でHTTPS終端。内側Caddyは**HTTPのみ** | 中〜高（ドメイン＋ACME/Caddy TLS化） |
+| DNS/名前 | MagicDNS + `*.<tailnet>` ホスト名 | 中（LAN DNS/内部CA/独自ドメイン） |
 | 公開ポート | `/`→18890, `:8443`→14443, `:8445`→14445 | 低（Caddyで直接待受） |
 | 認証オリジン | Pocket IDのAPP_URL・OIDC issuer・DSH Cookieのauthority | **高（パスキー再登録）** |
 | ACL/ID | tailnet ACL・ノード認証 | 中（アプリ側のパスキーで代替可） |
@@ -27,7 +27,7 @@
 
 ## 3. 移行の必須条件と障壁
 ### (a) パスキーRP ID（最重要）
-- Pocket ID `APP_URL=https://onoderakeita-systemproductname.<tailnet>:8443`
+- Pocket ID `APP_URL=https://<host>.<tailnet>:8443`
 - WebAuthnのパスキーは**このホスト名に暗号学的に束縛**される
 - したがって**ホスト名を変える＝既存パスキーは全て無効**。ログインできない状態になるため、
   移行前に「新オリジンでのパスキー登録手段」を確保する必要がある（Pocket IDの回復/一時トークン等の

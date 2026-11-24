@@ -29,8 +29,8 @@
    ```
 
 ## 検証（2026-11-08 21:37）
-- `mcp__github__list_commits` で `onoderakeita/system_all_update` の実コミット3件を取得 → **接続・認証・読み取りOK**。
-- トークン: fine-grained PAT / 15リポジトリ / `push=true` を確認。
+- `mcp__github__list_commits` で `<account>/<private-repo>` の実コミット3件を取得 → **接続・認証・読み取りOK**。
+- トークン: fine-grained PAT / <count>リポジトリ / `push=true` を確認。
 - 起動ログに MCP エラーなし。
 
 ## できること / できないこと
@@ -54,23 +54,23 @@
 
 | 操作 | 結果 |
 |---|---|
-| ブランチ作成 `mcp-connection-test` | 成功（起点 `494ba7d`） |
-| ファイルコミット（`MCP-TEST.md`） | 成功（commit `7b58e5a`） |
-| PR作成 | 成功（[PR #1](https://github.com/onoderakeita/system_all_update/pull/1)、1ファイル/1コミット） |
+| ブランチ作成 `mcp-connection-test` | 成功（起点 `<commit>`） |
+| ファイルコミット（`MCP-TEST.md`） | 成功（commit `<commit>`） |
+| PR作成 | 成功（[PR #1](https://github.com/<account>/<private-repo>/pull/1)、1ファイル/1コミット） |
 | 後片付け | PRクローズ（**未マージ**）、ブランチ削除（API 204→404確認） |
-| `master` | **無変更**（`494ba7d` のまま） |
+| `master` | **無変更**（`<commit>` のまま） |
 
 これにより「コミット作成・PR作成」の自動化が実動作で確認できた。
 
 ## 新規リポジトリ作成（2026-11-08 22:12）
 
-- `onoderakeita/howdy-notifier`（private）を作成し、ローカル初回コミットをpush。
-- `onoderakeita/system-diagnostics`（private）を作成し、旧`------`の壊れたremoteを置換してpush。
+- `<account>/<private-repo>`（private）を作成し、ローカル初回コミットをpush。
+- `<account>/<private-repo>`（private）を作成し、旧`------`の壊れたremoteを置換してpush。
 
 ### 重要な制約（PATのスコープ）
-- 現在のfine-grained PATは**「選択したリポジトリ」**スコープのため、**新規作成した2リポジトリはAPI/MCPから見えない**（404）。
+- 現在のfine-grained PATは**「選択したリポジトリ」**スコープのため、**新規作成した<count>リポジトリはAPI/MCPから見えない**（404）。
   - git push / ls-remote は成功（書き込みは通る）。
   - `/user/repos` にも出ないため、棚卸しレポートでは「GitHub未確認」と表示される。
 - 解消するには: https://github.com/settings/personal-access-tokens → 該当トークン →
-  **Repository access に新規2リポジトリを追加**（または「All repositories」）。
+  **Repository access に新規<count>リポジトリを追加**（または「All repositories」）。
 - 以後、新規リポジトリを作るたびにPATの選択範囲更新が必要。

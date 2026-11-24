@@ -121,20 +121,13 @@ generated: <br>
 - スマホブラウザは Microsoft Edge Beta を使う。
 - PCブラウザは Microsoft Edge Stable を使う。
 - スマホはAndroidスマートフォンとする。
-- スマホはSIMフリーのGalaxy S26 Ultra 1TB SM-S948Qを使う。
-- スマホ回線は日本通信の合理的みんなのプラン20GBとする。
-- 自宅回線はドコモHOME 5G HR02とする。
+- スマホは `<phone>`（`<phone-storage>`）を使う。機種固有ID・回線・プラン情報は記載しない。
+- スマホ回線・自宅回線の固有情報は記載しない。
 - スクリプトエージェントは
   [Violentmonkey](https://violentmonkey.github.io)を使う。
 - PCはKubuntu 202604 LTSを使用する。
-- CPUはRyzen 3600を使用する。
-- メモリはDDR4 64GBを使用する。
-- SSDはSamsung 970 EVO 1TBを使用する。
-- HDDは1TBを使用する。
-- USBポータブルSSDを使用する。
-- GPUはASUS GTX1660 SUPERを使用する。
-- マザーボードはASUS PRIME B450-PLUSを使用する。
-- ケースはG-GEAR ミドルタワーケース 69JDを使用する。
+- CPUは `<cpu>`、メモリは `<memory>`、ストレージは `<disk>`、GPUは `<gpu>` を使用する。
+- マザーボード・ケースの型番は `<motherboard>` / `<chassis>` とする。
 
 ### 参照
 

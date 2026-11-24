@@ -1,6 +1,6 @@
 # dsh-ntfy-notify
 
-DeepSeek Harness の **承認待ち / 質問待ち / ターン完了** を、スマホ（Galaxy S26 Ultra）の
+DeepSeek Harness の **承認待ち / 質問待ち / ターン完了** を、スマホ（`<phone>`）の
 ntfy 通知として受け取るためのプラグインです。ブラウザを閉じていても PC から離れていても届きます。
 
 - ホスト側（`lib/index.js`）: DSH のイベントを監視して ntfy へ HTTP publish

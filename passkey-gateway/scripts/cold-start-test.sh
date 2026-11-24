@@ -16,8 +16,8 @@ healthy() {
   [ "$(curl -q --noproxy '*' -s -o /dev/null -w '%{http_code}' --max-time 2 http://127.0.0.1:14181/ping 2>/dev/null)" = 200 ] &&
   [ "$(curl -q --noproxy '*' -s -o /dev/null -w '%{http_code}' --max-time 2 http://127.0.0.1:14182/ping 2>/dev/null)" = 200 ] &&
   [ "$(curl -q --noproxy '*' -s -o /dev/null -w '%{http_code}' --max-time 3 http://127.0.0.1:14111/.well-known/openid-configuration 2>/dev/null)" = 200 ] &&
-  [ "$(host_code http://127.0.0.1:14445/ onoderakeita-systemproductname.<tailnet>:8445)" = 302 ] &&
-  [ "$(host_code http://127.0.0.1:18890/ onoderakeita-systemproductname.<tailnet>)" = 302 ]
+  [ "$(host_code http://127.0.0.1:14445/ <host>.<tailnet>:8445)" = 302 ] &&
+  [ "$(host_code http://127.0.0.1:18890/ <host>.<tailnet>)" = 302 ]
 }
 {
 echo "cold-start-test start $(date -Is)"

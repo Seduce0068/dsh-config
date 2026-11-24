@@ -20,7 +20,7 @@ for base in ['<home>', '<home>/ドキュメント/作業用', '<home>/ドキュ�
              '<home>/ドキュメント/作業用/userscript', '<home>/ドキュメント/作業用/jarvis',
              '<home>/ドキュメント/作業用/opencode_opencoderust/opencoderust',
              '<home>/.config', '<home>/.openclaw', '<home>/.codex',
-             '<home>/repos/onoderakeita']:
+             '<home>/repos/Seduce0068']:
     b = pathlib.Path(base)
     if not b.exists(): continue
     for p in list(b.iterdir()) + list(b.glob('*/*')):

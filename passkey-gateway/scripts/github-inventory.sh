@@ -25,7 +25,7 @@ seen_real = set()
 for base in ['<home>', '<home>/ドキュメント/作業用', '<home>/ドキュメント/作業用/rustscript',
              '<home>/ドキュメント/作業用/userscript', '<home>/ドキュメント/作業用/jarvis',
              '<home>/.config', '<home>/.openclaw', '<home>/.codex',
-             '<home>/repos/onoderakeita',
+             '<home>/repos/Seduce0068',
              '<home>/ドキュメント/作業用/opencode_opencoderust/opencoderust']:
     b = pathlib.Path(base)
     if not b.exists():
@@ -64,7 +64,7 @@ for p in sorted(cands):
 
 gh_by_name = {r['full_name']: r for r in gh}
 local_by_remote = {r['remote']: r for r in locals_ if r['remote']}
-personal = {k: v for k, v in gh_by_name.items() if k.startswith('onoderakeita/')}
+personal = {k: v for k, v in gh_by_name.items() if k.startswith('Seduce0068/')}
 now = datetime.datetime.now().strftime('%Y-%m-%d %H:%M')
 
 lines = []
@@ -110,7 +110,7 @@ else:
 lines.append('')
 dup = {}
 for r in locals_:
-    if r['remote'] and r['remote'].startswith('onoderakeita/'):
+    if r['remote'] and r['remote'].startswith('Seduce0068/'):
         dup.setdefault(r['remote'], []).append(r['path'])
 lines.append('## 5. 重複クローン（同一個人リモートの複数ローカル）\n')
 dups = {k: v for k, v in dup.items() if len(v) > 1}
@@ -121,7 +121,7 @@ else:
     lines.append('- なし')
 lines.append('')
 lines.append('## 6. GitHub未確認のリモート（PATの選択範囲外/改名/削除の可能性）\n')
-broken = [r for r in locals_ if r['remote'] and r['remote'].startswith('onoderakeita/') and r['remote'] not in gh_by_name]
+broken = [r for r in locals_ if r['remote'] and r['remote'].startswith('Seduce0068/') and r['remote'] not in gh_by_name]
 if broken:
     for r in broken:
         lines.append(f"- `{r['path']}` → `{r['remote']}`（APIから見えない: PAT対象外か改名/削除）")

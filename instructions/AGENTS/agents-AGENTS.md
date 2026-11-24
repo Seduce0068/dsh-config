@@ -166,11 +166,9 @@
 
 ### ユーザー環境
 
-- PC: Kubuntu 2026.04 LTS（Ryzen 5 3600 / DDR4 64GB /
-  Samsung 970 EVO 1TB SSD + HDD 1TB + USBポータブルSSD / GeForce GTX 1660 SUPER /
-  ASUS PRIME B450-PLUS / G-GEAR 69JD）。ブラウザは Microsoft Edge Stable。
-- スマートフォン: Galaxy S26 Ultra（16GB RAM / 1TB、SIMフリー、SM-S948Q）、Android 16、Microsoft Edge（Stable）。回線は日本通信「合理的みんなのプラン」（20GB）。
-- 自宅回線: ドコモ HOME 5G（ルーター HR02）。
+- PC: Kubuntu 2026.04 LTS（<cpu> / <memory> / <disk> / <gpu> / <motherboard>）。ブラウザは Microsoft Edge Stable。
+- スマートフォン: <phone>（<phone-memory> / <phone-storage>）、Android 16、Microsoft Edge（Stable）。回線・プラン等の固有情報は記載しない。
+- 自宅回線: <carrier>（ルーター <router>）。固有の回線情報は記載しない。
 - その他: ユーザスクリプトマネージャーは Violentmonkey。
 - 開発ツール: [mise](https://mise.jdx.dev/) をインストール済み。
 - Windows向け手順ではなく、Linux/Kubuntu向けの手順を提供する।

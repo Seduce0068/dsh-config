@@ -4,7 +4,7 @@
 プロジェクト側に `AGENTS.md` 等があれば、そちらが優先される。
 
 ## 環境
-- OS: Kubuntu 2026.04 LTS（KDE Plasma 6 / Wayland / NVIDIA GTX 1660 SUPER）
+- OS: Kubuntu 2026.04 LTS（KDE Plasma 6 / Wayland / `<gpu>`）
 - シェル: bash。ツール: node v24, npm, pnpm, bun, python3.14, cargo/rustc 1.99, gcc, shellcheck, shfmt。
 - エディタ: Zed 1.27。設定は `~/.config/zed/`（settings.json / keymap.json / tasks.json）。
 - DSH (DeepSeek Harness): `dsh web` がユーザー systemd で常駐（:3080 / :3081）。`DSH_HOME=~/.dsh-agentrouter`。ACP は `dsh --profile acp`。

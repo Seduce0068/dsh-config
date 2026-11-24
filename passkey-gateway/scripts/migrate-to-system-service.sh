@@ -5,7 +5,7 @@
 set -euo pipefail
 [ "$(id -u)" -eq 0 ] || { echo "rootで実行してください" >&2; exit 1; }
 root=<home>/document/deepseek-harness/default-workspace/passkey-gateway
-H=onoderakeita-systemproductname.<tailnet>
+H=<host>.<tailnet>
 remove_docker=0
 [ "${1:-}" = "--remove-docker-group" ] && remove_docker=1
 

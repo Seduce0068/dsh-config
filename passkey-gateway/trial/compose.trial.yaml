@@ -56,10 +56,10 @@ services:
     env_file: ["./oauth2-proxy/oauth2-proxy.env"]
     command:
       - --provider=oidc
-      - --oidc-issuer-url=https://onoderakeita-systemproductname.<tailnet>:8443
+      - --oidc-issuer-url=https://<host>.<tailnet>:8443
       - --skip-oidc-discovery=false
-      - --oidc-jwks-url=https://onoderakeita-systemproductname.<tailnet>:8443/.well-known/jwks.json
-      - --login-url=https://onoderakeita-systemproductname.<tailnet>:8443/authorize
+      - --oidc-jwks-url=https://<host>.<tailnet>:8443/.well-known/jwks.json
+      - --login-url=https://<host>.<tailnet>:8443/authorize
       - --http-address=127.0.0.1:14180
       - --upstream=static://202
       - --reverse-proxy=false
@@ -82,8 +82,8 @@ services:
       - --cookie-expire=720h
       - --cookie-refresh=1h
       - --scope=openid email profile offline_access
-      - --redirect-url=https://onoderakeita-systemproductname.<tailnet>:8443/oauth2/callback
-      - --whitelist-domain=onoderakeita-systemproductname.<tailnet>:8443
+      - --redirect-url=https://<host>.<tailnet>:8443/oauth2/callback
+      - --whitelist-domain=<host>.<tailnet>:8443
       # 8445 の agentrouter ゲートから戻る rd を許可する。
       # OIDC callback 自体は 8443 のまま（cookie は host スコープで共有）。
       - --request-logging=false
@@ -101,10 +101,10 @@ services:
     env_file: ["./oauth2-proxy/oauth2-proxy.env"]
     command:
       - --provider=oidc
-      - --oidc-issuer-url=https://onoderakeita-systemproductname.<tailnet>:8443
+      - --oidc-issuer-url=https://<host>.<tailnet>:8443
       - --skip-oidc-discovery=false
-      - --oidc-jwks-url=https://onoderakeita-systemproductname.<tailnet>:8443/.well-known/jwks.json
-      - --login-url=https://onoderakeita-systemproductname.<tailnet>:8443/authorize
+      - --oidc-jwks-url=https://<host>.<tailnet>:8443/.well-known/jwks.json
+      - --login-url=https://<host>.<tailnet>:8443/authorize
       - --http-address=127.0.0.1:14181
       - --upstream=static://202
       - --reverse-proxy=false
@@ -122,8 +122,8 @@ services:
       - --cookie-expire=720h
       - --cookie-refresh=1h
       - --scope=openid email profile offline_access
-      - --redirect-url=https://onoderakeita-systemproductname.<tailnet>:8445/oauth2/callback
-      - --whitelist-domain=onoderakeita-systemproductname.<tailnet>:8445
+      - --redirect-url=https://<host>.<tailnet>:8445/oauth2/callback
+      - --whitelist-domain=<host>.<tailnet>:8445
       - --request-logging=false
       - --auth-logging=false
     volumes:
@@ -136,10 +136,10 @@ services:
     env_file: ["./oauth2-proxy/oauth2-proxy.env"]
     command:
       - --provider=oidc
-      - --oidc-issuer-url=https://onoderakeita-systemproductname.<tailnet>:8443
+      - --oidc-issuer-url=https://<host>.<tailnet>:8443
       - --skip-oidc-discovery=false
-      - --oidc-jwks-url=https://onoderakeita-systemproductname.<tailnet>:8443/.well-known/jwks.json
-      - --login-url=https://onoderakeita-systemproductname.<tailnet>:8443/authorize
+      - --oidc-jwks-url=https://<host>.<tailnet>:8443/.well-known/jwks.json
+      - --login-url=https://<host>.<tailnet>:8443/authorize
       - --http-address=127.0.0.1:14182
       - --upstream=static://202
       - --reverse-proxy=false
@@ -157,8 +157,8 @@ services:
       - --cookie-expire=720h
       - --cookie-refresh=1h
       - --scope=openid email profile offline_access
-      - --redirect-url=https://onoderakeita-systemproductname.<tailnet>/oauth2/callback
-      - --whitelist-domain=onoderakeita-systemproductname.<tailnet>
+      - --redirect-url=https://<host>.<tailnet>/oauth2/callback
+      - --whitelist-domain=<host>.<tailnet>
       - --request-logging=false
       - --auth-logging=false
     volumes:

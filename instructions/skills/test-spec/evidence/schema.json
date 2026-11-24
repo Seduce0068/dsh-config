@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://github.com/onoderakeita/grobalOpencodeSettings/schemas/test-evidence.schema.json",
+  "$id": "https://github.com/Seduce0068/grobalOpencodeSettings/schemas/test-evidence.schema.json",
   "title": "Test Evidence",
   "description": "test-spec スキルの実行エビデンス。ISO/IEC/IEEE 29119-3:2021 の情報項目 (test execution log / test result / test completion report) に対応させる。",
   "type": "object",

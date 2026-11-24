@@ -13,7 +13,7 @@
 ## マスク
 - 公開IPv4 → `<PUBLIC_IP>`
 - tailnet IPv4（100.x）→ `<TAILNET_IP>`
-- tailnet ドメイン → `<tailnet>`
+- tailnet ドメイン → `<tailnet>`、tailnet ホスト名（旧アカウント由来のホスト名を含む）→ `<host>.<tailnet>`
 - LAN 内部 IPv4（10/8・172.16/12・192.168/16）→ `<private-ip>`
 - Docker bridge ID → `<bridge-id>`
 - プロセス ID（`pid=...`）→ `<pid>`
@@ -22,6 +22,10 @@
 - `?token=...` → `?token=<REDACTED>`
 - `Bearer ...` → `Bearer <REDACTED>`
 - `github_pat_*` / `sk-*` 等 → `<REDACTED>`
+- 旧アカウント名 → `<account>`（実行用スクリプトの照合対象のみ現行アカウント名に置換）
+- 非公開リポジトリ名 → `<private-repo>`、リポジトリ件数 → `<count>`、コミットハッシュ → `<commit>`
+- GPU型番/ドライバ/VRAM → `<gpu>` / `<driver>` / `<vram>`、ディスク装置名・容量・マウント先 → `<disk>` / `<size>` / `<mount>`、ディスクUUID → `<disk-uuid>`
+- CPU/メモリ/マザーボード/筐体 → `<cpu>` / `<memory>` / `<motherboard>` / `<chassis>`、端末型番・回線・キャリア・プラン → `<phone>` / `<carrier>`（固有値は記載しない）
 
 ## 環境変数
 `.env.example` に**変数名のみ**を記載（値は空）。

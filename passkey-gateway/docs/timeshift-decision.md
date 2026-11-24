@@ -3,12 +3,12 @@
 ## 実測（2026-11-08 17:18）
 
 - 設定 `/etc/timeshift/timeshift.json` の `backup_device_uuid` は
-  `d38292f5-…` を指すが、**そのUUIDのデバイスは現在存在しない**（5月の設定が残存）。
+  `<disk-uuid>` を指すが、**そのUUIDのデバイスは現在存在しない**（5月の設定が残存）。
   → 画面の「Device: Not Selected」/ スナップショット0件の原因。
 - 現在のブロックデバイスのファイルシステム:
-  - `/dev/nvme0n1p7` **ext4**（ルート、587G、空き109G）
-  - `/dev/nvme0n1p1,p4,p5`, `/dev/sda1`, `/dev/sdb2` は **NTFS**
-  - `/dev/nvme0n1p2` vfat（EFI）
+  - `<diskpart>` **ext4**（ルート、`<size>`、空き `<size>`）
+  - `<diskpart>` は **NTFS**
+  - `<diskpart>` vfat（EFI）
 - 外付け `sdb2` は 447G・空き445G（既存 `vm_backup` 2.2G）。
 
 ## 制約
@@ -43,10 +43,10 @@ Timeshift の設定変更・デバイス再フォーマット・スナップシ�
 
 ## 実施結果（2026-11-08 17:57）
 
-- `sdb` を **GPT + ext4（LABEL=TS-BACKUP, UUID=4011f2a9-…）** に再構成。
+- `sdb` を **GPT + ext4（LABEL=TS-BACKUP, UUID=<disk-uuid>）** に再構成。
   - 実行前: `vm_backup` をルートNVMeへ退避し**SHA256一致**を確認。
   - 既存オフサイトバックアップ7世代もルートへ退避後に復元。
-- fstab: `UUID=4011f2a9-… /mnt/timeshift ext4 defaults,nofail 0 2`（USB未接続でも起動可）。
+- fstab: `UUID=<disk-uuid> /mnt/timeshift ext4 defaults,nofail 0 2`（USB未接続でも起動可）。
 - Timeshift: RSYNCモード、週次2世代、除外（/home, /root, /var/lib/libvirt, /var/lib/docker, /var/cache, /var/tmp, /swapfile）。
 - 初回スナップショット作成成功: `2026-11-08_17-48-27`（On demand）、使用 **124G**、空き312G。
 - 点検（毎日08:00）に「timeshift disk/snapshot」を追加。

@@ -11,7 +11,7 @@
 :18888 {
 	bind 127.0.0.1
 	route {
-		@wrong_host not host onoderakeita-systemproductname.<tailnet>
+		@wrong_host not host <host>.<tailnet>
 		respond @wrong_host "invalid host" 400
 
 		handle /oauth2/* {
@@ -32,7 +32,7 @@
 					copy_headers X-Auth-Request-Email X-Auth-Request-User
 					@unauthorized status 401
 					handle_response @unauthorized {
-						redir * /oauth2/sign_in?rd=https://onoderakeita-systemproductname.<tailnet>:8443/trial/ 302
+						redir * /oauth2/sign_in?rd=https://<host>.<tailnet>:8443/trial/ 302
 					}
 				}
 				# 認証後にのみ /trial を剥がして DSH(web :3080) へ。
@@ -53,7 +53,7 @@
 :18889 {
 	bind 127.0.0.1
 	route {
-		@wrong_host not host onoderakeita-systemproductname.<tailnet>
+		@wrong_host not host <host>.<tailnet>
 		respond @wrong_host "invalid host" 400
 
 		handle /oauth2/* {
@@ -74,12 +74,12 @@
 					copy_headers X-Auth-Request-Email X-Auth-Request-User
 					@unauthorized status 401
 					handle_response @unauthorized {
-						redir * /oauth2/sign_in?rd=https://onoderakeita-systemproductname.<tailnet>:8445/ 302
+						redir * /oauth2/sign_in?rd=https://<host>.<tailnet>:8445/ 302
 					}
 				}
 				reverse_proxy {$DSH_AGENT_UPSTREAM} {
 					# 公開オリジンのポートを固定（クライアント指定を反射しない）
-					header_up Host onoderakeita-systemproductname.<tailnet>:8445
+					header_up Host <host>.<tailnet>:8445
 					header_up X-Forwarded-Proto https
 				}
 			}
@@ -91,7 +91,7 @@
 :18890 {
 	bind 127.0.0.1
 	route {
-		@wrong_host not host onoderakeita-systemproductname.<tailnet>
+		@wrong_host not host <host>.<tailnet>
 		respond @wrong_host "invalid host" 400
 
 		handle /oauth2/* {
@@ -120,7 +120,7 @@
 					copy_headers X-Auth-Request-Email X-Auth-Request-User
 					@unauthorized status 401
 					handle_response @unauthorized {
-						redir * /oauth2/sign_in?rd=https://onoderakeita-systemproductname.<tailnet>/ 302
+						redir * /oauth2/sign_in?rd=https://<host>.<tailnet>/ 302
 					}
 				}
 				reverse_proxy {$DSH_WEB_UPSTREAM} {

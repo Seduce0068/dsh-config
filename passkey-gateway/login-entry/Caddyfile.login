@@ -8,7 +8,7 @@
 # ここで Pocket ID と認証ゲートを同じオリジンに束ねる（TLS の入れ子を作らない）。
 :14443 {
 	bind 127.0.0.1
-	@wrong_host not host onoderakeita-systemproductname.<tailnet>
+	@wrong_host not host <host>.<tailnet>
 	respond @wrong_host "invalid host" 400
 
 	@stale_asset path /_assets/* /_app/immutable/*.*.map

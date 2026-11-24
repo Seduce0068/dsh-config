@@ -15,7 +15,7 @@ log_line() {
 code() { curl -q --noproxy '*' -s -o /dev/null -w '%{http_code}' --max-time 3 "$1" 2>/dev/null || echo 000; }
 # Host検査を通過する必要がある入口向け（Hostを明示）
 code_host() { curl -q --noproxy '*' -s -o /dev/null -w '%{http_code}' --max-time 3 -H "Host: $2" "$1" 2>/dev/null || echo 000; }
-PUBLIC_HOST="onoderakeita-systemproductname.<tailnet>"
+PUBLIC_HOST="<host>.<tailnet>"
 
 healthy() {
 	[ "$(code http://127.0.0.1:14180/ping)" = 200 ] &&
@@ -28,7 +28,7 @@ healthy() {
 
 # Tailscale Serve の公開マッピング（/ と 8443 と 8445）が揃っているか
 serve_healthy() {
-	local H="onoderakeita-systemproductname.<tailnet>" json
+	local H="<host>.<tailnet>" json
 	json="$(tailscale serve status --json 2>/dev/null)" || return 1
 	printf '%s' "$json" | python3 -c "
 import json,sys

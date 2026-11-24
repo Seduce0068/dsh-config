@@ -83,7 +83,7 @@
 - id: ntfy-notify
   config:
     server: 'https://ntfy.sh'
-    clickUrl: 'https://onoderakeita-systemproductname.<tailnet>:8445/'
+    clickUrl: 'https://<host>.<tailnet>:8445/'
     topic: '${env:NTFY_TOPIC}'
     sound: true
     notifyApproval: true

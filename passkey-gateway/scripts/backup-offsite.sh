@@ -9,7 +9,7 @@ set -uo pipefail
 root="<home>/document/deepseek-harness/default-workspace/passkey-gateway"
 log="$root/docs/backup-offsite.log"
 mnt="/mnt/timeshift"
-uuid="4011f2a9-a538-4b6e-ac04-7a0fa58a6559"   # sdb1 ext4 TS-BACKUP
+uuid="<disk-uuid>"   # <diskpart> ext4 TS-BACKUP
 keep=14
 
 log_line() { printf '%s %s\n' "$(date -Is)" "$*" >>"$log"; }

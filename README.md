@@ -8,7 +8,10 @@ DeepSeek Harness（DSH）の設定と、このPCの環境情報をまとめた**
   OAuth2 Proxy/Pocket IDのシークレット、`dsh.env` の実値は除外しています。
 - メールアドレスは `<email>`、ntfy トピックは `${env:NTFY_TOPIC}`（実値は環境変数 `NTFY_TOPIC`）に置換しています。
 - LAN 内部 IPv4 / PID / Docker bridge ID は `<private-ip>` / `<pid>` / `<bridge-id>` にマスクしています。
-- 公開 IPv4 / tailnet IPv4 / tailnet ドメインは `<PUBLIC_IP>` / `<TAILNET_IP>` / `<tailnet>` に置換済みです。
+- 公開 IPv4 / tailnet IPv4 / tailnet ドメイン・ホスト名 / 旧アカウント名 / 実ハードウェア情報は
+  `<PUBLIC_IP>` / `<TAILNET_IP>` / `<tailnet>` / `<host>.<tailnet>` / `<account>` / `<gpu>` / `<disk>` に置換しています。
+- 旧アカウント配下の非公開リポジトリ名・件数・コミットハッシュ・ディスクUUIDは
+  `<private-repo>` / `<count>` / `<commit>` / `<disk-uuid>` に置換しています（スクリプトの照合対象は現行アカウント名）。
 - 環境変数は「名前のみ」を `.env.example` に記載しています（値は空）。
 
 ## 検証

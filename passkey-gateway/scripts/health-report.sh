@@ -3,7 +3,7 @@
 set -uo pipefail
 root="<home>/document/deepseek-harness/default-workspace/passkey-gateway"
 log="$root/docs/health.log"
-H="onoderakeita-systemproductname.<tailnet>"
+H="<host>.<tailnet>"
 
 warn=0; fail=0
 line()  { printf '  %-42s %s\n' "$1" "$2"; }
