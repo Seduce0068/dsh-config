@@ -25,7 +25,8 @@
         "dsh-resilient-retry",
         "@local/dsh-goal-bulk-resume",
         "@local/dsh-inspect-preset",
-        "@local/dsh-playwright-mcp"
+        "@local/dsh-playwright-mcp",
+        "@deepseek-ai/dsh-experimental-session-titles-bundle"
       ]
     }
   }
