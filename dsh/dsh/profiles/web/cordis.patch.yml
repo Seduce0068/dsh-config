@@ -1,5 +1,5 @@
 # Providers routed through dsh-llm-pi-ai.
-# Credentials are read from EnvironmentFile=/home/koppe/.config/opencode/dsh.env.
+# Credentials are read from EnvironmentFile=<home>/.config/opencode/dsh.env.
 # モデル選択メニューの「エージェント連携を有効にする」を新規セッションで既定ONにする。
 # config は丸ごと置換されるため base の maxTasks: 256 も併記する。
 # 既存セッションの保存済み選択は上書きしない（ドキュメント仕様）。
@@ -475,7 +475,7 @@
       config:
         serverName: rustxng
         transport: stdio
-        command: /home/koppe/.local/bin/rustxng
+        command: <home>/.local/bin/rustxng
         args:
           - mcp
         toolCallTimeoutMs: 60000

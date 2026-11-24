@@ -204,10 +204,10 @@
     // API キーはラッパーが Web サービスと同じ env ファイルから読む（settings に秘密を書かない）。
     "DSH": {
       "type": "custom",
-      "command": "/home/koppe/.local/bin/dsh-acp",
+      "command": "<home>/.local/bin/dsh-acp",
       "args": [],
       "env": {
-        "DSH_HOME": "/home/koppe/.dsh-agentrouter"
+        "DSH_HOME": "<home>/.dsh-agentrouter"
       }
     }
   },

@@ -3,7 +3,7 @@
 # --apply: コピー実行 / --commit: コミット / --push: pushまで
 set -euo pipefail
 repo="$(cd "$(dirname "$0")/.." && pwd)"
-home_dir="${HOME:-/home/koppe}"
+home_dir="${HOME:-<home>}"
 apply=0
 commit=0
 push=0

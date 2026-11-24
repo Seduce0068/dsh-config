@@ -2,7 +2,7 @@
 # ゲート一式を完全停止 → systemd unit で復旧できるか検証。
 # 失敗時は compose で直接フォールバック起動する。
 set -uo pipefail
-root=/home/koppe/document/deepseek-harness/default-workspace/passkey-gateway
+root=<home>/document/deepseek-harness/default-workspace/passkey-gateway
 log="$root/docs/cold-start-test.log"
 export XDG_RUNTIME_DIR=/run/user/1000 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
 compose_all() {
@@ -16,8 +16,8 @@ healthy() {
   [ "$(curl -q --noproxy '*' -s -o /dev/null -w '%{http_code}' --max-time 2 http://127.0.0.1:14181/ping 2>/dev/null)" = 200 ] &&
   [ "$(curl -q --noproxy '*' -s -o /dev/null -w '%{http_code}' --max-time 2 http://127.0.0.1:14182/ping 2>/dev/null)" = 200 ] &&
   [ "$(curl -q --noproxy '*' -s -o /dev/null -w '%{http_code}' --max-time 3 http://127.0.0.1:14111/.well-known/openid-configuration 2>/dev/null)" = 200 ] &&
-  [ "$(host_code http://127.0.0.1:14445/ onoderakeita-systemproductname.tailb706b0.ts.net:8445)" = 302 ] &&
-  [ "$(host_code http://127.0.0.1:18890/ onoderakeita-systemproductname.tailb706b0.ts.net)" = 302 ]
+  [ "$(host_code http://127.0.0.1:14445/ onoderakeita-systemproductname.<tailnet>:8445)" = 302 ] &&
+  [ "$(host_code http://127.0.0.1:18890/ onoderakeita-systemproductname.<tailnet>)" = 302 ]
 }
 {
 echo "cold-start-test start $(date -Is)"

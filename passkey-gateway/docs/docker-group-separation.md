@@ -20,7 +20,7 @@
 
 ## 実行コマンド（root必要）
 ```bash
-sudo bash /home/koppe/document/deepseek-harness/default-workspace/passkey-gateway/scripts/migrate-to-system-service.sh --remove-docker-group
+sudo bash <home>/document/deepseek-harness/default-workspace/passkey-gateway/scripts/migrate-to-system-service.sh --remove-docker-group
 ```
 - 実行中にゲートが**数秒停止**します（自動復旧・失敗時ロールバックあり）。
 - dockerグループから外れた後は、手動の `docker` 操作に sudo パスワードが必要。

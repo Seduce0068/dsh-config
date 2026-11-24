@@ -3,7 +3,7 @@
 以下は**このリポジトリに含めていません**。
 
 ## 完全に除外
-- `/home/koppe/.config/opencode/dsh.env`（APIキー・GITHUB_MCP_TOKEN等）
+- `<home>/.config/opencode/dsh.env`（APIキー・GITHUB_MCP_TOKEN等）
 - `passkey-gateway/oauth2-proxy/oauth2-proxy.env`、`pocket-id/pocket-id.env`、`register/pocket-id.env`
 - Pocket ID の DB（`*.db`）とバックアップ
 - DSHのセッション/会話履歴（`~/.dsh*/sessions`, `storages`）

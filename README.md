@@ -1,4 +1,4 @@
-# DSH 設定・環境情報（プライベート）
+# DSH 設定・環境情報（サニタイズ済み）
 
 DeepSeek Harness（DSH）の設定と、このPCの環境情報をまとめた**バックアップ兼リストア資料**です。
 生成日時: 2026-11-09 00:27 
@@ -7,7 +7,7 @@ DeepSeek Harness（DSH）の設定と、このPCの環境情報をまとめた**
 - **秘密情報は含めていません**。APIキー、トークン、Cookie、Pocket IDのDB、会話履歴、セッション、
   OAuth2 Proxy/Pocket IDのシークレット、`dsh.env` の実値は除外しています。
 - 環境変数は「名前のみ」を `.env.example` に記載しています。
-- ホスト名・LAN構成は含みますが、公開IPやtailnet IPはマスクしています。
+- ホスト名・LAN構成・ユーザーパス・tailnet ドメインはサニタイズ済みです。
 
 ## 検証
 - `tools/check-config.sh`: 設定例（JSONC対応）・YAML（テンプレート除外）・リンクの静的検証。

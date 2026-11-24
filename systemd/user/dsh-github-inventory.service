@@ -5,6 +5,6 @@ Wants=network-online.target
 
 [Service]
 Type=oneshot
-ExecStart=/home/koppe/document/deepseek-harness/default-workspace/passkey-gateway/scripts/github-inventory.sh
+ExecStart=<home>/document/deepseek-harness/default-workspace/passkey-gateway/scripts/github-inventory.sh
 TimeoutStartSec=300
 SuccessExitStatus=0

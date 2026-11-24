@@ -81,7 +81,7 @@
 - 毎週月曜09:00のタイマー（`dsh-github-inventory.timer`）で自動更新。
 - 出力: `docs/github-inventory-latest.md`（読み取り専用・トークンは表示しない）。
 - 報告例: 未コミット6件 / 未push 0件 / 未clone 0件（クローン済み）。
-- 未cloneだった5件＋追加判明5件を `/home/koppe/repos/onoderakeita/` にクローン済み（計10件）。
+- 未cloneだった5件＋追加判明5件を `<home>/repos/onoderakeita/` にクローン済み（計10件）。
 - PATをAll repositoriesへ更新し、23リポジトリがAPI/MCPから可視。
 - リモートなしだった workspace / knowledge もprivateリポジトリ化してpush済み。
 - 初回棚卸しの結果、jarvisをコミット＋rebase＋push、作業用/-をローカルコミット。

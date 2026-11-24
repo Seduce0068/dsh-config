@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # web(443)ゲートを起動し、失敗時は自動で戻す。GUI(8445)には影響しない。
 set -uo pipefail
-root=/home/koppe/document/deepseek-harness/default-workspace/passkey-gateway
+root=<home>/document/deepseek-harness/default-workspace/passkey-gateway
 log="$root/docs/apply-web-gate.log"
 cd "$root/trial" || exit 1
 cbak="$(ls -1t compose.trial.yaml.webpre-* | head -n 1)"

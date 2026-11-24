@@ -2,13 +2,13 @@
   "name": "dsh-profile-agentrouter",
   "private": true,
   "dependencies": {
-    "@local/dsh-goal-bulk-resume": "link:/home/koppe/document/deepseek-harness/default-workspace/dsh-goal-bulk-resume",
-    "@local/dsh-inspect-preset": "link:/home/koppe/document/deepseek-harness/default-workspace/dsh-inspect-preset",
-    "@local/dsh-playwright-mcp": "link:/home/koppe/document/deepseek-harness/default-workspace/dsh-playwright-mcp",
+    "@local/dsh-goal-bulk-resume": "link:<home>/document/deepseek-harness/default-workspace/dsh-goal-bulk-resume",
+    "@local/dsh-inspect-preset": "link:<home>/document/deepseek-harness/default-workspace/dsh-inspect-preset",
+    "@local/dsh-playwright-mcp": "link:<home>/document/deepseek-harness/default-workspace/dsh-playwright-mcp",
     "dsh-llm-agentrouter": "^2.6.1",
-    "dsh-mobile-maxxing": "file:/home/koppe/.dsh/plugins/artifacts/dsh-mobile-maxxing-1.0.9-local2.tgz",
-    "dsh-ntfy-notify": "link:/home/koppe/.dsh/plugins/dsh-ntfy-notify",
-    "dsh-resilient-retry": "link:/home/koppe/document/deepseek-harness/default-workspace/dsh-resilient-retry"
+    "dsh-mobile-maxxing": "file:<home>/.dsh/plugins/artifacts/dsh-mobile-maxxing-1.0.9-local2.tgz",
+    "dsh-ntfy-notify": "link:<home>/.dsh/plugins/dsh-ntfy-notify",
+    "dsh-resilient-retry": "link:<home>/document/deepseek-harness/default-workspace/dsh-resilient-retry"
   },
   "dsh": {
     "profile": {

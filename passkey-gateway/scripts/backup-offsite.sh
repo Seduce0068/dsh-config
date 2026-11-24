@@ -6,7 +6,7 @@
 # - 書き込み後にハッシュ検証、古い世代は最大5件まで保持
 set -uo pipefail
 
-root="/home/koppe/document/deepseek-harness/default-workspace/passkey-gateway"
+root="<home>/document/deepseek-harness/default-workspace/passkey-gateway"
 log="$root/docs/backup-offsite.log"
 mnt="/mnt/timeshift"
 uuid="4011f2a9-a538-4b6e-ac04-7a0fa58a6559"   # sdb1 ext4 TS-BACKUP

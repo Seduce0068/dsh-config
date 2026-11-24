@@ -3,9 +3,9 @@
 	name = koppe
 [credential "https://github.com"]
 	helper = 
-	helper = !/home/koppe/.local/bin/gh auth git-credential
+	helper = !<home>/.local/bin/gh auth git-credential
 [credential "https://gist.github.com"]
 	helper = 
-	helper = !/home/koppe/.local/bin/gh auth git-credential
+	helper = !<home>/.local/bin/gh auth git-credential
 [core]
-	excludesFile = /home/koppe/.config/git/ignore
+	excludesFile = <home>/.config/git/ignore

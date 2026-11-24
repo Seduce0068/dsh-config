@@ -2,9 +2,9 @@
 # 個人リポジトリの棚卸し（ローカル vs GitHub）。読み取り専用。
 # 出力: passkey-gateway/docs/github-inventory-latest.md
 set -uo pipefail
-root=/home/koppe/document/deepseek-harness/default-workspace/passkey-gateway
+root=<home>/document/deepseek-harness/default-workspace/passkey-gateway
 out="$root/docs/github-inventory-latest.md"
-env_file=/home/koppe/.config/opencode/dsh.env
+env_file=<home>/.config/opencode/dsh.env
 token=$(grep -oE '^GITHUB_MCP_TOKEN=.*' "$env_file" 2>/dev/null | cut -d= -f2-)
 if [ -z "${token:-}" ]; then
 	echo "GITHUB_MCP_TOKEN が見つかりません" >&2; exit 1
@@ -22,11 +22,11 @@ gh = json.load(open(gh_path))
 
 cands = set()
 seen_real = set()
-for base in ['/home/koppe', '/home/koppe/ドキュメント/作業用', '/home/koppe/ドキュメント/作業用/rustscript',
-             '/home/koppe/ドキュメント/作業用/userscript', '/home/koppe/ドキュメント/作業用/jarvis',
-             '/home/koppe/.config', '/home/koppe/.openclaw', '/home/koppe/.codex',
-             '/home/koppe/repos/onoderakeita',
-             '/home/koppe/ドキュメント/作業用/opencode_opencoderust/opencoderust']:
+for base in ['<home>', '<home>/ドキュメント/作業用', '<home>/ドキュメント/作業用/rustscript',
+             '<home>/ドキュメント/作業用/userscript', '<home>/ドキュメント/作業用/jarvis',
+             '<home>/.config', '<home>/.openclaw', '<home>/.codex',
+             '<home>/repos/onoderakeita',
+             '<home>/ドキュメント/作業用/opencode_opencoderust/opencoderust']:
     b = pathlib.Path(base)
     if not b.exists():
         continue

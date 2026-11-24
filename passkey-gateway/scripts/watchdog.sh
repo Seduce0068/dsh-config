@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # ゲートの死活監視。異常時のみ systemd unit で復旧する。正常時は何もしない。
 set -uo pipefail
-root="/home/koppe/document/deepseek-harness/default-workspace/passkey-gateway"
+root="<home>/document/deepseek-harness/default-workspace/passkey-gateway"
 log="$root/docs/watchdog.log"
 
 log_line() {
@@ -15,7 +15,7 @@ log_line() {
 code() { curl -q --noproxy '*' -s -o /dev/null -w '%{http_code}' --max-time 3 "$1" 2>/dev/null || echo 000; }
 # Host検査を通過する必要がある入口向け（Hostを明示）
 code_host() { curl -q --noproxy '*' -s -o /dev/null -w '%{http_code}' --max-time 3 -H "Host: $2" "$1" 2>/dev/null || echo 000; }
-PUBLIC_HOST="onoderakeita-systemproductname.tailb706b0.ts.net"
+PUBLIC_HOST="onoderakeita-systemproductname.<tailnet>"
 
 healthy() {
 	[ "$(code http://127.0.0.1:14180/ping)" = 200 ] &&
@@ -28,7 +28,7 @@ healthy() {
 
 # Tailscale Serve の公開マッピング（/ と 8443 と 8445）が揃っているか
 serve_healthy() {
-	local H="onoderakeita-systemproductname.tailb706b0.ts.net" json
+	local H="onoderakeita-systemproductname.<tailnet>" json
 	json="$(tailscale serve status --json 2>/dev/null)" || return 1
 	printf '%s' "$json" | python3 -c "
 import json,sys

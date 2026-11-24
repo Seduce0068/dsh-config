@@ -4,8 +4,8 @@
 #   sudo bash migrate-to-system-service.sh [--remove-docker-group]
 set -euo pipefail
 [ "$(id -u)" -eq 0 ] || { echo "rootで実行してください" >&2; exit 1; }
-root=/home/koppe/document/deepseek-harness/default-workspace/passkey-gateway
-H=onoderakeita-systemproductname.tailb706b0.ts.net
+root=<home>/document/deepseek-harness/default-workspace/passkey-gateway
+H=onoderakeita-systemproductname.<tailnet>
 remove_docker=0
 [ "${1:-}" = "--remove-docker-group" ] && remove_docker=1
 

@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 # 日常点検レポート。読み取りのみ。結果を docs/health.log に追記する。
 set -uo pipefail
-root="/home/koppe/document/deepseek-harness/default-workspace/passkey-gateway"
+root="<home>/document/deepseek-harness/default-workspace/passkey-gateway"
 log="$root/docs/health.log"
-H="onoderakeita-systemproductname.tailb706b0.ts.net"
+H="onoderakeita-systemproductname.<tailnet>"
 
 warn=0; fail=0
 line()  { printf '  %-42s %s\n' "$1" "$2"; }
@@ -48,7 +48,7 @@ report="$(mktemp)"
 	[ "$n" = 3 ] && ok "serve mappings" "$n" || wrn "serve mappings" "$n"
 	# 証明書
 	if [ -f "$root/../.dsh/certs/cert.pem" ]; then :; fi
-	cert=/home/koppe/.dsh/certs/cert.pem
+	cert=<home>/.dsh/certs/cert.pem
 	if [ -f "$cert" ]; then
 		end=$(openssl x509 -in "$cert" -noout -enddate 2>/dev/null | cut -d= -f2)
 		days=$(( ( $(date -d "$end" +%s 2>/dev/null || echo 0) - $(date +%s) ) / 86400 ))

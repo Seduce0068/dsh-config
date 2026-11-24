@@ -17,7 +17,7 @@ services:
     entrypoint: ["/app/pocket-id"]
     env_file: ["./pocket-id.env"]
     environment:
-      APP_URL: https://onoderakeita-systemproductname.tailb706b0.ts.net:8443
+      APP_URL: https://onoderakeita-systemproductname.<tailnet>:8443
       HOST: 127.0.0.1
       PORT: "14111"
       ACTORS_HOST: 127.0.0.1

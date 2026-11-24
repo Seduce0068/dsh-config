@@ -18,7 +18,7 @@
 | ACL/ID | tailnet ACL・ノード認証 | 中（アプリ側のパスキーで代替可） |
 
 ## 2. ネットワーク環境（実測）
-- LAN: `192.168.128.111/24`、GW `192.168.128.1`（HR02）
+- LAN: `<private-ip>/24`、GW `<private-ip>`（HR02）
 - 公開IPv4: `<PUBLIC_IP>`（docomo 5G帯）→ **共有アドレス(CGNAT)の可能性大**
 - IPv6: グローバルあり（`240a:61:.../64`）だが**HR02のIPv6ファイアウォール次第**で受信不可の可能性
 - tracerouteは全ホップ無応答（ICMP/UDP制限）で経路確認不可
@@ -27,7 +27,7 @@
 
 ## 3. 移行の必須条件と障壁
 ### (a) パスキーRP ID（最重要）
-- Pocket ID `APP_URL=https://onoderakeita-systemproductname.tailb706b0.ts.net:8443`
+- Pocket ID `APP_URL=https://onoderakeita-systemproductname.<tailnet>:8443`
 - WebAuthnのパスキーは**このホスト名に暗号学的に束縛**される
 - したがって**ホスト名を変える＝既存パスキーは全て無効**。ログインできない状態になるため、
   移行前に「新オリジンでのパスキー登録手段」を確保する必要がある（Pocket IDの回復/一時トークン等の
@@ -39,7 +39,7 @@
   証明書を (i) 独自ドメイン+ACME(DNS-01/HTTP-01) または (ii) 内部CA（端末にCA証明書配布）で用意
 
 ### (c) DNS
-- LAN内: AdGuard HomeをLANバインドし、対象ホスト名を`192.168.128.111`へ書き換え
+- LAN内: AdGuard HomeをLANバインドし、対象ホスト名を`<private-ip>`へ書き換え
 - ルーター(HR02)のDHCPでDNSをAdGuardに向けられるか要確認
 
 ### (d) リモート経路

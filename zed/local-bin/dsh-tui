@@ -9,7 +9,7 @@
 # 実体: ~/.npm-global/bin/dsh-tui（npm グローバル導入版）
 set -u
 
-ENV_FILE="${DSH_ENV_FILE:-/home/koppe/.config/opencode/dsh.env}"
+ENV_FILE="${DSH_ENV_FILE:-<home>/.config/opencode/dsh.env}"
 if [ -r "$ENV_FILE" ]; then
   set -a
   # shellcheck disable=SC1090
@@ -17,6 +17,6 @@ if [ -r "$ENV_FILE" ]; then
   set +a
 fi
 
-export DSH_HOME="${DSH_HOME:-/home/koppe/.dsh-agentrouter}"
+export DSH_HOME="${DSH_HOME:-<home>/.dsh-agentrouter}"
 
-exec /home/koppe/.npm-global/bin/dsh-tui "$@"
+exec <home>/.npm-global/bin/dsh-tui "$@"

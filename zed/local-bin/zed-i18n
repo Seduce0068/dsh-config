@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 set -euo pipefail
 export ZED_UPDATE_EXPLANATION="${ZED_UPDATE_EXPLANATION:-Zed i18n user-local build. Update by replacing ~/.local/zed-i18n.}"
-exec /home/koppe/.local/zed-i18n/bin/zed "$@"
+exec <home>/.local/zed-i18n/bin/zed "$@"

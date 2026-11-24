@@ -5,7 +5,7 @@
 # Upstream issue: https://github.com/deepseek-ai/deepseek-harness/discussions/5362
 set -euo pipefail
 
-target="/home/koppe/.npm-global/lib/node_modules/@deepseek-ai/dsh/node_modules/@deepseek-ai/dsh-client-connection/lib/index.js"
+target="<home>/.npm-global/lib/node_modules/@deepseek-ai/dsh/node_modules/@deepseek-ai/dsh-client-connection/lib/index.js"
 [ -f "$target" ] || exit 0
 
 if grep -q 'SameSite=Strict' "$target"; then

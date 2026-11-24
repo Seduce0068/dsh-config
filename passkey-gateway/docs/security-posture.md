@@ -22,7 +22,7 @@
 ## ホスト
 
 - UFW: default deny incoming。LAN許可は 8080 のみ（DSHの3080/3081は撤去済み）。
-- LANからDSH直結不可（`192.168.128.111:3080/3081` は待受なし）。
+- LANからDSH直結不可（`<private-ip>:3080/3081` は待受なし）。
 - 秘密ファイル（env/backup/inbox）は 0600・0700。
 - 失敗ユニット: `system-all-update-resume.service`（11/7の更新時に一部タスク失敗、DSH／ゲートとは無関係）。
 

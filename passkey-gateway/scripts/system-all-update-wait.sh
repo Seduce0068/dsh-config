@@ -4,7 +4,7 @@
 set -uo pipefail
 for _ in $(seq 1 120); do
 	if ! fuser /var/lib/apt/lists/lock /var/lib/dpkg/lock-frontend >/dev/null 2>&1; then
-		exec /home/koppe/.local/bin/system-all-update "$@"
+		exec <home>/.local/bin/system-all-update "$@"
 	fi
 	sleep 5
 done

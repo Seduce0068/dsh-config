@@ -8,14 +8,14 @@
 #   - DSH_HOME は Web サービスと同じホームを使い、セッション/認証を共有する。
 #
 # 使い方 (Zed の agent_servers から):
-#   command: /home/koppe/.local/bin/dsh-acp
+#   command: <home>/.local/bin/dsh-acp
 #   args: []
 #
 # 手動確認:
-#   /home/koppe/.local/bin/dsh-acp --help
+#   <home>/.local/bin/dsh-acp --help
 set -u
 
-ENV_FILE="${DSH_ENV_FILE:-/home/koppe/.config/opencode/dsh.env}"
+ENV_FILE="${DSH_ENV_FILE:-<home>/.config/opencode/dsh.env}"
 if [ -r "$ENV_FILE" ]; then
   set -a
   # shellcheck disable=SC1090
@@ -23,6 +23,6 @@ if [ -r "$ENV_FILE" ]; then
   set +a
 fi
 
-export DSH_HOME="${DSH_HOME:-/home/koppe/.dsh-agentrouter}"
+export DSH_HOME="${DSH_HOME:-<home>/.dsh-agentrouter}"
 
-exec /home/koppe/.npm-global/bin/dsh --profile acp "$@"
+exec <home>/.npm-global/bin/dsh --profile acp "$@"

@@ -33,7 +33,7 @@ import sys
 import time
 
 DB_PATH = os.path.expanduser("~/.local/share/zed/db/0-stable/db.sqlite")
-DEFAULT_WORKSPACE = "/home/koppe/document/deepseek-harness/default-workspace"
+DEFAULT_WORKSPACE = "<home>/document/deepseek-harness/default-workspace"
 
 # Zed 1.28 の panel persistent_name / panel_key
 LAYOUT = {

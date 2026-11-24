@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -uo pipefail
-root=/home/koppe/document/deepseek-harness/default-workspace/passkey-gateway
+root=<home>/document/deepseek-harness/default-workspace/passkey-gateway
 log="$root/docs/start-web-gate.log"
 cd "$root/trial" || exit 1
 compose() { docker compose -p dsh-passkey-trial --project-directory "$root/trial" -f compose.trial.yaml -f compose.trial.override.yaml "$@"; }
@@ -18,6 +18,6 @@ ping_ok || { echo "web gate FINAL FAIL"; exit 1; }
 compose up -d --force-recreate caddy >/dev/null 2>&1
 for _ in $(seq 1 30); do [ "$(curl -q --noproxy '*' -s -o /dev/null -w '%{http_code}' --max-time 2 http://127.0.0.1:14445/ 2>/dev/null)" = 302 ] && break; sleep 1; done
 echo "agent entry $(curl -q --noproxy '*' -s -o /dev/null -w '%{http_code}' --max-time 3 http://127.0.0.1:14445/)"
-echo "web entry $(curl -q --noproxy '*' -s -o /dev/null -w '%{http_code}' --max-time 3 -H 'Host: onoderakeita-systemproductname.tailb706b0.ts.net' http://127.0.0.1:18890/)"
+echo "web entry $(curl -q --noproxy '*' -s -o /dev/null -w '%{http_code}' --max-time 3 -H 'Host: onoderakeita-systemproductname.<tailnet>' http://127.0.0.1:18890/)"
 echo "done $(date -Is)"
 } >> "$log" 2>&1

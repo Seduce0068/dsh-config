@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -uo pipefail
-root=/home/koppe/document/deepseek-harness/default-workspace/passkey-gateway
+root=<home>/document/deepseek-harness/default-workspace/passkey-gateway
 log="$root/docs/bind-loopback.log"
 cd "$root/trial" || exit 1
 backup="$(ls -1t caddy/Caddyfile.staging.prebind-* | head -n 1)"

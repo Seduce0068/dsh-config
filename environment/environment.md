@@ -38,7 +38,7 @@ Filesystem      Size  Used Avail Use% Mounted on
 /dev/sdb1       440G  127G  309G  30% /mnt/timeshift
 
 ## Network (sanitized)
-default via 192.168.128.1 dev enp4s0 proto dhcp src 192.168.128.111 metric 100 
+default via <private-ip> dev enp4s0 proto dhcp src <private-ip> metric 100 
 10.0.3.0/24 dev lxcbr0 proto kernel scope link src 10.0.3.1 linkdown 
 172.17.0.0/16 dev docker0 proto kernel scope link src 172.17.0.1 linkdown 
 172.18.0.0/16 dev br-19b60f1f19dc proto kernel scope link src 172.18.0.1 linkdown 
@@ -58,7 +58,7 @@ LISTEN 0      4096                                127.0.0.1:18889      0.0.0.0:*
 LISTEN 0      4096                                127.0.0.1:18890      0.0.0.0:*    users:(("caddy",pid=3281,fd=7))          
 LISTEN 0      511                                 127.0.0.1:18789      0.0.0.0:*    users:(("MainThread",pid=2780,fd=27))    
 LISTEN 0      4096                                127.0.0.1:18554      0.0.0.0:*                                             
-LISTEN 0      32                              192.168.122.1:53         0.0.0.0:*                                             
+LISTEN 0      32                              <private-ip>:53         0.0.0.0:*                                             
 LISTEN 0      4096                 <TAILNET_IP>%tailscale0:443        0.0.0.0:*                                             
 LISTEN 0      4096                               127.0.0.54:53         0.0.0.0:*                                             
 LISTEN 0      4096                                127.0.0.1:631        0.0.0.0:*                                             

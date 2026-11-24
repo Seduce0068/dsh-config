@@ -6,7 +6,7 @@ Wants=network-online.target docker.service
 [Service]
 Type=oneshot
 RemainAfterExit=yes
-ExecStart=/home/koppe/document/deepseek-harness/default-workspace/passkey-gateway/scripts/start-gate-stack.sh
+ExecStart=<home>/document/deepseek-harness/default-workspace/passkey-gateway/scripts/start-gate-stack.sh
 TimeoutStartSec=300
 SuccessExitStatus=0
 

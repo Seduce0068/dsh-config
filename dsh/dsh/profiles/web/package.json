@@ -12,7 +12,7 @@
     }
   },
   "dependencies": {
-    "dsh-ntfy-notify": "link:/home/koppe/.dsh/plugins/dsh-ntfy-notify",
+    "dsh-ntfy-notify": "link:<home>/.dsh/plugins/dsh-ntfy-notify",
     "dsh-web-ui-notify": "^0.1.7"
   }
 }

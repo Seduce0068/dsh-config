@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # 内部Caddyの待受をループバック限定にし、失敗時は自動で戻す。
 set -uo pipefail
-root=/home/koppe/document/deepseek-harness/default-workspace/passkey-gateway
+root=<home>/document/deepseek-harness/default-workspace/passkey-gateway
 log="$root/docs/bind-loopback.log"
 cd "$root/trial" || exit 1
 backup="$(ls -1t caddy/Caddyfile.staging.bak-* | head -n 1)"

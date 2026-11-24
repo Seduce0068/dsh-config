@@ -1,7 +1,7 @@
 # .gitignore 監査レポート（2026-11-09 00:20）
 
 - ローカルGitリポジトリ: **36件**
-- グローバル core.excludesFile: `/home/koppe/.config/git/ignore`
+- グローバル core.excludesFile: `<home>/.config/git/ignore`
 - `.gitignore` なし: **10件**
 
 ## 1. 重大（追跡されている秘匿系ファイル）

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # issuer検証を厳格化し、失敗時は自動で元に戻す。GUI(:8445)の短時間断を伴う。
 set -uo pipefail
-root=/home/koppe/document/deepseek-harness/default-workspace/passkey-gateway
+root=<home>/document/deepseek-harness/default-workspace/passkey-gateway
 log="$root/docs/strict-issuer-apply.log"
 cd "$root/trial" || exit 1
 backup="$(ls -1t compose.trial.yaml.bak-* | head -n 1)"
@@ -14,9 +14,9 @@ python3 - <<'PY'
 from pathlib import Path
 p = Path('compose.trial.yaml')
 s = p.read_text()
-s = s.replace('      - --oidc-issuer-url=http://127.0.0.1:14111\n', '      - --oidc-issuer-url=https://onoderakeita-systemproductname.tailb706b0.ts.net:8443\n')
+s = s.replace('      - --oidc-issuer-url=http://127.0.0.1:14111\n', '      - --oidc-issuer-url=https://onoderakeita-systemproductname.<tailnet>:8443\n')
 s = s.replace('      - --insecure-oidc-skip-issuer-verification=true\n', '')
-s = s.replace('      - --oidc-jwks-url=http://127.0.0.1:14111/.well-known/jwks.json\n', '      - --oidc-jwks-url=https://onoderakeita-systemproductname.tailb706b0.ts.net:8443/.well-known/jwks.json\n')
+s = s.replace('      - --oidc-jwks-url=http://127.0.0.1:14111/.well-known/jwks.json\n', '      - --oidc-jwks-url=https://onoderakeita-systemproductname.<tailnet>:8443/.well-known/jwks.json\n')
 p.write_text(s)
 print('config rewritten')
 PY

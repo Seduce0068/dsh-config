@@ -211,7 +211,7 @@
 
 ハーネス間（DSH / opencode / Zed 等）では、**共有フォルダのファイルをタスクとして受け渡し、人間がプロンプトの運び手（meat prompt proxy）になる**方式を標準とする。専用サーバは必須ではない。
 
-- 共有フォルダ（正）: `/home/koppe/document/deepseek-harness/default-workspace/.agent-bridge`
+- 共有フォルダ（正）: `<home>/document/deepseek-harness/default-workspace/.agent-bridge`
   - 環境変数 `AGENT_BRIDGE_DIR` があればそちらを優先する。
   - `tasks/`（依頼）、`results/`（結果）、`status/`（状態）を使う。IDは `YYYYMMDD-HHMMSS-<slug>`、1タスク1ファイル。
 - 依頼側（どのハーネスでも同じ）:

@@ -20,7 +20,7 @@ git/
 │   ├── gitignore        # ~/.config/git/ignore（グローバル ignore）
 │   └── system-gitconfig # /etc/gitconfig（システム設定）
 ├── gitconfig.example  # 公開参照用（user 情報をプレースホルダ化、
-│                      # /home/koppe を ${HOME} に置換）
+│                      # <home> を ${HOME} に置換）
 └── README.md
 ```
 

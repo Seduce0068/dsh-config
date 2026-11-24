@@ -6,12 +6,12 @@ Wants=network-online.target
 
 [Service]
 Type=simple
-WorkingDirectory=/home/koppe
-Environment=DSH_HOME=/home/koppe/.dsh
-Environment=PATH=/home/koppe/.npm-global/bin:/home/koppe/.cargo/bin:/home/koppe/.local/bin:/usr/local/bin:/usr/bin:/bin
-EnvironmentFile=/home/koppe/.config/opencode/dsh.env
-ExecStartPre=/home/koppe/.local/bin/dsh-samesite-lax.sh
-ExecStart=/home/koppe/.npm-global/bin/dsh web --no-open --port 3080 --trusted-host 192.168.128.111 --trusted-host onoderakeita-systemproductname.tailb706b0.ts.net --public-url https://onoderakeita-systemproductname.tailb706b0.ts.net/
+WorkingDirectory=<home>
+Environment=DSH_HOME=<home>/.dsh
+Environment=PATH=<home>/.npm-global/bin:<home>/.cargo/bin:<home>/.local/bin:/usr/local/bin:/usr/bin:/bin
+EnvironmentFile=<home>/.config/opencode/dsh.env
+ExecStartPre=<home>/.local/bin/dsh-samesite-lax.sh
+ExecStart=<home>/.npm-global/bin/dsh web --no-open --port 3080 --trusted-host <private-ip> --trusted-host onoderakeita-systemproductname.<tailnet> --public-url https://onoderakeita-systemproductname.<tailnet>/
 Restart=on-failure
 RestartSec=5
 

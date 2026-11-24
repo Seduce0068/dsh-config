@@ -60,7 +60,7 @@
       config:
         serverName: rustxng
         transport: stdio
-        command: /home/koppe/.local/bin/rustxng
+        command: <home>/.local/bin/rustxng
         args:
           - mcp
         toolCallTimeoutMs: 60000
@@ -83,7 +83,7 @@
 - id: ntfy-notify
   config:
     server: 'https://ntfy.sh'
-    clickUrl: 'https://onoderakeita-systemproductname.tailb706b0.ts.net:8445/'
+    clickUrl: 'https://onoderakeita-systemproductname.<tailnet>:8445/'
     topic: 'LZYVQrZ5hf754ZUQkLYGLPFEX'
     sound: true
     notifyApproval: true
