@@ -27,6 +27,19 @@ DeepSeek Harness（DSH）の設定と、このPCの環境情報をまとめた**
 - `passkey-gateway/`: パスキーゲートのcompose/Caddy設定、運用スクリプト、主要ドキュメント
 - `.env.example`: 必要な環境変数の**名前のみ**
 
+## 外部依存（未収録のスクリプト）
+
+`passkey-gateway/scripts/gen-staging-env.sh` と `passkey-gateway/scripts/verify-staging.sh` は
+ラッパーであり、同じディレクトリの `staging_env.py` / `verify_staging.py` に処理を委譲します。
+両 `.py` はローカル状態や秘密情報を扱うため、このサニタイズ済みバックアップには収録していません。
+利用する場合は元の passkey-gateway 環境から入手し、各ラッパーと同じディレクトリへ配置してください。
+
+- `staging_env.py`: ローカル検証用の認証情報を生成・検証する（既存キー/DBはリセットしない）。
+- `verify_staging.py`: 一時コンテナと使い捨てDBで検証する（既存プロジェクトを再利用・停止しない）。
+
+`.py` が無い状態ではラッパーは失敗します。処理をシェルへ移したり、値を推測して
+再実装したりしないでください。
+
 ## 再現の考え方
 1. このPCの環境（Kubuntu/DSH）を再構築する際の参照資料。
 2. 秘密は別管理（パスワードマネージャ等）から投入する。

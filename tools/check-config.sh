@@ -58,9 +58,11 @@ try:
 except ImportError:
     pass
 
-for md in [root/'README.md', root/'AGENTS.md', root/'SAFETY.md', root/'docs/INDEX.md',
-           root/'instructions/README.md', root/'docs/approval-matrix.md']:
+md_files = [root/'README.md', root/'AGENTS.md', root/'SAFETY.md', root/'docs/notifications.md',
+            root/'instructions/README.md', root/'docs/approval-matrix.md']
+for md in md_files:
     if not md.exists():
+        bad.append(f'DOC missing: {md.relative_to(root)}')
         continue
     for m in re.finditer(r'\[[^\]]+\]\(([^)]+)\)', md.read_text(encoding='utf-8')):
         t = m.group(1).split('#')[0]
@@ -69,7 +71,7 @@ for md in [root/'README.md', root/'AGENTS.md', root/'SAFETY.md', root/'docs/INDE
         if not (md.parent / t).resolve().exists():
             bad.append(f'LINK {md.name}: {t}')
 
-print(f'  checked: json={len(json_files)} / links=7 files')
+print(f'  checked: json={len(json_files)} / links={len(md_files)} files')
 if bad:
     print(f'  NG: {len(bad)}')
     for b in bad:
