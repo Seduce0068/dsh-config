@@ -1,6 +1,6 @@
 [user]
-	email = keitaonodera0903@gmail.com
-	name = koppe
+	email = <email>
+	name = testuser
 [credential "https://github.com"]
 	helper = 
 	helper = !<home>/.local/bin/gh auth git-credential

@@ -62,7 +62,7 @@ docker start dsh-passkey-register-pocket-id
 
 ## sudoers方針の同梱（2026-11-08 17:16）
 
-- `root-helper collect-sudoers` で `/etc/sudoers.d/50-dsh-root-helper` と `99-koppe-nopasswd` を
+- `root-helper collect-sudoers` で `/etc/sudoers.d/50-dsh-root-helper` と `99-testuser-nopasswd` を
   **ユーザー所有0600**で退避し、`config.tar.gz` 内の `sudoers.d/` に同梱する。
 - 復元時は `sudo install -o root -g root -m 0440 sudoers.d/... /etc/sudoers.d/` で配置し、
   `visudo -c` で検証する。

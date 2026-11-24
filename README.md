@@ -6,8 +6,10 @@ DeepSeek Harness（DSH）の設定と、このPCの環境情報をまとめた**
 ## 重要（安全方針）
 - **秘密情報は含めていません**。APIキー、トークン、Cookie、Pocket IDのDB、会話履歴、セッション、
   OAuth2 Proxy/Pocket IDのシークレット、`dsh.env` の実値は除外しています。
-- 環境変数は「名前のみ」を `.env.example` に記載しています。
-- ホスト名・LAN構成・ユーザーパス・tailnet ドメインはサニタイズ済みです。
+- メールアドレスは `<email>`、ntfy トピックは `${env:NTFY_TOPIC}`（実値は環境変数 `NTFY_TOPIC`）に置換しています。
+- LAN 内部 IPv4 / PID / Docker bridge ID は `<private-ip>` / `<pid>` / `<bridge-id>` にマスクしています。
+- 公開 IPv4 / tailnet IPv4 / tailnet ドメインは `<PUBLIC_IP>` / `<TAILNET_IP>` / `<tailnet>` に置換済みです。
+- 環境変数は「名前のみ」を `.env.example` に記載しています（値は空）。
 
 ## 検証
 - `tools/check-config.sh`: 設定例（JSONC対応）・YAML（テンプレート除外）・リンクの静的検証。

@@ -5,7 +5,7 @@ Wants=network-online.target
 
 [Service]
 Type=oneshot
-User=koppe
+User=user
 Environment=HOME=<home>
 Environment=PATH=<home>/.cargo/bin:<home>/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 ExecStart=<home>/.local/bin/system-all-update

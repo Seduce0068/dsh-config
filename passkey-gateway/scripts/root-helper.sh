@@ -57,10 +57,10 @@ collect-sudoers)
 	dest="${2:?dest required}"
 	[ -d "$dest" ] || die "dest dir missing"
 	mkdir -p "$dest/sudoers.d"
-	chown koppe:koppe "$dest/sudoers.d"
-	for f in 50-dsh-root-helper 51-system-update 99-koppe-nopasswd 99-koppe-nopasswd.disabled; do
+	chown "$TARGET_USER:$TARGET_USER" "$dest/sudoers.d"
+	for f in 50-dsh-root-helper 51-system-update 99-nopasswd 99-nopasswd.disabled; do
 		[ -f "/etc/sudoers.d/$f" ] || continue
-		install -o koppe -g koppe -m 0600 "/etc/sudoers.d/$f" "$dest/sudoers.d/$f"
+		install -o "$TARGET_USER" -g "$TARGET_USER" -m 0600 "/etc/sudoers.d/$f" "$dest/sudoers.d/$f"
 	done
 	;;
 restart-stack)

@@ -25,10 +25,11 @@ ntfy 通知として受け取るためのプラグインです。ブラウザを
 
 ```bash
 pkg install ntfy        # または F-Droid / Play ストアの ntfy アプリ
-ntfy subscribe "dsh-<ランダム文字列>"
+export NTFY_TOPIC="<your-random-topic>"   # 実値は環境変数で管理
+ntfy subscribe "$NTFY_TOPIC"
 ```
 
-トピック名は他人に推測されにくいランダム文字列にしてください（ntfy.sh はトピック名を知っていれば誰でも購読できます）。
+トピック名は他人に推測されにくいランダム文字列にしてください（ntfy.sh はトピック名を知っていれば誰でも購読できます）。実値はリポジトリへ書かず、環境変数 `NTFY_TOPIC` で管理します。
 自分専用サーバーを使う場合は `server` にその URL を設定します。
 
 ### 2. PC 側（プロファイル設定）
@@ -39,11 +40,11 @@ ntfy subscribe "dsh-<ランダム文字列>"
 - id: ntfy-notify
   config:
     server: 'https://ntfy.sh'
-    topic: 'dsh-<ランダム文字列>'   # スマホと揃える
+    topic: '${env:NTFY_TOPIC}'   # スマホと揃える（実値は環境変数で管理）
     sound: true
 ```
 
-ntfy のアクセストークンを使う場合だけ `token: '...'` も設定（`Authorization: Bearer` で送信）。
+ntfy のアクセストークンを使う場合だけ `token: '...'` も設定（`Authorization: Bearer` で送信）。トピックの実値はコミットせず、適用時に `NTFY_TOPIC` から展開してください。
 
 ### 3. 反映
 
@@ -55,7 +56,7 @@ systemctl --user restart dsh-web.service
 
 ```bash
 # 送信だけを手で確認
-curl -H "Title: test" -d "ntfy-notify のテスト" https://ntfy.sh/dsh-<ランダム文字列>
+curl -H "Title: test" -d "ntfy-notify のテスト" "https://ntfy.sh/${NTFY_TOPIC}"
 
 # プラグインのログ
 DSH_NTFY_DEBUG=1 dsh web --no-open --port 3199
@@ -67,7 +68,7 @@ journalctl --user -u dsh-web.service -f | grep ntfy-notify
 | キー | 既定 | 意味 |
 | --- | --- | --- |
 | `server` | `https://ntfy.sh` | ntfy のベース URL |
-| `topic` | 空 | 購読トピック。空だと通知しない（警告ログのみ） |
+| `topic` | 空 | 購読トピック（環境変数 `NTFY_TOPIC` 参照）。空だと通知しない（警告ログのみ） |
 | `token` | 空 | アクセストークン（任意） |
 | `sound` | `true` | `X-Sound: default` を付ける |
 | `notifyApproval` | `true` | 承認待ちを通知する |

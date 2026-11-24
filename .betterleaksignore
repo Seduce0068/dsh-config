@@ -1,3 +1,2 @@
-# False positives verified 2026-11-24: documentation/test placeholders
-# (postgres://user:pass@host, admin:I51A-do-not-log@..., etc.)
 8d92e94a6aa366be3bfbb59c9217c964cf399106:instructions/skills/test-spec/templates/integration-api.md:generic-credential-uri:263
+93566ece489ec65766cb7927737ddfc30b170b6b:.betterleaksignore:generic-credential-uri:2

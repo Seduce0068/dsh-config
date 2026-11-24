@@ -1,4 +1,4 @@
-# Git グローバル設定（koppe / Kubuntu 2026.04）
+# Git グローバル設定（testuser / Kubuntu 2026.04）
 
 `~/.gitconfig` と `~/.config/git/ignore` のバックアップ、および公開参照用の
 設定例。

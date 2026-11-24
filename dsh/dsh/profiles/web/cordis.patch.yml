@@ -445,7 +445,7 @@
 - id: ntfy-notify
   config:
     server: 'https://ntfy.sh'
-    topic: 'LZYVQrZ5hf754ZUQkLYGLPFEX'
+    topic: '${env:NTFY_TOPIC}'
     sound: true
     # 承認待ち・質問待ちは最強（5）で DND も突破、ターン完了はポップアップ（4）
     approvalPriority: 'max'

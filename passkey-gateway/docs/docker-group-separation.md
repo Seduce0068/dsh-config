@@ -1,7 +1,7 @@
 # dockerグループ権限の分離（準備完了・rootコマンド1回で適用）
 
 ## 実測したリスク
-- `koppe` は `docker` グループ所属。`docker run ... id` は **uid=0(root)**。
+- `testuser` は `docker` グループ所属。`docker run ... id` は **uid=0(root)**。
 - つまり sudo を絞っても、`docker` 経由で host root 相当に到達できる（残余リスク）。
 
 ## 構造
@@ -15,7 +15,7 @@
 2. `/etc/systemd/system/dsh-passkey-stack.service` 作成・enable（rootでゲートを起動）
 3. user unit を停止・無効化
 4. システムunitで起動し、3ゲートのpingと入口を検証（失敗時は user unit へ自動ロールバック）
-5. `--remove-docker-group` 指定時、`gpasswd -d koppe docker`
+5. `--remove-docker-group` 指定時、`gpasswd -d testuser docker`
 6. watchdog は helper 経由でシステムunitを再起動（未移行時は user unit にフォールバック）
 
 ## 実行コマンド（root必要）

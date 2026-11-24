@@ -1,4 +1,4 @@
-# Zed 設定（ koppe / Kubuntu 2026.04 ）
+# Zed 設定（ user / Kubuntu 2026.04 ）
 
 `~/.config/zed/` の実稼働設定と、DSH ACP / dsh-TUI 用ラッパーのバックアップ。
 Zed 1.28（公式）と zed-i18n 1.29.2（日本語UIビルド）を併用中。

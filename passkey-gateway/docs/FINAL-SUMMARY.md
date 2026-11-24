@@ -24,7 +24,7 @@
 ## 3. 権限（最小化済み）
 
 - **sudo**: 任意コマンド不可。許可は `dsh-root-helper`（固定操作）と `snap`/`apt`/`apt-get`（自動更新）のみ。
-- **dockerグループ**: `koppe` から解除。ゲートは **rootのシステムunit** で起動。
+- **dockerグループ**: `testuser` から解除。ゲートは **rootのシステムunit** で起動。
   - 実測: dockerグループメンバー空、GID129を持つプロセス **0**。
 - opencode: **127.0.0.1:49374** のみ。tailnet遮断ルールは多層防御として残置。
 

@@ -33,13 +33,13 @@ systemctl daemon-reload
 systemctl enable dsh-passkey-stack.service >/dev/null
 
 echo "=== 3. user unit を停止・無効化 ==="
-sudo -u koppe XDG_RUNTIME_DIR=/run/user/1000 systemctl --user stop dsh-passkey-stack.service 2>/dev/null || true
-sudo -u koppe XDG_RUNTIME_DIR=/run/user/1000 systemctl --user disable dsh-passkey-stack.service 2>/dev/null || true
+sudo -u testuser XDG_RUNTIME_DIR=/run/user/1000 systemctl --user stop dsh-passkey-stack.service 2>/dev/null || true
+sudo -u testuser XDG_RUNTIME_DIR=/run/user/1000 systemctl --user disable dsh-passkey-stack.service 2>/dev/null || true
 
 echo "=== 4. システムunitで起動 ==="
 if ! systemctl start dsh-passkey-stack.service; then
   echo "失敗: user unit へ戻します"
-  sudo -u koppe XDG_RUNTIME_DIR=/run/user/1000 systemctl --user enable --now dsh-passkey-stack.service
+  sudo -u testuser XDG_RUNTIME_DIR=/run/user/1000 systemctl --user enable --now dsh-passkey-stack.service
   exit 1
 fi
 ok=0
@@ -53,7 +53,7 @@ done
 if [ "$ok" -ne 1 ]; then
   echo "検証失敗: ロールバックします"
   systemctl stop dsh-passkey-stack.service || true
-  sudo -u koppe XDG_RUNTIME_DIR=/run/user/1000 systemctl --user enable --now dsh-passkey-stack.service || true
+  sudo -u testuser XDG_RUNTIME_DIR=/run/user/1000 systemctl --user enable --now dsh-passkey-stack.service || true
   exit 1
 fi
 echo "=== 5. 入口確認 ==="
@@ -62,8 +62,8 @@ for u in "https://$H/" "https://$H:8445/" "https://$H:8443/.well-known/openid-co
 done
 
 if [ "$remove_docker" -eq 1 ]; then
-  echo "=== 6. koppe を docker グループから外す ==="
-  gpasswd -d koppe docker
+  echo "=== 6. testuser を docker グループから外す ==="
+  gpasswd -d testuser docker
   echo "※ 反映には再ログイン（または newgrp）が必要。旧シェルでは docker が使える場合があります。"
 fi
 echo "完了。再起動後はシステムunitが自動起動します。"

@@ -13,6 +13,12 @@
 ## マスク
 - 公開IPv4 → `<PUBLIC_IP>`
 - tailnet IPv4（100.x）→ `<TAILNET_IP>`
+- tailnet ドメイン → `<tailnet>`
+- LAN 内部 IPv4（10/8・172.16/12・192.168/16）→ `<private-ip>`
+- Docker bridge ID → `<bridge-id>`
+- プロセス ID（`pid=...`）→ `<pid>`
+- メールアドレス → `<email>`
+- ntfy トピック → `${env:NTFY_TOPIC}`（実値は環境変数 `NTFY_TOPIC` で管理）
 - `?token=...` → `?token=<REDACTED>`
 - `Bearer ...` → `Bearer <REDACTED>`
 - `github_pat_*` / `sk-*` 等 → `<REDACTED>`

@@ -1,4 +1,4 @@
-# VSCode グローバル設定（koppe / Kubuntu 2026.04）
+# VSCode グローバル設定（user / Kubuntu 2026.04）
 
 `~/.config/Code/User/` と `~/.vscode/` の実稼働設定のバックアップ、および
 公開参照用の設定例・拡張機能リスト。

@@ -1,4 +1,4 @@
-# Zed 個人指示（Kubuntu / koppe）
+# Zed 個人指示（Kubuntu / user）
 
 このファイルは Zed Agent の「個人指示」として、すべてのプロジェクトで常時読み込まれる。
 プロジェクト側に `AGENTS.md` 等があれば、そちらが優先される。

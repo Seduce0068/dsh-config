@@ -58,71 +58,71 @@ tar -C / -czf "$stage/repos.tar.gz" \
 	--exclude='*/node_modules' --exclude='*/target' --exclude='*/dist' \
 	--exclude='*/.cache' --exclude='*/.next' --exclude='*/__pycache__' \
 	--exclude='*/venv' --exclude='*/.venv' --exclude='*/.serena/cache' \
-	--exclude='home/koppe/.config/opencode/opencode.jsonc*' \
-	--exclude='home/koppe/.config/opencode/dsh.env' \
-	--exclude='home/koppe/.config/opencode/deepai.key' \
+	--exclude='home/testuser/.config/opencode/opencode.jsonc*' \
+	--exclude='home/testuser/.config/opencode/dsh.env' \
+	--exclude='home/testuser/.config/opencode/deepai.key' \
 	--exclude='*/browser-session' --exclude='*/browser-session/*' \
 	--exclude='*.env*' \
 	--exclude='*.key' --exclude='*.pem' --exclude='*.p12' \
 	--exclude='id_rsa*' --exclude='*credentials*' \
-	"home/koppe/.config/opencode" \
-	"home/koppe/ドキュメント/作業用/-" \
-	"home/koppe/ドキュメント/作業用/Policy_discussion_casualconversation" \
-	"home/koppe/ドキュメント/作業用/rustscript/system_all_update" \
-	"home/koppe/ドキュメント/作業用/ZenzaWatch" \
-	"home/koppe/ドキュメント/作業用/userscript/userscript" \
-	"home/koppe/ドキュメント/作業用/UserScripts" \
-	"home/koppe/knowledge" \
-	"home/koppe/.agents/skills" \
-	"home/koppe/.openclaw/workspace" \
-	"home/koppe/.codex/memories" \
+	"home/testuser/.config/opencode" \
+	"home/testuser/ドキュメント/作業用/-" \
+	"home/testuser/ドキュメント/作業用/Policy_discussion_casualconversation" \
+	"home/testuser/ドキュメント/作業用/rustscript/system_all_update" \
+	"home/testuser/ドキュメント/作業用/ZenzaWatch" \
+	"home/testuser/ドキュメント/作業用/userscript/userscript" \
+	"home/testuser/ドキュメント/作業用/UserScripts" \
+	"home/testuser/knowledge" \
+	"home/testuser/.agents/skills" \
+	"home/testuser/.openclaw/workspace" \
+	"home/testuser/.codex/memories" \
 	2>/dev/null || true
 sudo -n /usr/local/sbin/dsh-root-helper collect-sudoers "$stage" || true
 
 # 2. 設定とDSHデータのアーカイブ
 tar -C / -czf "$stage/config.tar.gz" \
 	--warning=no-file-changed \
-	--exclude='home/koppe/.dsh/.credentials.yaml' \
-	--exclude='home/koppe/.dsh/certs' \
+	--exclude='home/testuser/.dsh/.credentials.yaml' \
+	--exclude='home/testuser/.dsh/certs' \
 	--exclude='*/.dsh/certs/*' \
 	--exclude='*.env*' --exclude='*.key' --exclude='*.pem' --exclude='*.p12' \
 	--exclude='*credentials*' \
 	--exclude='*pocket-id.db-*' --exclude='*pocket-id.db.bak-*' \
 	$(cd / && ls -d \
-		"home/koppe/.config/systemd/user/dsh-passkey-stack.service" \
-		"home/koppe/.config/systemd/user/dsh-web.service" \
-		"home/koppe/.config/systemd/user/dsh-web-agentrouter.service" \
-		"home/koppe/.config/systemd/user/dsh-backup-offsite.service" \
-		"home/koppe/.config/systemd/user/dsh-backup-offsite.timer" \
-		"home/koppe/.config/systemd/user/dsh-passkey-watchdog.service" \
-		"home/koppe/.config/systemd/user/dsh-passkey-watchdog.timer" \
-		"home/koppe/.config/systemd/user/dsh-health-report.service" \
-		"home/koppe/.config/systemd/user/dsh-health-report.timer" \
-		"home/koppe/.config/systemd/user/dsh-github-inventory.service" \
-		"home/koppe/.config/systemd/user/dsh-github-inventory.timer" \
-		"home/koppe/.config/systemd/user/dsh-backup-verify.service" \
-		"home/koppe/.config/systemd/user/dsh-backup-verify.timer" \
-		"home/koppe/.config/systemd/user/dsh-security-scan.service" \
-		"home/koppe/.config/systemd/user/dsh-security-scan.timer" \
-		"home/koppe/.config/systemd/user/dsh-advisory-check.service" \
-		"home/koppe/.config/systemd/user/dsh-advisory-check.timer" \
+		"home/testuser/.config/systemd/user/dsh-passkey-stack.service" \
+		"home/testuser/.config/systemd/user/dsh-web.service" \
+		"home/testuser/.config/systemd/user/dsh-web-agentrouter.service" \
+		"home/testuser/.config/systemd/user/dsh-backup-offsite.service" \
+		"home/testuser/.config/systemd/user/dsh-backup-offsite.timer" \
+		"home/testuser/.config/systemd/user/dsh-passkey-watchdog.service" \
+		"home/testuser/.config/systemd/user/dsh-passkey-watchdog.timer" \
+		"home/testuser/.config/systemd/user/dsh-health-report.service" \
+		"home/testuser/.config/systemd/user/dsh-health-report.timer" \
+		"home/testuser/.config/systemd/user/dsh-github-inventory.service" \
+		"home/testuser/.config/systemd/user/dsh-github-inventory.timer" \
+		"home/testuser/.config/systemd/user/dsh-backup-verify.service" \
+		"home/testuser/.config/systemd/user/dsh-backup-verify.timer" \
+		"home/testuser/.config/systemd/user/dsh-security-scan.service" \
+		"home/testuser/.config/systemd/user/dsh-security-scan.timer" \
+		"home/testuser/.config/systemd/user/dsh-advisory-check.service" \
+		"home/testuser/.config/systemd/user/dsh-advisory-check.timer" \
 		"etc/systemd/system/block-tailnet-opencode.service" \
 		"usr/local/sbin/block-tailnet-opencode.sh" \
 		"etc/systemd/system/dsh-passkey-stack.service" \
 		"etc/systemd/system/system-all-update-boot.service.d/override.conf" \
 		"usr/local/sbin/system-all-update-wait.sh" \
 		"usr/local/sbin/dsh-root-helper" \
-		"home/koppe/document/deepseek-harness/default-workspace/passkey-gateway/trial" \
-		"home/koppe/document/deepseek-harness/default-workspace/passkey-gateway/register" \
-		"home/koppe/document/deepseek-harness/default-workspace/passkey-gateway/login-entry" \
-		"home/koppe/document/deepseek-harness/default-workspace/passkey-gateway/scripts" \
-		"home/koppe/document/deepseek-harness/default-workspace/AGENTS.md" \
-		"home/koppe/document/deepseek-harness/default-workspace/passkey-gateway/docs" \
-		"home/koppe/.dsh" \
-		"home/koppe/.dsh-agentrouter/sessions" \
-		"home/koppe/.dsh-agentrouter/storages" \
-		"home/koppe/.dsh-agentrouter/profiles" \
-		"home/koppe/.dsh-agentrouter/dsh-mobile-maxxing" 2>/dev/null) \
+		"home/testuser/document/deepseek-harness/default-workspace/passkey-gateway/trial" \
+		"home/testuser/document/deepseek-harness/default-workspace/passkey-gateway/register" \
+		"home/testuser/document/deepseek-harness/default-workspace/passkey-gateway/login-entry" \
+		"home/testuser/document/deepseek-harness/default-workspace/passkey-gateway/scripts" \
+		"home/testuser/document/deepseek-harness/default-workspace/AGENTS.md" \
+		"home/testuser/document/deepseek-harness/default-workspace/passkey-gateway/docs" \
+		"home/testuser/.dsh" \
+		"home/testuser/.dsh-agentrouter/sessions" \
+		"home/testuser/.dsh-agentrouter/storages" \
+		"home/testuser/.dsh-agentrouter/profiles" \
+		"home/testuser/.dsh-agentrouter/dsh-mobile-maxxing" 2>/dev/null) \
 	--exclude='*/node_modules' \
 	-C "$stage" sudoers.d \
 	2>/dev/null || true

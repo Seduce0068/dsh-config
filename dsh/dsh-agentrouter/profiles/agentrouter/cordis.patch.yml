@@ -84,7 +84,7 @@
   config:
     server: 'https://ntfy.sh'
     clickUrl: 'https://onoderakeita-systemproductname.<tailnet>:8445/'
-    topic: 'LZYVQrZ5hf754ZUQkLYGLPFEX'
+    topic: '${env:NTFY_TOPIC}'
     sound: true
     notifyApproval: true
     notifyQuestion: false
