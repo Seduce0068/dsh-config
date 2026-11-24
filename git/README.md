@@ -8,16 +8,17 @@
 - **グローバル設定**: `~/.gitconfig` に `user.*` / `credential.*.helper` /
   `core.excludesfile` を保持。トークンは埋め込まれておらず、
   `gh auth git-credential` を呼び出す方式。
-- **システム設定**: `/etc/gitconfig` は**存在しない**ため管理対象なし。
-  将来的に root 権限で作成する場合は、このディレクトリへコピーして管理する。
+- **システム設定**: `/etc/gitconfig` に `init.defaultBranch = master` を設定。
+  root 所有のため、更新時はパスキー経由の `agent-sudo.sh` を使う。
 
 ## 構成
 
 ```
 git/
 ├── config/
-│   ├── gitconfig   # ~/.gitconfig（実設定）
-│   └── gitignore   # ~/.config/git/ignore（グローバル ignore）
+│   ├── gitconfig        # ~/.gitconfig（実設定）
+│   ├── gitignore        # ~/.config/git/ignore（グローバル ignore）
+│   └── system-gitconfig # /etc/gitconfig（システム設定）
 ├── gitconfig.example  # 公開参照用（user 情報をプレースホルダ化、
 │                      # /home/koppe を ${HOME} に置換）
 └── README.md
@@ -37,6 +38,10 @@ chmod 600 ~/.config/git/ignore
 
 # 3. 認証は gh CLI に依存するため、先にログインしておく
 gh auth status
+
+# 4. システム設定（root 権限が必要・パスキー承認）
+passkey-gateway/scripts/agent-sudo.sh /tmp/sudo-url.txt -- \
+  cp git/config/system-gitconfig /etc/gitconfig
 ```
 
 ## 秘密情報の方針
@@ -52,6 +57,7 @@ gh auth status
 
 ```bash
 git config --file git/config/gitconfig --list >/dev/null
+git config --file git/config/system-gitconfig --list >/dev/null
 git config --file git/gitconfig.example --list >/dev/null
 grep -icE '(ghp_|github_pat_|gho_|ghu_|ghs_|ghr_|password[[:space:]]*=|token[[:space:]]*=)' git/config/gitconfig
 # 期待値: 0
