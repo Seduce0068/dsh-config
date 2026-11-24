@@ -3,14 +3,13 @@
 # - ディスクが無い場合は安全にスキップ（exit 0）
 # - 既存データには書き込まず、新しいディレクトリへ追加のみ
 # - Pocket ID DB は無停止の整合スナップショット
-# - 書き込み後にハッシュ検証、古い世代は最大5件まで保持
+# - 書き込み後にハッシュ検証、古い世代は最大10件まで保持（root-helper の KEEP で管理）
 set -uo pipefail
 
-root="<home>/document/deepseek-harness/default-workspace/passkey-gateway"
+root="<workdir>/passkey-gateway"
 log="$root/docs/backup-offsite.log"
 mnt="/mnt/timeshift"
-uuid="<disk-uuid>"   # <diskpart> ext4 TS-BACKUP
-keep=14
+uuid="<disk-uuid>"   # <diskpart> ext4 <label>
 
 log_line() { printf '%s %s\n' "$(date -Is)" "$*" >>"$log"; }
 cleanup() { sudo -n /usr/local/sbin/dsh-root-helper umount-disk >/dev/null 2>&1 || true; rmdir "$mnt" 2>/dev/null || true; }
@@ -53,6 +52,7 @@ fi
 # 1b. sudoers方針を先に退避（tarに含めるため）
 
 # 1c. 個人リポジトリ（未コミット作業を含む。ビルド生成物は除外）
+# 対象は <private-dir> 配下の個人リポジトリとし、個別パスは設定例に列挙しない。
 tar -C / -czf "$stage/repos.tar.gz" \
 	--warning=no-file-changed \
 	--exclude='*/node_modules' --exclude='*/target' --exclude='*/dist' \
@@ -60,18 +60,13 @@ tar -C / -czf "$stage/repos.tar.gz" \
 	--exclude='*/venv' --exclude='*/.venv' --exclude='*/.serena/cache' \
 	--exclude='home/testuser/.config/opencode/opencode.jsonc*' \
 	--exclude='home/testuser/.config/opencode/dsh.env' \
-	--exclude='home/testuser/.config/opencode/deepai.key' \
+	--exclude='home/testuser/.config/opencode/<secret-file>' \
 	--exclude='*/browser-session' --exclude='*/browser-session/*' \
 	--exclude='*.env*' \
 	--exclude='*.key' --exclude='*.pem' --exclude='*.p12' \
 	--exclude='id_rsa*' --exclude='*credentials*' \
 	"home/testuser/.config/opencode" \
-	"home/testuser/ドキュメント/作業用/-" \
-	"home/testuser/ドキュメント/作業用/Policy_discussion_casualconversation" \
-	"home/testuser/ドキュメント/作業用/rustscript/system_all_update" \
-	"home/testuser/ドキュメント/作業用/ZenzaWatch" \
-	"home/testuser/ドキュメント/作業用/userscript/userscript" \
-	"home/testuser/ドキュメント/作業用/UserScripts" \
+	"<private-dir>" \
 	"home/testuser/knowledge" \
 	"home/testuser/.agents/skills" \
 	"home/testuser/.openclaw/workspace" \
@@ -112,17 +107,17 @@ tar -C / -czf "$stage/config.tar.gz" \
 		"etc/systemd/system/system-all-update-boot.service.d/override.conf" \
 		"usr/local/sbin/system-all-update-wait.sh" \
 		"usr/local/sbin/dsh-root-helper" \
-		"home/testuser/document/deepseek-harness/default-workspace/passkey-gateway/trial" \
-		"home/testuser/document/deepseek-harness/default-workspace/passkey-gateway/register" \
-		"home/testuser/document/deepseek-harness/default-workspace/passkey-gateway/login-entry" \
-		"home/testuser/document/deepseek-harness/default-workspace/passkey-gateway/scripts" \
-		"home/testuser/document/deepseek-harness/default-workspace/AGENTS.md" \
-		"home/testuser/document/deepseek-harness/default-workspace/passkey-gateway/docs" \
+		"<workdir>/passkey-gateway/trial" \
+		"<workdir>/passkey-gateway/register" \
+		"<workdir>/passkey-gateway/login-entry" \
+		"<workdir>/passkey-gateway/scripts" \
+		"<workdir>/AGENTS.md" \
+		"<workdir>/passkey-gateway/docs" \
 		"home/testuser/.dsh" \
 		"home/testuser/.dsh-agentrouter/sessions" \
 		"home/testuser/.dsh-agentrouter/storages" \
 		"home/testuser/.dsh-agentrouter/profiles" \
-		"home/testuser/.dsh-agentrouter/dsh-mobile-maxxing" 2>/dev/null) \
+		"home/testuser/.dsh-agentrouter/<profile>" 2>/dev/null) \
 	--exclude='*/node_modules' \
 	-C "$stage" sudoers.d \
 	2>/dev/null || true

@@ -2,7 +2,7 @@
 # root-helper: ゲート運用に必要な固定操作だけを提供する。
 # sudoers では本スクリプト1本のみ許可する想定（引数は検証する）。
 set -euo pipefail
-UUID="<disk-uuid>"   # <diskpart> ext4 (TS-BACKUP)
+UUID="<disk-uuid>"   # <diskpart> ext4 (<label>)
 MNT="/mnt/timeshift"
 DEV="/dev/disk/by-uuid/$UUID"
 BKROOT="dsh-passkey-backup"

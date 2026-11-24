@@ -4,7 +4,7 @@
 **技術的には脱却可能だが、無条件ではない。**
 - **LAN内だけ**なら比較的現実的（ただしTLS基盤の作り直しと**パスキー再登録が必須**）
 - **リモートアクセスを維持**するなら、Tailscale相当の代替（Cloudflare Tunnel / Headscale+VPS / WireGuard）が必要
-- 本環境は**docomo HOME 5G**でIPv4はCGNATの可能性が高く、**自前のポート開放によるリモート公開は現実的でない**
+- 本環境は**<carrier>**でIPv4はCGNATの可能性が高く、**自前のポート開放によるリモート公開は現実的でない**
 - 最大の移行障壁は**パスキーのRP ID（オリジン束縛）**で、ホスト名変更＝全パスキー再登録
 
 ## 1. 現在Tailscaleが担っている役割
@@ -18,9 +18,9 @@
 | ACL/ID | tailnet ACL・ノード認証 | 中（アプリ側のパスキーで代替可） |
 
 ## 2. ネットワーク環境（実測）
-- LAN: `<private-ip>/24`、GW `<private-ip>`（HR02）
-- 公開IPv4: `<PUBLIC_IP>`（docomo 5G帯）→ **共有アドレス(CGNAT)の可能性大**
-- IPv6: グローバルあり（`240a:61:.../64`）だが**HR02のIPv6ファイアウォール次第**で受信不可の可能性
+- LAN: `<private-ip>/24`、GW `<private-ip>`（<router>）
+- 公開IPv4: `<PUBLIC_IP>`（<carrier>）→ **共有アドレス(CGNAT)の可能性大**
+- IPv6: グローバルあり（`<ipv6>`）だが**<router>のIPv6ファイアウォール次第**で受信不可の可能性
 - tracerouteは全ホップ無応答（ICMP/UDP制限）で経路確認不可
 - AdGuard Homeは稼働中だがDNSは **127.0.0.54:53（ローカル限定）**。LAN向けDNSには未使用
 - cloudflared / certbot / lego / caddy(ホスト) はいずれも未導入
@@ -40,7 +40,7 @@
 
 ### (c) DNS
 - LAN内: AdGuard HomeをLANバインドし、対象ホスト名を`<private-ip>`へ書き換え
-- ルーター(HR02)のDHCPでDNSをAdGuardに向けられるか要確認
+- ルーター(<router>)のDHCPでDNSをAdGuardに向けられるか要確認
 
 ### (d) リモート経路
 - CGNATのためポートフォワード不可の可能性が高い

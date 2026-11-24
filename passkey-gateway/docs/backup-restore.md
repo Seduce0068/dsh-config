@@ -26,7 +26,7 @@ docker start dsh-passkey-register-pocket-id
 5. 3入口の疎通（`/` と `:8445` が302、`:8443/setup` が200）を確認
 
 ## 未対応（要判断）
-- 外付け記憶域（sdb2: BUFFALO 447G NTFS / sda1: HDD 931G NTFS）への**オフディスク複製**は未実施。
+- 外付け記憶域（<disk>: <label> <size> NTFS / <disk>: HDD <size> NTFS）への**オフディスク複製**は未実施。
   マウントと書き込みに伴うリスク・対象範囲を決めてから行う。
 - Timeshift は `Device: Not Selected`（0件）。NTFS は rsync モードの保存先に適さないため、
   別途 ext4 領域かデータバックアップ方式の選択が必要。
@@ -35,7 +35,7 @@ docker start dsh-passkey-register-pocket-id
 
 - スクリプト: `scripts/backup-offsite.sh`
 - タイマー: `dsh-backup-offsite.timer`（毎週日曜 04:00 前後、Persistent=true、ランダム遅延15分）
-- 保存先: 外付け ext4（TS-BACKUP, /mnt/timeshift）の `dsh-passkey-backup/auto-<日時>/`（**毎日04:00・最大10世代**）
+- 保存先: 外付け ext4（<label>, <mount>）の `dsh-passkey-backup/auto-<日時>/`（**毎日04:00・最大10世代**）
 - 内容: 設定（秘密含む）、DSHホームの設定と会話履歴、Pocket ID の整合DB、状態記録
 - 除外: `.dsh-agentrouter/speech-to-text`（231M・再生成可能なモデル）、`node_modules`
 - ディスク未接続時は**安全にスキップ**（exit 0、ログに SKIP）
@@ -83,6 +83,6 @@ docker start dsh-passkey-register-pocket-id
   `.../Policy_discussion_casualconversation`, `.../rustscript/system_all_update`,
   `.../ZenzaWatch`, `.../userscript/userscript`, `.../UserScripts`, `~/knowledge`,
   `~/.openclaw/workspace`, `~/.codex/memories`
-- 世代あたり約**302MB**、生成時間 約23秒。保持10世代で約3GB（空き312G）。
+- 世代あたり約**<size>**、生成時間 約23秒。保持10世代で約<size>（空き<size>）。
 - 大容量リポジトリ（jarvis/jarvis 19.9G、openIllustration 34G、openrustbooks 32.8G、システム診断 1.9G）は
   GitHub へpush済みのため**同梱せず**（必要なら個別に追加可能）。

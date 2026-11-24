@@ -9,7 +9,7 @@
   - `<diskpart>` **ext4**（ルート、`<size>`、空き `<size>`）
   - `<diskpart>` は **NTFS**
   - `<diskpart>` vfat（EFI）
-- 外付け `sdb2` は 447G・空き445G（既存 `vm_backup` 2.2G）。
+- 外付け `<disk>` は <size>・空き<size>（既存 `<label>` <size>）。
 
 ## 制約
 
@@ -29,28 +29,28 @@
 ## 推奨
 
 現時点では **C**（現行バックアップを継続）を維持し、システム全体のスナップショットが必要なら
-A を計画的に実施する（事前に sdb2 の既存データを退避し、ユーザーの明示承認を得る）。
+A を計画的に実施する（事前に <disk> の既存データを退避し、ユーザーの明示承認を得る）。
 
 ## 実施していないこと
 Timeshift の設定変更・デバイス再フォーマット・スナップショット作成は行っていない。
 
 ## 進捗（2026-11-08 17:43）
 
-- 外付けSSD `sdb2` の既存データ `vm_backup`（2.0G, 2ファイル）を
-  **ルートNVMeへ退避済み**: `<home>/vm_backup-archive-20261108/`（サイズ一致を確認）。
+- 外付けSSD `<disk>` の既存データ `<label>`（<size>, 2ファイル）を
+  **ルートNVMeへ退避済み**: `<home>/<label>-archive-<日時>/`（サイズ一致を確認）。
 - **破壊的フォーマットは未実施**（安全第一のため、明示承認待ち）。
 - 代替として現行オフサイトバックアップを **毎日04:00・保持10世代**へ強化。
 
 ## 実施結果（2026-11-08 17:57）
 
-- `sdb` を **GPT + ext4（LABEL=TS-BACKUP, UUID=<disk-uuid>）** に再構成。
-  - 実行前: `vm_backup` をルートNVMeへ退避し**SHA256一致**を確認。
+- `<disk>` を **GPT + ext4（LABEL=<label>, UUID=<disk-uuid>）** に再構成。
+  - 実行前: `<label>` をルートNVMeへ退避し**SHA256一致**を確認。
   - 既存オフサイトバックアップ7世代もルートへ退避後に復元。
 - fstab: `UUID=<disk-uuid> /mnt/timeshift ext4 defaults,nofail 0 2`（USB未接続でも起動可）。
 - Timeshift: RSYNCモード、週次2世代、除外（/home, /root, /var/lib/libvirt, /var/lib/docker, /var/cache, /var/tmp, /swapfile）。
-- 初回スナップショット作成成功: `2026-11-08_17-48-27`（On demand）、使用 **124G**、空き312G。
+- 初回スナップショット作成成功: `2026-11-08_17-48-27`（On demand）、使用 **<size>**、空き<size>。
 - 点検（毎日08:00）に「timeshift disk/snapshot」を追加。
 
 ## 注意
-- sdbはext4のため**Windowsからは読めない**。
+- <disk>はext4のため**Windowsからは読めない**。
 - USB未接続時はスナップショット不可（fstabはnofailなので起動は継続）。
