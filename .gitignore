@@ -1,6 +1,7 @@
 # 秘密情報は絶対に含めない（SAFETY.md参照）
 .env
 .env.*
+!.env.example
 *.token
 *.key
 *.pem
