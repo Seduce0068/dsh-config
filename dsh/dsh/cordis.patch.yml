@@ -562,3 +562,21 @@
     transport: streamable-http
     url: https://mcp.context7.com/mcp/oauth
     failOnStartupError: false
+
+# External search MCP: Exa & Tavily keyless — added 2026-11-25
+- id: mcp-exa
+  name: '@deepseek-ai/dsh-mcp-client'
+  config:
+    serverName: exa
+    transport: streamable-http
+    url: https://mcp.exa.ai/mcp
+    failOnStartupError: false
+- id: mcp-tavily
+  name: '@deepseek-ai/dsh-mcp-client'
+  config:
+    serverName: tavily
+    transport: streamable-http
+    url: https://mcp.tavily.com/mcp/
+    headers:
+      X-Tavily-Access-Mode: keyless
+    failOnStartupError: false
