@@ -64,8 +64,7 @@
 - 手動の `docker` / 任意の `sudo` は**パスワード入力**が必要（意図した制限）。
 - 端末紛失時は、ブラウザCookie削除またはPocket IDでユーザー無効化。
 - 健康点検は `cat .../docs/health.log`、または `systemctl --user start dsh-health-report.service` で即実行。
-- 主な資料: `docs/security-posture.md`、`docs/backup-restore.md`、`docs/timeshift-decision.md`、
-  `docs/sudoers-stage2-applied.md`、`docs/current-state-2026-11-08.md`
+- 主な資料: `docs/security-posture.md`、`docs/backup-restore.md`、`docs/timeshift-decision.md`
 
 ## 9. GitHub MCP（2026-11-08 追加）
 
@@ -79,7 +78,7 @@
 
 - `scripts/github-inventory.sh`: ローカルGitとGitHubを突合し、未コミット・未push・未cloneをレポート。
 - 毎週月曜09:00のタイマー（`dsh-github-inventory.timer`）で自動更新。
-- 出力: `docs/github-inventory-latest.md`（読み取り専用・トークンは表示しない）。
+- 出力: 実行時に生成されるレポート（読み取り専用・トークンは表示しない、リポジトリ未収録）。
 - 報告例: 未コミット6件 / 未push 0件 / 未clone 0件（クローン済み）。
 - 未cloneだった<count>件＋追加判明<count>件を `<home>/repos/<account>/` にクローン済み（計<count>件）。
 - PATをAll repositoriesへ更新し、<count>リポジトリがAPI/MCPから可視。
@@ -89,4 +88,4 @@
 ## 11. リポジトリ整理（2026-11-08 23:42）
 
 - 旧重複クローン削除、OpenCodeRustの修正をforkへ、Policyの`.opencode/`をignore化。
-- 詳細: `docs/current-state-2026-11-08.md` の §40。
+  （詳細は当リポジトリ未収録の状態記録を参照）

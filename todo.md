@@ -1,11 +1,11 @@
 ---
 type: Todo
-title: "dsh-config-export プロジェクトTODO"
-description: "dsh-config-export 固有のタスク。横断タスクはグローバルTODOへ。"
+title: "dsh-config プロジェクトTODO"
+description: "dsh-config 固有のタスク。横断タスクはグローバルTODOへ。"
 tags:
   - todo
   - tasks
-  - "dsh-config-export"
+  - "dsh-config"
 generated:
   by: opencode
   at: "2026-11-17T20:11:47+09:00"

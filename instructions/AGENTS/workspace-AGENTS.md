@@ -26,14 +26,12 @@
 - ドキュメントは `passkey-gateway/docs/` に日付付きで残す。
 - 定期点検: `passkey-gateway/scripts/health-report.sh`、バックアップ: `backup-offsite.sh`。
 - Git: 個人リポジトリは明確なメッセージでコミット。テスト/lintを通してからpush。
-- **DSH設定の自動コミット**: `~/.dsh*` 配下の設定（`cordis.patch.yml` / `cordis.yml` / `package.json` 等）を変更したら、作業完了前に `dsh-config-export/` の対応ファイルへ同期し、`git add` → 差分確認 → 検証 → コミット → push までエージェントが実施する（都度確認不要）。同期マッピング: `dsh/dsh-agentrouter/*` ↔ `~/.dsh-agentrouter/*`、`dsh/dsh/*` ↔ `~/.dsh/*`。秘密情報・トークンは絶対に含めない。
+- **DSH設定の自動コミット**: `~/.dsh*` 配下の設定（`cordis.patch.yml` / `cordis.yml` / `package.json` 等）を変更したら、作業完了前に `dsh-config/` の対応ファイルへ同期し、`git add` → 差分確認 → 検証 → コミット → push までエージェントが実施する（都度確認不要）。同期マッピング: `dsh/dsh-agentrouter/*` ↔ `~/.dsh-agentrouter/*`、`dsh/dsh/*` ↔ `~/.dsh/*`。秘密情報・トークンは絶対に含めない。
 - 応答は日本語。簡潔に、根拠（コマンド結果）を示す。
 
 ## 主要ドキュメント
 - `passkey-gateway/docs/FINAL-SUMMARY.md`（環境全体）
 - `passkey-gateway/docs/security-posture.md`（セキュリティ）
-- `passkey-gateway/docs/tooling-research-2026-11-09.md`（DSH/Muse/opencode/VSCode/Zed）
-- `passkey-gateway/docs/jarvis-muse-dsh-roles.md`（役割分担）
 
 ## ゴール運用
 - **ブロッカーに立ち止まらない**: あるタスクがユーザー/管理者対応待ち（GitHub課金、root権限、物理操作等）で行き詰まったら、**別の安全なタスクに移る**。同じ監視ループを何十ラウンドも繰り返さない。

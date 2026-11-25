@@ -58,7 +58,7 @@
 - `sudo NOPASSWD: ALL` の縮小（C1の根本原因の一つ）。
   → **準備完了**: `scripts/root-helper.sh` を `/usr/local/sbin/dsh-root-helper` に配置し、
   ゲート側の sudo 依存を全て helper 経由へ移行（バックアップで実証済み）。
-  適用は `docs/sudoers-proposal.md` の段階案どおり、承認後に行う。
+  適用は段階案どおり、承認後に行う（提案書は当リポジトリ未収録）。
 - opencode 自体を `--hostname 127.0.0.1` で起動し直す（現在はユーザーの端末セッション由来。遮断は済み）。
 - 5746/8123/18555 など他の 0.0.0.0 待受の要否整理。
 

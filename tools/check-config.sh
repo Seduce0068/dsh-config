@@ -58,18 +58,18 @@ try:
 except ImportError:
     pass
 
-md_files = [root/'README.md', root/'AGENTS.md', root/'SAFETY.md', root/'docs/notifications.md',
-            root/'instructions/README.md', root/'docs/approval-matrix.md']
+md_files = [p for p in root.rglob('*.md')
+            if not ({'node_modules', '.git'} & set(p.parts))]
 for md in md_files:
-    if not md.exists():
-        bad.append(f'DOC missing: {md.relative_to(root)}')
-        continue
-    for m in re.finditer(r'\[[^\]]+\]\(([^)]+)\)', md.read_text(encoding='utf-8')):
+    text = re.sub(r'```.*?```', '', md.read_text(encoding='utf-8'), flags=re.S)
+    for m in re.finditer(r'\[[^\]]+\]\(([^)]+)\)', text):
         t = m.group(1).split('#')[0]
         if not t or t.startswith(('http', 'mailto:')):
             continue
+        if '{{' in t or '<' in t:  # テンプレート・プレースホルダは対象外
+            continue
         if not (md.parent / t).resolve().exists():
-            bad.append(f'LINK {md.name}: {t}')
+            bad.append(f'LINK {md.relative_to(root)}: {t}')
 
 print(f'  checked: json={len(json_files)} / links={len(md_files)} files')
 if bad:
