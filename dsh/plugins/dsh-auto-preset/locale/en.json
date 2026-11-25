@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Auto agent preset",
+    "description": "Selects standard, PTC, or Creator on a new blank session with rule-based scoring, while preserving explicit preset choices."
+  }
+}
