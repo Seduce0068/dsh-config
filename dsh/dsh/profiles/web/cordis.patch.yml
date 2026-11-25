@@ -491,13 +491,17 @@
         approval: never
     defaultPreset: danger-full-access
 
-# スマホ通知 (dsh-ntfy-notify): 承認待ち・質問待ち・ターン完了を ntfy で転送
+# スマホ通知 (dsh-ntfy-notify): 承認待ちのみ ntfy。質問・ターン完了は Web Push が担当。
+# 方針は旧 agentrouter プロファイルと同じ。Web Push が届かない場合は notifyQuestion を true に戻す。
 - id: ntfy-notify
   config:
     server: 'https://ntfy.sh'
+    clickUrl: 'https://<host>.<tailnet>:8445/'
     topic: 'LZYVQrZ5hf754ZUQkLYGLPFEX'
     sound: true
-    # 承認待ち・質問待ちは最強（5）で DND も突破、ターン完了はポップアップ（4）
+    notifyApproval: true
+    notifyQuestion: false
+    notifyTurnComplete: false
     approvalPriority: 'max'
     questionPriority: 'max'
     turnPriority: 'high'
