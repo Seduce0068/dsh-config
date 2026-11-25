@@ -566,7 +566,7 @@
   config:
     serverName: context7
     transport: streamable-http
-    url: https://mcp.context7.com/mcp/oauth
+    url: https://mcp.context7.com/mcp
     failOnStartupError: false
 
 # External search MCP: Exa & Tavily keyless — added 2026-11-25
