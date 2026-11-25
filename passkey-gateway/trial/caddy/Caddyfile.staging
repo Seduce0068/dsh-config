@@ -83,6 +83,11 @@
 					# 公開オリジンのポートを固定（クライアント指定を反射しない）
 					header_up Host <host>.<tailnet>:8445
 					header_up X-Forwarded-Proto https
+					# Add first-login guidance to DSH's 401 without touching core modules.
+					@dsh_auth_required status 401
+					handle_response @dsh_auth_required {
+						respond "dsh web authentication required. Open the ?token= URL printed by 'dsh web' once to create the 30-day cookie; then this bookmark works with passkey only." 401
+					}
 				}
 			}
 		}
