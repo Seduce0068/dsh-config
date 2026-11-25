@@ -7,11 +7,31 @@
         "@deepseek-ai/dsh-base",
         "@deepseek-ai/dsh-web-app",
         "dsh-web-ui-notify",
-        "dsh-ntfy-notify"
+        "dsh-ntfy-notify",
+        "dsh-mobile-maxxing",
+        "@deepseek-ai/dsh-experimental-forge-bundle",
+        "@deepseek-ai/dsh-experimental-auto-review",
+        "@deepseek-ai/dsh-experimental-plugin-market-bundle",
+        "@deepseek-ai/dsh-experimental-voice-input-bundle",
+        "@deepseek-ai/dsh-personalized-recommendations",
+        "@deepseek-ai/dsh-experimental-inspector-profile",
+        "@deepseek-ai/dsh-experimental-cot-translation-bundle",
+        "@deepseek-ai/dsh-experimental-session-titles-bundle",
+        "@deepseek-ai/dsh-experimental-badge-skill-bundle",
+        "@deepseek-ai/dsh-deepseek-chat-import",
+        "@deepseek-ai/dsh-subagent-codex",
+        "@deepseek-ai/dsh-subagent-claude-code",
+        "@local/dsh-goal-bulk-resume",
+        "@local/dsh-playwright-mcp"
       ]
     }
   },
   "dependencies": {
+    "@deepseek-ai/dsh-subagent-claude-code": "0.2.2-rc.5",
+    "@deepseek-ai/dsh-subagent-codex": "0.2.2-rc.5",
+    "@local/dsh-goal-bulk-resume": "link:<home>/document/deepseek-harness/default-workspace/dsh-goal-bulk-resume",
+    "@local/dsh-playwright-mcp": "link:<home>/document/deepseek-harness/default-workspace/dsh-playwright-mcp",
+    "dsh-mobile-maxxing": "file:<home>/.dsh/plugins/artifacts/dsh-mobile-maxxing-1.0.9-local2.tgz",
     "dsh-ntfy-notify": "link:<home>/.dsh/plugins/dsh-ntfy-notify",
     "dsh-web-ui-notify": "^0.1.7"
   }
