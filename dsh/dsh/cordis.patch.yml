@@ -593,3 +593,11 @@
     headers:
       X-Tavily-Access-Mode: keyless
     failOnStartupError: false
+
+# DSH プラグインのコミュニティインデックス（Open Plugin Market / dshopen.org）。
+# Custom plugin indexes バンドルが有効なとき Discover タブから読める。
+- id: plugin-market
+  name: '@deepseek-ai/dsh-plugin-market'
+  config:
+    indexes:
+      - https://dshopen.org/index.json
