@@ -1,5 +1,5 @@
 [Unit]
-Description=DeepSeek Harness Web UI (AgentRouter profile)
+Description=DeepSeek Harness Web UI (unified web profile)
 Documentation=https://github.com/deepseek-ai/deepseek-harness
 After=network-online.target
 Wants=network-online.target
@@ -7,12 +7,12 @@ Wants=network-online.target
 [Service]
 Type=simple
 WorkingDirectory=<home>
-Environment=DSH_HOME=<home>/.dsh-agentrouter
+Environment=DSH_HOME=<home>/.dsh
 EnvironmentFile=<home>/.config/opencode/dsh.env
 Environment=PATH=<home>/.npm-global/bin:<home>/.cargo/bin:<home>/.local/bin:/usr/local/bin:/usr/bin:/bin
 ExecStartPre=<home>/.local/bin/dsh-samesite-lax.sh
-ExecStart=<home>/.npm-global/bin/dsh --profile agentrouter --no-open --port 3081 --trusted-host <private-ip> --trusted-host <host>.<tailnet> --public-url https://<host>.<tailnet>:8445/
-Restart=on-failure
+ExecStart=<home>/.npm-global/bin/dsh web --no-open --port 3081 --trusted-host <private-ip> --trusted-host <host>.<tailnet> --public-url https://<host>.<tailnet>:8445/
+Restart=always
 RestartSec=5
 
 [Install]
