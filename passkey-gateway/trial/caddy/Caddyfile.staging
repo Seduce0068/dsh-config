@@ -74,7 +74,9 @@
 					copy_headers X-Auth-Request-Email X-Auth-Request-User
 					@unauthorized status 401
 					handle_response @unauthorized {
-						redir * /oauth2/sign_in?rd=https://<host>.<tailnet>:8445/ 302
+						# Preserve the original query (DSH launch token) in rd so
+						# the token survives passkey auth and mints the DSH cookie.
+						redir * /oauth2/sign_in?rd=https://<host>.<tailnet>:8445{uri} 302
 					}
 				}
 				reverse_proxy {$DSH_AGENT_UPSTREAM} {
