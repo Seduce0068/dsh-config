@@ -222,6 +222,56 @@
             input:
               - text
               - image
+          # Zen Go API の /v1/models で確認した新着 chat モデル (2026-11-25)。
+          # すべて opencode-go ルートの openai-completions で HTTP 200 を実測済み。
+          - id: hungerg-free
+            name: HungerG Free
+            contextWindow: 1000000
+            maxTokens: 65536
+            input:
+              - text
+              - image
+            reasoningEfforts:
+              low: low
+          - id: hy4
+            name: Hy4
+            contextWindow: 1048576
+            maxTokens: 65536
+            input:
+              - text
+              - image
+            reasoningEfforts:
+              off: none
+              high: high
+          - id: hy4-flash-free
+            name: Hy4 Flash Free
+            contextWindow: 1048576
+            maxTokens: 65536
+            input:
+              - text
+              - image
+            reasoningEfforts:
+              off: none
+              high: high
+          - id: longcat-2.5
+            name: LongCat-2.5
+            contextWindow: 1000000
+            maxTokens: 262144
+            input:
+              - text
+              - image
+          - id: qwen4-max
+            name: Qwen4 Max
+            contextWindow: 1000000
+            maxTokens: 262144
+            input:
+              - text
+              - image
+            reasoningEfforts:
+              off: none
+              low: low
+              high: high
+              xhigh: xhigh
       # DeepAI Code プロバイダは削除 (2026-11-14): /deepai_code は公式クライアント専用の
       # 非公開バックエンドで、DeepAI 利用規約 Restrictions（無断アプリ利用・アクセス迂回）
       # に抵触するため。過去設定は同ディレクトリの bak ファイルを参照。
