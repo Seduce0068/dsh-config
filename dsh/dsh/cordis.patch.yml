@@ -601,3 +601,4 @@
   config:
     indexes:
       - https://dshopen.org/index.json
+      - https://awesome-dsh-plugin.com/index.json
