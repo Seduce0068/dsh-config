@@ -86,7 +86,7 @@
 					# Add first-login guidance to DSH's 401 without touching core modules.
 					@dsh_auth_required status 401
 					handle_response @dsh_auth_required {
-						respond "DSH 認証が必要です。初回のみ 'dsh web' が表示した ?token= 付き URL を開いて 30 日有効な Cookie を作成してください。以後はこのブックマークでパスキーのみで入れます。" 401
+						respond "{$DSH_AUTH_GUIDE}" 401
 					}
 				}
 			}
