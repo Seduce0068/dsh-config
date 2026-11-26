@@ -69,7 +69,7 @@ if hits: sys.exit(2)
 PY
   if [ "$commit" -eq 1 ]; then
     (cd "$repo" && git add instructions \
-      && git -c user.name="${GIT_AUTHOR_NAME:-user}" -c user.email="${GIT_AUTHOR_EMAIL:-<email>}" \
+      && git -c user.name="${GIT_AUTHOR_NAME:-user}" -c user.email="${GIT_AUTHOR_EMAIL:-<user>@example.invalid}" \
         commit -q -m "chore(instructions): 自動同期" || echo "  変更なし")
   fi
   if [ "$push" -eq 1 ]; then
