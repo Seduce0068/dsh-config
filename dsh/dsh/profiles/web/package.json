@@ -22,17 +22,23 @@
         "@deepseek-ai/dsh-subagent-codex",
         "@deepseek-ai/dsh-subagent-claude-code",
         "@local/dsh-goal-bulk-resume",
-        "@local/dsh-playwright-mcp"
+        "@local/dsh-playwright-mcp",
+        "@local/dsh-auto-preset",
+        "@local/dsh-opencode-console-mcp-reload",
+        "dsh-resilient-retry"
       ]
     }
   },
   "dependencies": {
     "@deepseek-ai/dsh-subagent-claude-code": "0.2.2-rc.5",
     "@deepseek-ai/dsh-subagent-codex": "0.2.2-rc.5",
+    "@local/dsh-auto-preset": "link:<home>/document/deepseek-harness/default-workspace/dsh-auto-preset",
     "@local/dsh-goal-bulk-resume": "link:<home>/document/deepseek-harness/default-workspace/dsh-goal-bulk-resume",
+    "@local/dsh-opencode-console-mcp-reload": "link:<home>/document/deepseek-harness/default-workspace/dsh-opencode-console-mcp-reload",
     "@local/dsh-playwright-mcp": "link:<home>/document/deepseek-harness/default-workspace/dsh-playwright-mcp",
     "dsh-mobile-maxxing": "file:<home>/.dsh/plugins/artifacts/dsh-mobile-maxxing-1.0.9-local2.tgz",
     "dsh-ntfy-notify": "link:<home>/.dsh/plugins/dsh-ntfy-notify",
+    "dsh-resilient-retry": "link:<home>/document/deepseek-harness/default-workspace/dsh-resilient-retry",
     "dsh-web-ui-notify": "^0.1.7"
   }
 }
