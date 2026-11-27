@@ -564,13 +564,9 @@
     credentials: opencode-console
   config: !!js "({...ctx.opencodeConsoleMcp.server('opencode_console'), expandTemplates: true, headers: {Authorization: 'Bearer ${credential:OPENCODE_CONSOLE_TOKEN}'}})"
 
-# Console ブロックの既定モデルを無制限モデルで上書き（ブロック外なので sync で消えない）。
-- id: agent-default-model
-  name: '@deepseek-ai/dsh-agent-default-model'
-  config:
-    provider: opencode-go
-    model: hy4-flash-free
-    reasoningEffort: high
+# 既定モデルは profiles/web/cordis.patch.yml 側で管理する。
+# ここに config 付きで置くと configEditor の保存検証が常にhome値を返し、
+# モデル選択の永続化がサイレントに失敗する（2026-11-27 実証）。
 
 # ゴールのデフォルト継続ラウンド上限（~/.agents/AGENTS.md の規則と整合）。
 - id: goal
