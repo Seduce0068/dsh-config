@@ -13,7 +13,7 @@
     providers:
       opencode-go:
         displayName: OpenCode Go
-        apiKeyEnv: OPENCODE_GO_API_KEY
+        apiKeyEnv: OPENCODE_CONSOLE_TOKEN
         api: openai-completions
         baseURL: https://opencode.ai/zen/go/v1
         headers:
